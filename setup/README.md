@@ -14,7 +14,7 @@ This code also assumes having a GPU machine. Make sure you are able to run `nvid
 **Create a dockerhub account and login**: Create an account on [dockerhub.com](https://hub.docker.com/). In your local terminal, log in:
 ```bash
 docker login -u <your-dockerhub-username>
-Password: <Enter your dockerhub password when asked to enter
+Password: <Enter your dockerhub password when asked to enter>
 ```
 
 **Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. If you have already set this up, you can skip this step. Follow the steps here:
