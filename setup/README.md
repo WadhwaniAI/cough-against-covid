@@ -4,6 +4,7 @@ In order to use this code, you need to use the docker image we have relased alon
 ```bash
 docker --version
 ```
+This code also assumes having a GPU machine. Make sure you are able to run `nvidia-smi` and see your GPUs.
 
 
 ### Pre-requisites
@@ -37,3 +38,37 @@ Password: <Enter your dockerhub password when asked to enter
   git config --global user.name "Piyush"
   git config --global user.email "piyush@wadhwaniai.org"
   ```
+* **Setup data and output folders**: This section assumes that you have followed steps here to download and store dataset(s) in a specific structure. For example, suppose you have a common folder at `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
+
+
+### Get started
+
+* **Clone the repository**
+```bash
+cd ~/
+mkdir projects; cd projects;
+git clone git@github.com:WadhwaniAI/cac-test-release.git
+```
+
+* **Pull required docker image**: Note that this might change depending on whether this image works.
+```bash
+docker pull wadhwaniai/covid:cac-aws-1.0-py3
+```
+
+* **Fire a container using the docker image**: First, set the following enviroment variables:
+```bash
+export WANDB_API_KEY=<your W&B API key obtained from previous section>
+export WANDB_CONFIG_DIR=</path/to/any/folder>/.config/wandb/
+```
+Next, you can start a container by the following command: 
+```bash
+bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
+
+>>> Explanation
+-g: GPU number
+-n: name of the container
+-e: path to the folder where data and outputs are to be stored
+-u: username (this is the name of folder you created inside outputs/ folder)
+-p: port number (this is needed if you want to start jupyter lab on a remote machine)
+```
+
