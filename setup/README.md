@@ -26,7 +26,7 @@ Password: <Enter your dockerhub password when asked to enter>
   ```bash
   ssh-add -l
   ```
-* Generate a key pair with your Wadhwani AI email ID
+* Generate a key pair with your email ID
   ```bash
   ssh-keygen -t rsa -b 4096 -C "piyush@wadhwaniai.org"
   ```
