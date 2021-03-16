@@ -17,7 +17,7 @@ docker login -u <your-dockerhub-username>
 Password: <Enter your dockerhub password when asked to enter
 ```
 
-**Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. Follow the steps here:
+**Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. If you have already set this up, you can skip this step. Follow the steps here:
 * Start an SSH agent: 
   ```bash
   eval `ssh-agent`
@@ -62,6 +62,7 @@ export WANDB_CONFIG_DIR=</path/to/any/folder>/.config/wandb/
 ```
 Next, you can start a container by the following command: 
 ```bash
+cd ~/projects/cac-test-release/setup/
 bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
 
 >>> Explanation
@@ -72,3 +73,10 @@ bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u 
 -p: port number (this is needed if you want to start jupyter lab on a remote machine)
 ```
 
+Once you are inside the container, you can run the training/evaluation scripts. Note that, inside the container, the code is mounted at `/workspace/cac-test-release/`, the data is mounted at `/data/` and your outputs at `/outputs/`.
+
+(Optional) In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
+```bash
+cd /workspace/cac-test-release/setup/
+bash jupyter.sh 8001
+```
