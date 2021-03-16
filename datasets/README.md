@@ -26,4 +26,10 @@ pip install termcolor
 cd ~/projects/cac-test-release/datasets/download/
 python coswara.py -p /scratche/data/cac/data/coswara-15-03-21/
 ```
-Check the data at `/scratche/data/cac/data/coswara-15-03-21/`. The `raw/audio/` folder contains the audio files following the structure of the original dataset. In `raw/annotations/`, we store a CSV files containing the target labels and other metadata (like location, gender etc.).
+Check the data at `/scratche/data/cac/data/coswara-15-03-21/`. The `raw/audio/` folder contains the audio files following the structure of the original dataset. In `raw/annotations/`, we store a CSV files containing the target labels and other metadata (like location, gender etc.). Note that this script does not have any fancy dependencies other than `termcolor` and after this script, everything that you do should be done inside a docker container. Steps for setting up the same are given in `setup/README.md`.
+
+
+* **Step 2: Cleaning**: In order to make is easy to work with multiple datasets, we standardise storage structure. We create a folder named `processed/` inside the dataset folder. First, we create a flat list of all audio files in the dataset in this folder. Second, we create two files `processed/attributes.csv` and `processed/annotations.csv` which contain the metadata attributes and target label(s) respectively. Thus, every dataset for this project expects this kind of a standard structure. For Coswara dataset, we use the following notebook to create achieve two things. (Note: See the `setup/README.md` file for instructions on how to fire up a Jupyter lab session from inside a docker container).
+```bash
+datasets/cleaning/coswara.ipynb
+```
