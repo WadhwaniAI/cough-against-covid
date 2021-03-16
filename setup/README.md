@@ -79,4 +79,7 @@ Once you are inside the container, you can run the training/evaluation scripts. 
 ```bash
 cd /workspace/cac-test-release/setup/
 bash jupyter.sh 8001
+
+# now visit <IP of the machine>:8001 in a browser;
+# if running on a local machine, visit 0.0.0.0:8001
 ```
