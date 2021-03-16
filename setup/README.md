@@ -15,3 +15,25 @@ docker --version
 docker login -u <your-dockerhub-username>
 Password: <Enter your dockerhub password when asked to enter
 ```
+
+**Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. Follow the steps here:
+* Start an SSH agent: 
+  ```bash
+  eval `ssh-agent`
+  ```
+* Check if it has identities 
+  ```bash
+  ssh-add -l
+  ```
+* Generate a key pair with your Wadhwani AI email ID
+  ```bash
+  ssh-keygen -t rsa -b 4096 -C "piyush@wadhwaniai.org"
+  ```
+* Copy the contents of the file: `cat ~/.ssh/id_rsa.pub`
+* Go to `github.com > Settings> Add SSH and GPG keys > Add new key`. Add a name to the key and paste the content and save it.
+* Setup your credentials
+
+  ```bash
+  git config --global user.name "Piyush"
+  git config --global user.email "piyush@wadhwaniai.org"
+  ```
