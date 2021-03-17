@@ -4,7 +4,7 @@ In order to use this code, you need to use the docker image we have relased alon
 ```bash
 docker --version
 ```
-This code also assumes having a GPU machine. Make sure you are able to run `nvidia-smi` and see your GPUs.
+This code also assumes having a GPU machine. Make sure you are able to run `nvidia-smi` and see your GPUs. (This line maybe removed later when we have support for running on CPU machines)
 
 
 ### Pre-requisites
@@ -38,7 +38,15 @@ Password: <Enter your dockerhub password when asked to enter>
   git config --global user.name "Piyush"
   git config --global user.email "piyush@wadhwaniai.org"
   ```
-* **Setup data and output folders**: This section assumes that you have followed steps here to download and store dataset(s) in a specific structure. For example, suppose you have a common folder at `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
+* **Setup data and output folders**: In order to run code for this project, we expect a certain directory structure for storing dataset(s) and model outputs. For example, suppose you have a common folder at `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
+```bash
+cac/
+├── data
+└── outputs
+    └── piyush
+
+3 directories, 0 files
+```
 
 
 ### Get started
@@ -47,12 +55,12 @@ Password: <Enter your dockerhub password when asked to enter>
 ```bash
 cd ~/
 mkdir projects; cd projects;
-git clone git@github.com:WadhwaniAI/cac-test-release.git
+git clone git@github.com:WadhwaniAI/cough-against-covid.git
 ```
 
 * **Pull required docker image**: Note that this might change depending on whether this image works.
 ```bash
-docker pull wadhwaniai/covid:cac-aws-1.0-py3
+docker pull wadhwaniai/cough-against-covid:py3-1.0
 ```
 
 * **Fire a container using the docker image**: First, set the following enviroment variables:
@@ -62,7 +70,7 @@ export WANDB_CONFIG_DIR=</path/to/any/folder>/.config/wandb/
 ```
 Next, you can start a container by the following command: 
 ```bash
-cd ~/projects/cac-test-release/setup/
+cd ~/projects/cough-against-covid/setup/
 bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
 
 >>> Explanation
@@ -73,11 +81,11 @@ bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u 
 -p: port number (this is needed if you want to start jupyter lab on a remote machine)
 ```
 
-Once you are inside the container, you can run the training/evaluation scripts. Note that, inside the container, the code is mounted at `/workspace/cac-test-release/`, the data is mounted at `/data/` and your outputs at `/outputs/`.
+Once you are inside the container, you can run the training/evaluation scripts. Note that, inside the container, the code is mounted at `/workspace/cough-against-covid/`, the data is mounted at `/data/` and your outputs at `/outputs/`.
 
 (Optional) In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
 ```bash
-cd /workspace/cac-test-release/setup/
+cd /workspace/cough-against-covid/setup/
 bash jupyter.sh 8001
 
 # now visit <IP of the machine>:8001 in a browser;
