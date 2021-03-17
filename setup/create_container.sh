@@ -1,6 +1,6 @@
 # example command to run
 # bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
-# -g: GPU number
+# -g: GPU number, for a non-GPU machine, pass -1
 # -n: name of the container
 # -e: path to the folder where data and outputs are to be stored
 # -u: username (this is the name of folder you created inside outputs/ folder)
@@ -8,7 +8,7 @@
 
 
 # set docker image
-image=wadhwaniai/covid:cac-aws-1.0-py3
+image=wadhwaniai/cough-against-covid:py3-1.0
 
 # get inputs
 while getopts "g:n:u:e:p:" OPTION; do
@@ -33,11 +33,19 @@ if [[ -z $WANDB_CONFIG_DIR ]] ; then
 	exit 0
 fi
 
+# nvidia-docker command works only for GPU machines
+command="nvidia-docker"
+if [ "$gpu" ==  -1  ];then
+       command="docker"
+fi
+
+echo "=> Firing docker container with $command"
+
 # start the docker container
-NV_GPU=$gpu nvidia-docker run --rm -it \
-	--name "$gpu"_"$name" \
+ NV_GPU=$gpu $command run --rm -it \
+	--name gpu-"$gpu"_"$name" \
     -p $port:$port \
-	-v $PWD/../:/workspace/cac-test-release \
+	-v $PWD/../:/workspace/cough-against-covid \
 	-v $efs_path/outputs/$user:/output \
 	-v $efs_path/outputs:/all-output \
 	-v $efs_path/data:/data \

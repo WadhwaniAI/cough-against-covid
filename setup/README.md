@@ -61,6 +61,8 @@ mkdir projects; cd projects;
 git clone git@github.com:WadhwaniAI/cough-against-covid.git
 ```
 
+> TEMPORARY: Please switch to pb/setup branch using `git checkout pb/setup` for further steps.
+
 * **Pull required docker image**: Note that this might change depending on whether this image works.
 ```bash
 docker pull wadhwaniai/cough-against-covid:py3-1.0
@@ -77,14 +79,15 @@ cd ~/projects/cough-against-covid/setup/
 bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
 
 >>> Explanation
--g: GPU number
+-g: GPU number, pass -1 for a non-GPU machine
 -n: name of the container
 -e: path to the folder where data and outputs are to be stored
 -u: username (this is the name of folder you created inside outputs/ folder)
 -p: port number (this is needed if you want to start jupyter lab on a remote machine)
 ```
 
-Once you are inside the container, you can run the training/evaluation scripts. Note that, inside the container, the code is mounted at `/workspace/cough-against-covid/`, the data is mounted at `/data/` and your outputs at `/outputs/`.
+Once you are inside the container, you can run the training/evaluation scripts.
+Note that, inside the container, the code is mounted at `/workspace/cough-against-covid/`, the data is mounted at `/data/` and your outputs at `/outputs/`.
 
 (Optional) In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
 ```bash
