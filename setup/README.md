@@ -83,3 +83,11 @@ bash jupyter.sh 8001
 # now visit <IP of the machine>:8001 in a browser;
 # if running on a local machine, visit 0.0.0.0:8001
 ```
+
+#### Updating docker image (Optional)
+In case you want to make certain changes to your local docker container and commit them as a new image, you can do that by modifying the Dockerfile and then running:
+```bash
+cd setup/
+docker build -t wadhwaniai/cough-against-covid:py3-1.0 . -f Dockerfile
+docker push <your docker username>/<your docker repo>:<tag>
+```
