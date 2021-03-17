@@ -93,10 +93,9 @@ Note that, inside the container, the code is mounted at `/workspace/cough-agains
 ```bash
 cd /workspace/cough-against-covid/setup/
 bash jupyter.sh 8001
-
-# now visit <IP of the machine>:8001 in a browser;
-# if running on a local machine, visit 0.0.0.0:8001
 ```
+Now visit <IP of the machine>:8001 in a browser. If running on a local machine, visit 0.0.0.0:8001, the password is "cac@1234" without the double-quotes. If you want to keep this secure, you can set the password by running `jupyter notebook passwd`, modifying `jupyter.sh` to remove `--NotebookApp.password` argument before running the above command.
+
 
 #### Updating docker image (Optional)
 In case you want to make certain changes to your local docker container and commit them as a new image, you can do that by modifying the Dockerfile and then running:
