@@ -1,3 +1,4 @@
+## Instructions for setup
 
 In order to use this code, you need to use the docker image we have relased along with the code for dependencies. For a basic tutorial on Docker, see [this](https://www.tutorialspoint.com/docker/docker_overview.htm). For installation steps, follow [this](https://www.tutorialspoint.com/docker/installing_docker_on_linux.htm). In simple terms, for our case, docker is like a self-enclosed virtual environment which anyone can download and run the code inside it instead of having to follow the tedious steps for installing dependencies. Check the installation by running:
 
@@ -17,7 +18,8 @@ docker login -u <your-dockerhub-username>
 Password: <Enter your dockerhub password when asked to enter>
 ```
 
-3. **Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. If you have already set this up, you can skip this step. Follow the steps here:
+3. **Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. If you have already set this up, you can skip this step. Follow the steps [here](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+<!-- 
 * Start an SSH agent: 
   ```bash
   eval `ssh-agent`
@@ -37,7 +39,8 @@ Password: <Enter your dockerhub password when asked to enter>
   ```bash
   git config --global user.name "Piyush"
   git config --global user.email "piyush@wadhwaniai.org"
-  ```
+  ``` -->
+
 4. **Setup data and output folders**: In order to run code for this project, we expect a certain directory structure for storing dataset(s) and model outputs. For example, suppose you have a common folder at `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
 ```bash
 cac/
