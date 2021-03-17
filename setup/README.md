@@ -9,15 +9,15 @@ This code also assumes having a GPU machine. Make sure you are able to run `nvid
 
 ### Pre-requisites
 
-**Creating an account on Weights and Biases**: We use W&B (or wandb) for logging and visualization. If you do not have a [W&B](https://app.wandb.ai/) account, you can create one for free. After that, copy your W&B API key from Settings. This will be needed later on.
+1. **Creating an account on Weights and Biases**: We use W&B (or wandb) for logging and visualization. If you do not have a [W&B](https://app.wandb.ai/) account, you can create one for free. After that, copy your W&B API key from Settings. This will be needed later on.
 
-**Create a dockerhub account and login**: Create an account on [dockerhub.com](https://hub.docker.com/). In your local terminal, log in:
+2. **Create a dockerhub account and login**: Create an account on [dockerhub.com](https://hub.docker.com/). In your local terminal, log in:
 ```bash
 docker login -u <your-dockerhub-username>
 Password: <Enter your dockerhub password when asked to enter>
 ```
 
-**Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. If you have already set this up, you can skip this step. Follow the steps here:
+3. **Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. If you have already set this up, you can skip this step. Follow the steps here:
 * Start an SSH agent: 
   ```bash
   eval `ssh-agent`
@@ -38,7 +38,7 @@ Password: <Enter your dockerhub password when asked to enter>
   git config --global user.name "Piyush"
   git config --global user.email "piyush@wadhwaniai.org"
   ```
-* **Setup data and output folders**: In order to run code for this project, we expect a certain directory structure for storing dataset(s) and model outputs. For example, suppose you have a common folder at `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
+4. **Setup data and output folders**: In order to run code for this project, we expect a certain directory structure for storing dataset(s) and model outputs. For example, suppose you have a common folder at `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
 ```bash
 cac/
 ├── data
