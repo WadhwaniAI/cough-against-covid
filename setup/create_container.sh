@@ -39,6 +39,8 @@ if [ "$gpu" ==  -1  ];then
        command="docker"
 fi
 
+cwd=$(dirname "$(readlink -f "$BASH_SOURCE")")
+
 echo "=> Firing docker container with $command"
 
 # start the docker container
@@ -46,7 +48,7 @@ echo "=> Firing docker container with $command"
 	--name gpu-"$gpu"_"$name" \
     -p $port:$port \
 	-v $HOME/.ssh/:/root/.ssh \
-	-v $PWD/../:/workspace/cough-against-covid \
+	-v $cwd/../:/workspace/cough-against-covid \
 	-v $efs_path/outputs/$user:/output \
 	-v $efs_path/outputs:/all-output \
 	-v $efs_path/data:/data \
