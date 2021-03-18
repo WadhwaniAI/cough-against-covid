@@ -18,7 +18,7 @@ docker login -u <your-dockerhub-username>
 Password: <Enter your dockerhub password when asked to enter>
 ```
 
-3. **Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, we recommend using SSH keys. If you have already set this up, you can skip this step. Follow the steps [here](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+3. **Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, this code requires using SSH keys. If you have already set this up, you can skip this step. Follow the steps [here](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 <!-- 
 * Start an SSH agent: 
   ```bash
