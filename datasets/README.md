@@ -42,9 +42,9 @@ Check the data at `/data/coswara-15-03-21/`. The `raw/audio/` folder contains th
 datasets/cleaning/coswara.ipynb
 ```
 
-* **Step 3: Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. This is an important step and needs carefully attention. For example, if you want to split a dataset randomly into train, validation and test, you can use `XXX` notebook and save it as version `v1.0`. If you want to create a new (different) split of the *same* samples as in `v1.0`, then create `v1.1` and so on. If you decide to add more samples to the original dataset, then you should create `v2.0` and so on. If a given dataset has pre-specified splits, then we store them in `/data/<dataset-name>/processed/versions/default.yml`. For `coswara` dataset, refer to the following notebook to create a default version. You can use your own notebooks to create new versions.
+* **Step 3: Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. This is an important step and needs carefully attention. For example, if you want to split a dataset randomly into train, validation and test, you can use `XXX` notebook and save it as version `v1.0`. If you want to create a new (different) split of the *same* samples as in `v1.0`, then create `v1.1` and so on. If you decide to add more samples to the original dataset, then you should create `v2.0` and so on. If a given dataset has pre-specified splits, then we store them in `/data/<dataset-name>/processed/versions/default.yml`. For `coswara` dataset, refer to the following notebook to create a default version for COVID-cough classification task. You can use your own notebooks to create new versions.
 ```bash
-datasets/versioning/coswara/default.yml
+datasets/versioning/cough-classification/coswara/default.yml
 ```
 
 ### Ready-to-use Datasets
