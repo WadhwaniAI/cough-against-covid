@@ -73,6 +73,8 @@ docker pull wadhwaniai/cough-against-covid:py3-1.0
 export WANDB_API_KEY=<your W&B API key obtained from previous section>
 export WANDB_CONFIG_DIR=</path/to/any/folder>/.config/wandb/
 ```
+> Tip: It is convenient to put these in your ~/.bashrc or ~/.bash_profile instead of setting them manually everytime.
+
 Next, you can start a container by the following command: 
 ```bash
 cd ~/projects/cough-against-covid/setup/
@@ -91,7 +93,8 @@ Once you are inside the container, you can run the training/evaluation scripts. 
 
 Note that, inside the container, the code is mounted at `/workspace/cough-against-covid/`, the data is mounted at `/data/` and your outputs at `/outputs/`.
 
-(Optional) In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
+#### (Optional) Starting Jupyter lab
+In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
 ```bash
 cd /workspace/cough-against-covid/setup/
 bash jupyter.sh 8001
@@ -99,7 +102,7 @@ bash jupyter.sh 8001
 Now visit `<IP of the machine>:8001` in a browser. If running on a local machine, visit `0.0.0.0:8001`, the password is "cac@1234" without the double-quotes. If you want to keep this secure, you can set the password by running `jupyter notebook passwd`, modifying `jupyter.sh` to remove `--NotebookApp.password` argument before running the above command.
 
 
-#### Updating docker image (Optional)
+#### (Optional) Updating docker image
 In case you want to make certain changes to your local docker container and commit them as a new image, you can do that by modifying the Dockerfile and then running:
 ```bash
 cd setup/
