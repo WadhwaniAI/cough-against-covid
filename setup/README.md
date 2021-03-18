@@ -89,7 +89,6 @@ bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u 
 Once you are inside the container, you can run the training/evaluation scripts. You should see an interface like this.
 ![image](https://user-images.githubusercontent.com/51699359/111505444-a0de2f00-876e-11eb-9cf1-67b070446ab8.png)
 
-Once you are inside the container, you can run the training/evaluation scripts. 
 Note that, inside the container, the code is mounted at `/workspace/cough-against-covid/`, the data is mounted at `/data/` and your outputs at `/outputs/`.
 
 (Optional) In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
