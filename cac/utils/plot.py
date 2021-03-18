@@ -8,6 +8,9 @@ import seaborn as sns
 def plot_categorical_attribute(
         df, attribute, hue=None, title=None, ax=None, figsize=(8, 6), show=False, kwargs=dict()
     ):
+    """
+    Plots a count plot for a categorical attribute (column) in a dataframe.
+    """
     if ax is None:
         fig, ax = plt.subplots(1, 1, figsize=figsize)
 
