@@ -1,6 +1,6 @@
 ## Datasets: Downloading, cleaning and versioning
 
-This section has code and instructions for downloading and setting up a dataset for usage (training, inference etc.). In this section, we describe the directory structure to be maintained to store datasets/outputs, and the steps to download, clean and version a given dataset.
+This section has code and instructions for downloading and setting up a dataset for usage (training, inference etc.). In this section, we describe the steps to download, clean and version a given dataset.
 
 > Note: This assumes you have setup the dependencies by following the steps given in `setup/`. All the code you run in these steps should be run from inside a docker container.
 
@@ -9,7 +9,6 @@ For a given dataset, say our own dataset named `wiai-facility`, you need to foll
 1. **Download**: You can follow the instructions in `download/wiai-facility/` to download and store the dataset in a folder structure as instructed.
 2. **Cleaning**: For every dataset, we have a `raw/` folder that stores the audio files in the format of the original dataset. In order to standardise the storage, we keep a `processed/` folder where we store a flat-list of all audio files contained in `raw/`.
 3. **Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. This is an important step and needs carefully attention. For example, if you want to split a dataset randomly into train, validation and test, you can use `XXX` notebook and save it as version `v1.0`. If you want to create a new (different) split of the *same* samples as in `v1.0`, then create `v1.1` and so on. If you decide to add more samples to the original dataset, then you should create `v2.0` and so on.
- -->
 
 ### Common storage folder
 
@@ -20,6 +19,7 @@ cac/
     |--outputs/
     |____piyush/
 ```
+-->
 
 ### Steps for dataset processing
 
