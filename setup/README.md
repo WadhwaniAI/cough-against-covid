@@ -73,6 +73,8 @@ docker pull wadhwaniai/cough-against-covid:py3-1.0
 export WANDB_API_KEY=<your W&B API key obtained from previous section>
 export WANDB_CONFIG_DIR=</path/to/any/folder>/.config/wandb/
 ```
+> Tip: It is convenient to put these in your ~/.bashrc or ~/.bash_profile instead of setting them manually everytime.
+
 Next, you can start a container by the following command: 
 ```bash
 cd ~/projects/cough-against-covid/setup/
