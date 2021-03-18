@@ -21,7 +21,7 @@ if __name__ == "__main__":
         help="Folder path where you want the dataset to be stored."
     )
     parser.add_argument(
-        "-u", "--url", default='git@work:iiscleap/Coswara-Data.git',
+        "-u", "--url", default='git@github.com:iiscleap/Coswara-Data.git',
         help="URL of the repository. Note: you will need to set SSH keys to use this OR pass HTML URL."
     )
     (args, unknown_args) = parser.parse_known_args()
