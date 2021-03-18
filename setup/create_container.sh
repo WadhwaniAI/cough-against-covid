@@ -45,7 +45,7 @@ echo "=> Firing docker container with $command"
  NV_GPU=$gpu $command run --rm -it \
 	--name gpu-"$gpu"_"$name" \
     -p $port:$port \
-	-v $HOME:$HOME
+	-v $HOME:$HOME \
 	-v $PWD/../:/workspace/cough-against-covid \
 	-v $efs_path/outputs/$user:/output \
 	-v $efs_path/outputs:/all-output \
