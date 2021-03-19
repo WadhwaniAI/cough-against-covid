@@ -27,7 +27,7 @@ For a given dataset, you need to follow the steps given below to be able to run 
 
 > Note: At this point, make sure you have fired up a docker container and you are running code inside it.
 
-> TEMPORARY: Once you start the container, run in another terminal `git checkout pb/datasets` since dataset related code is in another branch.
+> TEMPORARY: All the code should be run on `pb/datasets` branch.
 
 * **Step 1: Download**: Run the following commands. Note that `/Users/piyushbagad/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
 ```bash
