@@ -159,14 +159,33 @@ Apart from the datasets for cough-detection, we also use ESC-50 dataset of envir
 
 ### ESC-50 Dataset
 
-* Download:
+* Download: Run the following commands.
+```bash
+cd /workspace/cough-against-covid/datasets/download
+python esc50.py
+```
 
-* Cleaning:
+* Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/esc50.ipynb`.
 
-* Versioning:
+* Versioning: We use this dataset for background noise addition. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/background/esc-50/default.ipynb`.
+
 
 The final dataset folder structure as a result of above steps is organized as follows:
+```bash
+esc-50/
+├── ESC-50-master
+│   ├── audio
+│   ├── meta
+│   └── tests
+├── processed
+│   ├── audio
+│   └── versions
+└── raw
+    ├── audio
+    └── meta
 
+10 directories
+```
 
 ## Setting up COVID Datasets
 
