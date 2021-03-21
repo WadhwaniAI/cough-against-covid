@@ -62,7 +62,7 @@ python freesound-kaggle.py
 * Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/freesound-kaggle/v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
 
 The final dataset folder structure as a result of above steps is organized as follows:
-```python
+```bash
 freesound-kaggle/
 ├── FSDKaggle2018
 │   ├── FSDKaggle2018.audio_test
@@ -98,6 +98,21 @@ python flusense.py
 
 * Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/flusense/segmented-v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
 
+The final dataset folder structure as a result of above steps is organized as follows:
+```bash
+flusense/
+├── FluSense-data
+│   ├── FluSense\ audio
+│   └── flusense_data
+├── processed
+│   ├── audio
+│   └── versions
+└── raw
+    ├── annotations
+    └── audio
+
+9 directories
+```
 
 ## Setting up COVID Datasets
 
