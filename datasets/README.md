@@ -65,7 +65,6 @@ freesound-kaggle/
 ├── FSDKaggle2018
 │   ├── FSDKaggle2018.audio_test
 │   ├── FSDKaggle2018.audio_train
-│   │   └── FSDKaggle2018.audio_train
 │   ├── FSDKaggle2018.doc
 │   └── FSDKaggle2018.meta
 ├── processed
