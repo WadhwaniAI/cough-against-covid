@@ -80,9 +80,14 @@ freesound-kaggle/
 
 ### Coswara Dataset
 
-* Download:
+* Download: Run the following commands. Note that `/Users/piyushbagad/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
+```bash
+cd /workspace/cough-against-covid/datasets/download/
+python coswara.py -p /data/coswara-15-03-21/
+```
+Check the data at `/data/coswara-15-03-21/`. The `raw/audio/` folder contains the audio files following the structure of the original dataset. In `raw/annotations/`, we store a CSV files containing the target labels and other metadata (like location, gender etc.).
 
-* Cleaning:
+* Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/coswara.ipynb`.
 
 * Versioning:
 
