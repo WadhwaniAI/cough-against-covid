@@ -47,6 +47,19 @@ datasets/cleaning/coswara.ipynb
 datasets/versioning/cough-classification/coswara/default.yml
 ```
 
+## Setting up publicly available datasets
+
+### FreeSound Dataset (Kaggle)
+
+### Coswara Dataset
+
+### FluSense Dataset
+
+## Setting up COVID Datasets
+
+### Cough Against COVID Dataset (Wadhwani AI)
+
+
 ### Ready-to-use Datasets
 
 WIP: This can contain a list of datasets with various statistics that we can release with our own dataset package - for these datasets, a user need not run these steps.
