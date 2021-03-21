@@ -49,6 +49,8 @@ datasets/versioning/cough-classification/coswara/default.yml
 
 ## Setting up publicly available datasets
 
+We use the following public datasets for pre-training our model before fine-tuning on the primary task(s). The pre-training task we consider is cough vs no-cough classification i.e. cough-detection.
+
 ### FreeSound Dataset (Kaggle)
 
 * Download the dataset:
