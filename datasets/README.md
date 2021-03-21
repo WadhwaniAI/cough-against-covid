@@ -57,9 +57,25 @@ cd /workspace/cough-against-covid/datasets/download
 python freesound-kaggle.py
 ```
 * Clean (standardise) the dataset: Run the notebook - `cough-against-covid/datasets/cleaning/freesound-kaggle.ipynb`.
-* Versioning: 
+* Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/freesound-kaggle/v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
 
+The final dataset folder structure as a result of above steps is organized as follows:
+```bash
+freesound-kaggle/
+├── FSDKaggle2018
+│   ├── FSDKaggle2018.audio_test
+│   ├── FSDKaggle2018.audio_train
+│   │   └── FSDKaggle2018.audio_train
+│   ├── FSDKaggle2018.doc
+│   └── FSDKaggle2018.meta
+├── processed
+│   ├── audio
+│   └── versions
+└── raw
+    └── audio
 
+11 directories
+```
 
 ### Coswara Dataset
 
