@@ -89,7 +89,7 @@ Check the data at `/data/coswara-15-03-21/`. The `raw/audio/` folder contains th
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/coswara.ipynb`.
 
-* Versioning:
+* Versioning: Run the notebook -  `datasets/versioning/cough-detection/coswara/v1.0.ipynb`. Note that this version is for cough-detection. If you want to use Coswara for COVID classification, then you need to create a new version.
 
 The final dataset folder structure as a result of above steps is organized as follows:
 ```bash
