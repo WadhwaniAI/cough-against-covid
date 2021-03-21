@@ -18,6 +18,9 @@ docker login -u <your-dockerhub-username>
 Password: <Enter your dockerhub password when asked to enter>
 ```
 
+3. **Create an account on Kaggle and store API key**: In order to download some of the public datasets used in this project (e.g. FreeSound Dataset), you need to setup Kaggle account and store your API key. Please follow instructions given [here](https://github.com/Kaggle/kaggle-api). Your API key file must reside at `~/.kaggle/kaggle.json`.
+
+
 3. **Setup SSH keys on GitHub**: Instead of entering password everytime you push code to GitHub, this code requires using SSH keys. If you have already set this up, you can skip this step. Follow the steps [here](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 <!-- 
 * Start an SSH agent: 
