@@ -88,12 +88,16 @@ FluSense is nothing but a subset of the AudioSet dataset released by Google with
 ```bash
 mv /path/to/downloads/FluSense*.zip /path/to/common/storage/data/flusense/FluSense-data/
 ```
-
 Once this is downloaded, run:
 ```bash
 cd /workspace/cough-against-covid/datasets/download
 python flusense.py
 ```
+
+* Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/flusense.ipynb`.
+
+* Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/flusense/v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
+
 
 ## Setting up COVID Datasets
 
