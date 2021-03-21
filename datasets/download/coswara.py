@@ -1,8 +1,8 @@
 """
 Script to download and properly store Coswara dataset (https://github.com/iiscleap/Coswara-Data)
 
-Example usage:
->>> python coswara.py -d /scratche/data/cac/data/coswara-15-03-21/
+Example usage (from inside docker container):
+>>> python coswara.py -d /data/coswara-15-03-21/
 """
 import argparse
 import os
