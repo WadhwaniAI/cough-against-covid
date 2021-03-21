@@ -34,8 +34,9 @@ if [[ -z $WANDB_CONFIG_DIR ]] ; then
 fi
 
 # check if Kaggle API key file exists
-if [ ! -f $HOME/.kaggle/kaggle.json ]; then
+if [ ! -e $HOME/.kaggle/kaggle.json ]; then
     echo "Kaggle API key file not found. See README for instructions!"
+    exit 0
 fi
 
 # nvidia-docker command works only for GPU machines
@@ -44,17 +45,15 @@ if [ "$gpu" ==  -1  ];then
        command="docker"
 fi
 
-cwd=$(dirname "$(readlink -f "$BASH_SOURCE")")
-
 echo "=> Firing docker container with $command"
 
 # start the docker container
  NV_GPU=$gpu $command run --rm -it \
 	--name gpu-"$gpu"_"$name" \
     -p $port:$port \
-    -v $HOME/.kaggle/:/root/.kaggle \
+    -v $HOME/.kaggle/kaggle.json:/root/.kaggle/kaggle.json \
 	-v $HOME/.ssh/:/root/.ssh \
-	-v $cwd/../:/workspace/cough-against-covid \
+	-v $HOME/projects/cough-against-covid/:/workspace/cough-against-covid \
 	-v $efs_path/outputs/$user:/output \
 	-v $efs_path/outputs:/all-output \
 	-v $efs_path/data:/data \
