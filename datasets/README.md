@@ -80,6 +80,43 @@ freesound-kaggle/
 
 ### Coswara Dataset
 
+* Download:
+
+* Cleaning:
+
+* Versioning:
+
+The final dataset folder structure as a result of above steps is organized as follows:
+```bash
+coswara-15-03-21/
+├── Coswara-Data
+│   ├── 20200413
+│   ├── :
+│   └── Extracted_data
+│       ├── 20200413
+│       │   ├── 0Rlzhiz6bybk77wdLjxwy7yLDhg1
+│       │   │   ├── breathing-deep.wav
+│       │   │   ├── breathing-shallow.wav
+│       │   │   ├── cough-heavy.wav
+│       │   │   ├── cough-shallow.wav
+│       │   │   ├── counting-fast.wav
+│       │   │   ├── counting-normal.wav
+│       │   │   ├── metadata.json
+│       │   │   ├── vowel-a.wav
+│       │   │   ├── vowel-e.wav
+│       │   │   └── vowel-o.wav
+│       │	└── :
+│       └── :
+├── processed
+│   ├── audio
+│   └── versions
+└── raw
+    ├── annotations
+    └── audio
+
+1570 directories
+```
+
 ### FluSense Dataset
 
 FluSense is nothing but a subset of the AudioSet dataset released by Google with annotations by [Al Hossain et al](https://github.com/Forsad/FluSense-data). This subset of AudioSet is stored as a google drive folder.
