@@ -114,6 +114,20 @@ flusense/
 9 directories
 ```
 
+
+Apart from the datasets for cough-detection, we also use ESC-50 dataset of environmental sounds for background noise addition (data augmentation) during training.
+
+### ESC-50 Dataset
+
+* Download:
+
+* Cleaning:
+
+* Versioning:
+
+The final dataset folder structure as a result of above steps is organized as follows:
+
+
 ## Setting up COVID Datasets
 
 ### Cough Against COVID Dataset (Wadhwani AI)
