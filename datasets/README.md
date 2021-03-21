@@ -96,7 +96,7 @@ python flusense.py
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/flusense.ipynb`.
 
-* Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/flusense/v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
+* Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/flusense/segmented-v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
 
 
 ## Setting up COVID Datasets
