@@ -51,12 +51,14 @@ datasets/versioning/cough-classification/coswara/default.yml
 
 ### FreeSound Dataset (Kaggle)
 
-Download the dataset:
+* Download the dataset:
 ```bash
 cd /workspace/cough-against-covid/datasets/download
 python freesound-kaggle.py
 ```
-Clean (standardise) the dataset:
+* Clean (standardise) the dataset: Run the notebook - `cough-against-covid/datasets/cleaning/freesound-kaggle.ipynb`.
+* Versioning: 
+
 
 
 ### Coswara Dataset
