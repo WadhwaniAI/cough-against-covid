@@ -90,8 +90,6 @@ The final dataset folder structure as a result of above steps is organized as fo
 ```bash
 coswara-15-03-21/
 ├── Coswara-Data
-│   ├── 20200413
-│   ├── :
 │   └── Extracted_data
 │       ├── 20200413
 │       │   ├── 0Rlzhiz6bybk77wdLjxwy7yLDhg1
