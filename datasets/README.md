@@ -82,6 +82,19 @@ freesound-kaggle/
 
 ### FluSense Dataset
 
+FluSense is nothing but a subset of the AudioSet dataset released by Google with annotations by [Al Hossain et al](https://github.com/Forsad/FluSense-data). This subset of AudioSet is stored as a google drive folder.
+
+* Download: You need to download it from [here](https://drive.google.com/drive/folders/1c-qkb_ljD6xXqU4AGm4jEf8-lygRjLtS) and place it at this location: `/data/flusense/`. Unfortunately, this step needs to be done manually. After the `zip` files (4 in total) is downloaded from GDrive, run
+```bash
+mv /path/to/downloads/FluSense*.zip /path/to/common/storage/data/flusense/FluSense-data/
+```
+
+Once this is downloaded, run:
+```bash
+cd /workspace/cough-against-covid/datasets/download
+python flusense.py
+```
+
 ## Setting up COVID Datasets
 
 ### Cough Against COVID Dataset (Wadhwani AI)
