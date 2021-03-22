@@ -64,6 +64,20 @@ For this project, we use the following datasets. The instructions to follow step
 
 </center>
 
+<div align="center">
+
+| Dataset                                                                    | Cough | Non-cough | Total |
+|----------------------------------------------------------------------------|-------|-----------|-------|
+| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 2035  | 7115      | 9149  |
+| [FluSense](https://github.com/Forsad/FluSense-data)                        | 2486  | 9201      | 11687 |
+| [FreeSound](https://zenodo.org/record/2552860#.XFD05fwo-V4)                | 273   | 10800     | 11073 |
+| [ESC-50](https://github.com/karolpiczak/ESC-50)                            | -     | 2000      | 2000  |
+| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | X     | X         | X     |
+
+</div>
+
+
+
 <!-- 
 For a given dataset, you need to follow the steps given below to be able to run training or inference on the dataset. As an example, we show instructions to download and setup the [CoSwara Dataset](https://github.com/iiscleap/Coswara-Data) by IISc, Bangalore.
 
