@@ -23,6 +23,45 @@ cac/
 
 ### Steps for dataset processing
 
+In order to use a given dataset (training or inference), you need to follow the three steps as follows. 
+
+* **Step 1 - Download**: For this step, we provide scripts to download and store a given dataset.
+
+* **Step 2 - Cleaning**: In order to make is easy to work with multiple datasets, we standardise storage structure. For a given dataset, the structure looks like:
+```bash
+dataset/
+├── DownloadedDatasetFiles
+│   ├── XYZ
+│   ├── ABC
+│   └── :
+├── processed
+│   ├── audio/
+│   ├── attributes.csv
+│   ├── annotations.csv
+│   └── versions/
+└── raw
+    ├── annotations/
+    └── audio/
+```
+
+On running the given scripts, dataset files will be stored in `DownloadedDatasetFiles`. The audio files shall be symlinked to `raw/audio/` and any annotations that come with the dataset shall be linked to `raw/annotations/`. In the cleaning step, we standardise s.t. `processed/audio/` will have a flat-list of audio files (note that `raw/audio/` may have any structure like `date/person-ID/*.wav`). `processed/attributes.csv` would contain the metadata associated with that dataset and `processed/annotations.csv` will contain the labels.
+
+* **Step 3 - Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. This is an important step and needs carefully attention. For example, if you want to split a dataset randomly into train, validation and test, you can use `XXX` notebook and save it as version `v1.0`. If you want to create a new (different) split of the *same* samples as in `v1.0`, then create `v1.1` and so on. If you decide to add more samples to the original dataset, then you should create `v2.0` and so on.
+
+### Summary of Datasets
+
+For this project, we use the following datasets. The instructions to follow steps 1, 2, 3 for each of them are given in the subsequent sections.
+
+| Dataset                                                                    | Cough | Non-cough | Total |
+|----------------------------------------------------------------------------|-------|-----------|-------|
+| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 2035  | 7115      | 9149  |
+| [FluSense](https://github.com/Forsad/FluSense-data)                        | 2486  | 9201      | 11687 |
+| [FreeSound](https://zenodo.org/record/2552860#.XFD05fwo-V4)                | 273   | 10800     | 11073 |
+| [ESC-50](https://github.com/karolpiczak/ESC-50)                            | -     | 2000      | 2000  |
+| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | X     | X         | X     |
+
+
+<!-- 
 For a given dataset, you need to follow the steps given below to be able to run training or inference on the dataset. As an example, we show instructions to download and setup the [CoSwara Dataset](https://github.com/iiscleap/Coswara-Data) by IISc, Bangalore.
 
 > Note: At this point, make sure you have fired up a docker container and you are running code inside it.
@@ -46,7 +85,7 @@ datasets/cleaning/coswara.ipynb
 ```bash
 datasets/versioning/cough-classification/coswara/default.yml
 ```
-
+ -->
 ## Setting up publicly available datasets
 
 We use the following public datasets for pre-training our model before fine-tuning on the primary task(s). The pre-training task we consider is cough vs no-cough classification i.e. cough-detection.
