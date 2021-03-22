@@ -65,7 +65,6 @@ For this project, we use the following datasets. The instructions to follow step
 </div>
 
 ---
----
 
 <!-- 
 For a given dataset, you need to follow the steps given below to be able to run training or inference on the dataset. As an example, we show instructions to download and setup the [CoSwara Dataset](https://github.com/iiscleap/Coswara-Data) by IISc, Bangalore.
