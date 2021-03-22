@@ -28,23 +28,23 @@ In order to use a given dataset (training or inference), you need to follow the 
 * **Step 1 - Download**: For this step, we provide scripts to download and store a given dataset.
 
 * **Step 2 - Cleaning**: In order to make is easy to work with multiple datasets, we standardise storage structure. For a given dataset, the structure looks like:
-                        ```bash
-                        dataset/
-                        ├── DownloadedDatasetFiles
-                        │   ├── XYZ
-                        │   ├── ABC
-                        │   └── :
-                        ├── processed
-                        │   ├── audio/
-                        │   ├── attributes.csv
-                        │   ├── annotations.csv
-                        │   └── versions/
-                        └── raw
-                            ├── annotations/
-                            └── audio/
-                        ```
+```bash
+dataset/
+├── DownloadedDatasetFiles
+│   ├── XYZ
+│   ├── ABC
+│   └── :
+├── processed
+│   ├── audio/
+│   ├── attributes.csv
+│   ├── annotations.csv
+│   └── versions/
+└── raw
+    ├── annotations/
+    └── audio/
+```
 
-                        On running the given scripts, dataset files will be stored in `DownloadedDatasetFiles`. The audio files shall be symlinked to `raw/audio/` and any annotations that come with the dataset shall be linked to `raw/annotations/`. In the cleaning step, we standardise s.t. `processed/audio/` will have a flat-list of audio files (note that `raw/audio/` may have any structure like `date/person-ID/*.wav`). `processed/attributes.csv` would contain the metadata associated with that dataset and `processed/annotations.csv` will contain the labels.
+On running the given scripts, dataset files will be stored in `DownloadedDatasetFiles`. The audio files shall be symlinked to `raw/audio/` and any annotations that come with the dataset shall be linked to `raw/annotations/`. In the cleaning step, we standardise s.t. `processed/audio/` will have a flat-list of audio files (note that `raw/audio/` may have any structure like `date/person-ID/*.wav`). `processed/attributes.csv` would contain the metadata associated with that dataset and `processed/annotations.csv` will contain the labels.
 
 * **Step 3 - Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. This is an important step and needs carefully attention. For example, if you want to split a dataset randomly into train, validation and test, you can use `XXX` notebook and save it as version `v1.0`. If you want to create a new (different) split of the *same* samples as in `v1.0`, then create `v1.1` and so on. If you decide to add more samples to the original dataset, then you should create `v2.0` and so on.
 
