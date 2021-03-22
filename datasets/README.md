@@ -52,18 +52,6 @@ On running the given scripts, dataset files will be stored in `DownloadedDataset
 
 For this project, we use the following datasets. The instructions to follow steps 1, 2, 3 for each of them are given in the subsequent sections.
 
-<center>
-
-| Dataset                                                                    | Cough | Non-cough | Total |
-|----------------------------------------------------------------------------|-------|-----------|-------|
-| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 2035  | 7115      | 9149  |
-| [FluSense](https://github.com/Forsad/FluSense-data)                        | 2486  | 9201      | 11687 |
-| [FreeSound](https://zenodo.org/record/2552860#.XFD05fwo-V4)                | 273   | 10800     | 11073 |
-| [ESC-50](https://github.com/karolpiczak/ESC-50)                            | -     | 2000      | 2000  |
-| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | X     | X         | X     |
-
-</center>
-
 <div align="center">
 
 | Dataset                                                                    | Cough | Non-cough | Total |
