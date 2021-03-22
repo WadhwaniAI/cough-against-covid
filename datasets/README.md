@@ -52,6 +52,8 @@ On running the given scripts, dataset files will be stored in `DownloadedDataset
 
 For this project, we use the following datasets. The instructions to follow steps 1, 2, 3 for each of them are given in the subsequent sections.
 
+<center>
+
 | Dataset                                                                    | Cough | Non-cough | Total |
 |----------------------------------------------------------------------------|-------|-----------|-------|
 | [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 2035  | 7115      | 9149  |
@@ -60,6 +62,7 @@ For this project, we use the following datasets. The instructions to follow step
 | [ESC-50](https://github.com/karolpiczak/ESC-50)                            | -     | 2000      | 2000  |
 | [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | X     | X         | X     |
 
+</center>
 
 <!-- 
 For a given dataset, you need to follow the steps given below to be able to run training or inference on the dataset. As an example, we show instructions to download and setup the [CoSwara Dataset](https://github.com/iiscleap/Coswara-Data) by IISc, Bangalore.
