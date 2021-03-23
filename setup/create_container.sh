@@ -33,12 +33,6 @@ if [[ -z $WANDB_CONFIG_DIR ]] ; then
 	exit 0
 fi
 
-# check if Kaggle API key file exists
-if [ ! -e $HOME/.kaggle/kaggle.json ]; then
-    echo "Kaggle API key file not found. See README for instructions!"
-    exit 0
-fi
-
 # nvidia-docker command works only for GPU machines
 command="nvidia-docker"
 if [ "$gpu" ==  -1  ];then
