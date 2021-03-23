@@ -51,7 +51,6 @@ echo "=> Firing docker container with $command"
  NV_GPU=$gpu $command run --rm -it \
 	--name gpu-"$gpu"_"$name" \
     -p $port:$port \
-    -v $HOME/.kaggle/kaggle.json:/root/.kaggle/kaggle.json \
 	-v $HOME/.ssh/:/root/.ssh \
 	-v $HOME/projects/cough-against-covid/:/workspace/cough-against-covid \
 	-v $efs_path/outputs/$user:/output \
