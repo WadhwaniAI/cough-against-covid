@@ -67,7 +67,7 @@ mkdir projects; cd projects;
 git clone git@github.com:WadhwaniAI/cough-against-covid.git
 ```
 
-> TEMPORARY: Please switch to pb/setup branch using `git checkout pb/setup` for further steps.
+> TEMPORARY: Please switch to pb/setup branch using `git checkout pb/datasets` for further steps.
 
 * **Pull required docker image**: Note that this might change depending on whether this image works.
 ```bash
