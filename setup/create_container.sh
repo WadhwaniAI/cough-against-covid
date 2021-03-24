@@ -8,7 +8,7 @@
 
 
 # set docker image
-image=wadhwaniai/cough-against-covid:py3-1.0
+image=wadhwaniai/cough-against-covid:py3-1.1
 
 # get inputs
 while getopts "g:n:u:e:p:" OPTION; do
