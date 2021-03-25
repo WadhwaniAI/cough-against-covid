@@ -62,11 +62,14 @@ if __name__ == "__main__":
             unzip_folder = file.split('.zip')[0]
             call(f"unzip '{file}' -d {repo_dir}/", shell=True)
 
+    new_unzip_folder = unzip_folder.replace('FluSense audio', 'FluSense-audio')
+    call(f"mv '{unzip_folder}' {new_unzip_folder}", shell=True)
+
     print(colored("4. LINKING DATA TO RAW FOLDER ...", 'yellow'))
 
     # audio files
     os.makedirs(f"{args.dpath}/raw/audio/", exist_ok=True)
-    src_files = glob(join(args.dpath, 'FluSense-data/FluSense audio/*.wav'))
+    src_files = glob(join(args.dpath, 'FluSense-data/FluSense-audio/*.wav'))
     dst_files = [join(args.dpath, 'raw/audio', basename(x)) for x in src_files]
     for src, dst in tqdm(zip(src_files, dst_files), desc=colored("Creating symlinks for audios", "white")):
         if not exists(dst):

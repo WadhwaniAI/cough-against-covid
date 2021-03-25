@@ -470,11 +470,12 @@ class FixedPad:
     :type pad_mode: str, optional
     """
     def __init__(self, target_size: int, axis: int = -1,
-                 pad_mode: str = 'constant'):
+                 pad_mode: str = 'constant', accept_longer_than_target=False):
         self._check_args(pad_mode)
         self.target_size = target_size
         self.pad_mode = pad_mode
         self.axis = axis
+        self.accept_longer_than_target = accept_longer_than_target
 
     def __call__(self, signal: torch.Tensor) -> torch.Tensor:
         # validate input
@@ -484,7 +485,9 @@ class FixedPad:
         # return the signal
         n_signal = signal.shape[self.axis]
 
-        if n_signal == self.target_size:
+        condition = n_signal >= self.target_size \
+            if self.accept_longer_than_target else n_signal >= self.target_size
+        if condition:
             return signal
 
         ndim = len(signal.shape)
@@ -580,10 +583,11 @@ class FixedPad:
             raise ValueError("axis={} but input has only {} dimensions".format(
                 self.axis, ndim))
 
-        if signal.shape[self.axis] > self.target_size:
-            raise ValueError(
-                "signal is longer than the target size at axis {}".format(
-                    self.axis))
+        if not self.accept_longer_than_target:
+            if signal.shape[self.axis] > self.target_size:
+                raise ValueError(
+                    "signal is longer than the target size at axis {}".format(
+                        self.axis))
 
 
 class NoiseReduction:
