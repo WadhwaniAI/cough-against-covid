@@ -65,7 +65,7 @@ class ClassificationDataset(BaseDataset):
             ) -> Tuple[torch.Tensor, Union[List[str], int]]:
         item = self.items[index]
 
-        self._check_item(item)
+        self._check_item(index, item)
 
         audio = item.load(as_tensor=as_tensor)
         signal = audio['signal']
@@ -85,7 +85,7 @@ class ClassificationDataset(BaseDataset):
 
         return instance
 
-    def _check_item(self, item: AudioItem):
+    def _check_item(self, index: int, item: AudioItem):
         assert 'classification' in item.label,\
             "Item at index {} does not contain 'classification' in label".format(index)
 
