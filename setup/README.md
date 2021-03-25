@@ -5,7 +5,8 @@ In order to use this code, you need to use the docker image we have relased alon
 ```bash
 docker --version
 ```
-This code also assumes having a GPU machine. Make sure you are able to run `nvidia-smi` and see your GPUs. (This line maybe removed later when we have support for running on CPU machines)
+
+Depending on whether you have a CPU-only machine or a GPU machine, you need to use different docker images. If you do have a GPU machine, make sure you are able to run `nvidia-smi` and see your GPUs. 
 
 
 ### Pre-requisites
@@ -47,7 +48,7 @@ Password: <Enter your dockerhub password when asked to enter>
   ```
 -->
 
-4. **Setup data and output folders**: In order to run code for this project, we expect a certain directory structure for storing dataset(s) and model outputs. For example, suppose you have a common folder at `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
+4. **Setup data and output folders**: In order to run code for this project, we expect a certain directory structure for storing dataset(s) and model outputs. For example, suppose you create a common folder: `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
 ```bash
 cac/
 ├── data
@@ -71,7 +72,7 @@ git clone git@github.com:WadhwaniAI/cough-against-covid.git
 
 * **Pull required docker image**: Note that this might change depending on whether this image works.
 ```bash
-docker pull wadhwaniai/cough-against-covid:py3-1.0
+docker pull wadhwaniai/cough-against-covid:py3-1.1
 ```
 
 * **Fire a container using the docker image**: First, set the following enviroment variables:
@@ -79,12 +80,19 @@ docker pull wadhwaniai/cough-against-covid:py3-1.0
 export WANDB_API_KEY=<your W&B API key obtained from previous section>
 export WANDB_CONFIG_DIR=</path/to/any/folder>/.config/wandb/
 ```
-> Tip: It is convenient to put these in your ~/.bashrc or ~/.bash_profile instead of setting them manually everytime.
+> Tip: It is convenient to put these in your `~/.bashrc` or `~/.bash_profile` instead of setting them manually everytime.
+> Add the line `export WANDB_API_KEY=XYZ` to your `~/.bashrc` file.
 
 Next, you can start a container by the following command: 
 ```bash
 cd ~/projects/cough-against-covid/setup/
+
+# for a GPU machine
 bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
+
+# for a CPU machine
+bash create_container.sh -g -1 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
+
 
 >>> Explanation
 -g: GPU number, pass -1 for a non-GPU machine
