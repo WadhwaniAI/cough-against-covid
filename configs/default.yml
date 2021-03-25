@@ -3,12 +3,25 @@ description: cough detection | 3-layer CNN -> 3 FCN | flusense
 model:
     name: classification
     type: binary
-    batch_size: 128
+    batch_size: 4
     epochs: 200
     optimizer:
-      name: Adam
+      name: SGD
       args:
-        lr: 0.0001
+        lr: 0.001
+        momentum: 0.9
+        nesterov: true
+      scheduler:
+        update: epoch
+        value: loss
+        name: ReduceLROnPlateau
+        params:
+            mode: 'min'
+            factor: 0.1
+            patience: 5
+            verbose: true
+            threshold: 0.0001
+            threshold_mode: abs
     loss:
       train:
         name: cross-entropy
