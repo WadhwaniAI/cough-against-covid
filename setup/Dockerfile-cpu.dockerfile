@@ -38,6 +38,6 @@ RUN pip --no-cache-dir install -U pip
 RUN pip install torch==1.6.0+cpu torchvision==0.7.0+cpu torchaudio==0.6.0 torchsummary==1.5.1 \
     -f https://download.pytorch.org/whl torch_stable.html
 RUN pip install kornia==0.4.0 wandb==0.9.1 siren-torch==1.1 xgboost==1.1.1
-RUN pip install termcolor natsort matplotlib seaborn
+RUN pip install termcolor natsort matplotlib seaborn natsort praatio
 RUN pip install noisereduce==1.1.0
 RUN pip install git+https://github.com/detly/gammatone.git
