@@ -21,7 +21,6 @@ def create_folder(path):
 
 DATA_DIR = '/data'
 DATASET_DIR = create_folder(join(DATA_DIR, 'wiai-facility'))
-# os.makedirs(DATASET_DIR, exist_ok=True)
 
 # <------------- Code to download .zip files --------------->
 """
