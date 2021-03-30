@@ -20,26 +20,26 @@ class UnsupervisedDatasetTestCase(unittest.TestCase):
         cls.single_dataset_config_crowdsourced = [
             {
                 'name': 'wiai-crowdsourced',
-                'version': 'default-unsupervised',
+                'version': 'default-unsupervised-mini',
                 'mode': 'test'
             }
         ]
         cls.single_dataset_config_facility = [
             {
                 'name': 'wiai-facility',
-                'version': 'default-unsupervised',
+                'version': 'default-unsupervised-mini',
                 'mode': 'train'
             }
         ]
         cls.multi_dataset_config = [
             {
                 'name': 'wiai-crowdsourced',
-                'version': 'default-unsupervised',
+                'version': 'default-unsupervised-mini',
                 'mode': 'test'
             },
             {
                 'name': 'wiai-facility',
-                'version': 'default-unsupervised',
+                'version': 'default-unsupervised-mini',
                 'mode': 'train'
             }
         ]
@@ -56,12 +56,12 @@ class UnsupervisedDatasetTestCase(unittest.TestCase):
         """Test creating UnsupervisedDataset object for different modes"""
         test_dataset_config = {
             'name': 'wiai-crowdsourced',
-            'version': 'default-unsupervised',
+            'version': 'default-unsupervised-mini',
             'mode': 'test'
         }
         train_dataset_config = {
             'name': 'wiai-crowdsourced',
-            'version': 'default-unsupervised',
+            'version': 'default-unsupervised-mini',
             'mode': 'train'
         }
         test_dataset = UnsupervisedDataset(dataset_config=[test_dataset_config])
