@@ -72,15 +72,15 @@ class ClassificationDatasetTestCase(unittest.TestCase):
         dataset = ClassificationDataset(self.single_dataset_config)
 
         instance = dataset[0]
-        self.assertEqual(instance['item'].path, '/data/flusense/processed/audio/xb2q8ekh4ZY_0_000-10_000.wav')
+        self.assertEqual(instance['item'].path, '/data/flusense/processed/audio/0oUkEze_kmo.wav')
         self.assertTrue(isinstance(instance['signal'], torch.Tensor))
-        self.assertEqual(instance['label'], [])
+        self.assertEqual(instance['label'], ['cough'])
 
         instance = dataset[3]
         self.assertEqual(
-            instance['item'].path, '/data/flusense/processed/audio/sNCKIJFUj5I.wav')
+            instance['item'].path, '/data/flusense/processed/audio/MPUShjrdzow_30_000-40_000.wav')
         self.assertTrue(isinstance(instance['signal'], torch.Tensor))
-        self.assertEqual(instance['label'], ['cough'])
+        self.assertEqual(instance['label'], [])
 
     def test_single_dataset_binary_class_with_transform(self):
         """Checks single dataset for binary classification task using target transform"""
@@ -89,10 +89,10 @@ class ClassificationDatasetTestCase(unittest.TestCase):
             target_transform=self.binary_transform)
 
         instance = dataset[0]
-        self.assertEqual(instance['label'], 0)
+        self.assertEqual(instance['label'], 1)
 
         instance = dataset[3]
-        self.assertEqual(instance['label'], 1)
+        self.assertEqual(instance['label'], 0)
 
     def test_multi_dataset_multi_class_with_transform(self):
         """Checks multi dataset for multiclass classification task using target transform"""
@@ -103,7 +103,7 @@ class ClassificationDatasetTestCase(unittest.TestCase):
         instance = dataset[0]
         self.assertEqual(
             instance['item'].path,
-            '/data/flusense/processed/audio/lj3UH3ZE2lg_0_000-10_000.wav')
+            '/data/flusense/processed/audio/OwAUGABGrqk.wav')
         self.assertEqual(instance['label'], 2)
 
     def test_single_dataset_binary_class_with_signal_transform(self):
