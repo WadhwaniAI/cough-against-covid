@@ -493,7 +493,7 @@ class DataProcessorTestCase(unittest.TestCase):
             }
         ]
         # hard coded for this particular file
-        num_frames = 1003
+        num_frames = 21304
 
         processor = DataProcessor(config)
         signal = processor(self.signal)
@@ -509,7 +509,7 @@ class DataProcessorTestCase(unittest.TestCase):
             }
         ]
         # hard coded for this particular file
-        num_frames = 1003
+        num_frames = 21304
 
         processor = DataProcessor(config)
         signal = processor(self.signal)
@@ -525,7 +525,7 @@ class DataProcessorTestCase(unittest.TestCase):
             }
         ]
         # hard coded for this particular file
-        num_frames = 1003
+        num_frames = 21304
 
         processor = DataProcessor(config)
         signal = processor(self.signal)
@@ -560,7 +560,7 @@ class DataProcessorTestCase(unittest.TestCase):
             }
         ]
         # hard coded for this particular file
-        num_frames = 1103
+        num_frames = 23435
 
         processor = DataProcessor(config)
 
@@ -610,7 +610,7 @@ class DataProcessorTestCase(unittest.TestCase):
 
         # hard coded for this particular file
         n_mfcc = 40
-        num_frames = 1103
+        num_frames = 23435
 
         processor = DataProcessor(config)
         signal = processor(self.signal)
