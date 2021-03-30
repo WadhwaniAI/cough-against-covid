@@ -19,7 +19,7 @@ class UnsupervisedDatasetTestCase(unittest.TestCase):
 
         cls.single_dataset_config_crowdsourced = [
             {
-                'name': 'wiai-crowdsourced',
+                'name': 'wiai-facility',
                 'version': 'default-unsupervised-mini',
                 'mode': 'test'
             }
@@ -33,7 +33,7 @@ class UnsupervisedDatasetTestCase(unittest.TestCase):
         ]
         cls.multi_dataset_config = [
             {
-                'name': 'wiai-crowdsourced',
+                'name': 'wiai-facility',
                 'version': 'default-unsupervised-mini',
                 'mode': 'test'
             },
@@ -55,12 +55,12 @@ class UnsupervisedDatasetTestCase(unittest.TestCase):
     def test_different_modes(self):
         """Test creating UnsupervisedDataset object for different modes"""
         test_dataset_config = {
-            'name': 'wiai-crowdsourced',
+            'name': 'wiai-facility',
             'version': 'default-unsupervised-mini',
             'mode': 'test'
         }
         train_dataset_config = {
-            'name': 'wiai-crowdsourced',
+            'name': 'wiai-facility',
             'version': 'default-unsupervised-mini',
             'mode': 'train'
         }
@@ -78,7 +78,7 @@ class UnsupervisedDatasetTestCase(unittest.TestCase):
         instance = dataset[0]
 
         self.assertTrue(isinstance(instance['signal'], torch.Tensor))
-        self.assertTrue(instance['label']['dataset-name'] == 'wiai-crowdsourced')
+        self.assertTrue(instance['label']['dataset-name'] == 'wiai-facility')
 
     def test_single_dataset_facility(self):
         """Checks single dataset for facility"""
@@ -97,7 +97,7 @@ class UnsupervisedDatasetTestCase(unittest.TestCase):
             signal_transform=self.spectrogram_transform)
 
         instance_crowdsourced = dataset[0]
-        self.assertTrue(instance_crowdsourced['label']['dataset-name'] == 'wiai-crowdsourced')
+        self.assertTrue(instance_crowdsourced['label']['dataset-name'] == 'wiai-facility')
 
         instance_facility = dataset[-1]
         self.assertTrue(instance_facility['label']['dataset-name'] == 'wiai-facility')
