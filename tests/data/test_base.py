@@ -88,7 +88,9 @@ class BaseDatasetTestCase(unittest.TestCase):
             'version': 'segmented-v1.0',
             'mode': 'val'
         }
-        dataset = BaseDataset([dataset_config], as_frames=True, frame_length=1000)
+        dataset = BaseDataset(
+            [dataset_config], as_frames=True, frame_length=1000, min_length=500, hop_length=500
+        )
 
         data_info = read_dataset_from_config(dataset_config)
         filepaths = data_info['file']
@@ -98,25 +100,24 @@ class BaseDatasetTestCase(unittest.TestCase):
         diff = end - start
 
         # file longer than frame length with last frame length < min_length
-        self.assertEqual(filepaths[0],
-            '/data/flusense/processed/audio/NSBAv1UxHB4_20_000-30_000.wav')
-        items = dataset._create_frames(filepaths[0], labels[0], start[0], end[0])
+        self.assertEqual(filepaths[30],
+            '/data/flusense/processed/audio/SF-srscAiK0_0_000-10_000.wav')
+        items = dataset._create_frames(filepaths[30], labels[30], start[30], end[30])
         self.assertEqual(len(items), 1)
         self.assertEqual(items[0].end - items[0].start, 1)
 
         # file longer than frame length with last frame length > min_length
-        # length = 1.195
         self.assertEqual(filepaths[1],
-            '/data/flusense/processed/audio/NSBAv1UxHB4_20_000-30_000.wav')
+            '/data/flusense/processed/audio/FpuF3uuV1U0_7_000-17_000.wav')
         items = dataset._create_frames(filepaths[1], labels[1], start[1], end[1])
-        self.assertEqual(len(items), 2)
+        self.assertEqual(len(items), 4)
         for item in items:
             self.assertEqual(item.end - item.start, 1)
 
         # file shorter than frame length
-        self.assertEqual(filepaths[21],
-            '/data/flusense/processed/audio/tWt0_TpfYtE_80_000-90_000.wav')
-        items = dataset._create_frames(filepaths[21], labels[21], start[21], end[21])
+        self.assertEqual(filepaths[10],
+            '/data/flusense/processed/audio/cl4hzarjGhk_0_000-10_000.wav')
+        items = dataset._create_frames(filepaths[10], labels[10], start[10], end[10])
         self.assertEqual(len(items), 1)
         self.assertTrue(items[0].end - items[0].start < 1)
 
