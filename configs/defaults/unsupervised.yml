@@ -1,4 +1,4 @@
-description: Unsupervised representation learning using MFCC based features with PCA and both facility + crowdsourced
+description: Unsupervised representation learning using MFCC based features with PCA and on facility
 
 model:
     name: dimensionality_reduction
@@ -63,10 +63,8 @@ data:
   dataset:
     name: unsupervised_dataset
     config:
-      - name: wiai-crowdsourced
-        version: default-unsupervised
       - name: wiai-facility
-        version: default-unsupervised
+        version: default-unsupervised-mini
   collate_fn:
     name: unsupervised_collate
     params:
