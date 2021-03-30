@@ -13,7 +13,7 @@ class DataloaderTestCase(unittest.TestCase):
     def test_unsupervised_dataloader_2d(self):
         """Test get_dataloader for unsupervised learning task with each input being 2D"""
         n_mfcc = 64
-        config = Config('default-unsupervised.yml')
+        config = Config('defaults/unsupervised.yml')
         cfg = config.data
         batch_size = 8
 
@@ -27,7 +27,7 @@ class DataloaderTestCase(unittest.TestCase):
         self.assertIsInstance(signals, torch.Tensor)
         self.assertIsInstance(labels, list)
         self.assertIsInstance(labels[0], dict)
-        self.assertTrue('unique_id' in labels[0].keys())
+        self.assertTrue('patient_id' in labels[0].keys())
         self.assertTrue('dataset-name' in labels[0].keys())
         self.assertEqual(signals[0].dtype, torch.float32)
         self.assertEqual(len(signals), len(labels))
@@ -39,31 +39,10 @@ class DataloaderTestCase(unittest.TestCase):
         self.assertEqual(len(signals.shape), 2)
         self.assertEqual(signals.shape, (batch_size, 2 * n_mfcc))
 
-    def test_multitask_dataloader(self):
-        """Test get_dataloader for multi-task learning"""
-        config = Config('default-adversarial.yml')
-        cfg = config.data
-        batch_size = 8
-
-        dataloader, _ = get_dataloader(
-            cfg, 'val', batch_size=batch_size, shuffle=True, drop_last=True)
-
-        iterator = iter(dataloader)
-        batch = next(iterator)
-        signals, labels = batch['signals'], batch['labels']
-
-        self.assertIsInstance(signals, torch.Tensor)
-        self.assertIsInstance(labels, list)
-        self.assertEqual(signals[0].dtype, torch.float32)
-        self.assertEqual(len(signals), len(labels[0]))
-        self.assertEqual(len(labels[0]), len(labels[1]))
-        self.assertEqual(len(signals.shape), 4)
-        self.assertEqual(signals.shape, (batch_size, 1, 257, 100))
-
     def test_binary_classification_dataloader_1dcnn(self):
         """Test get_dataloader for binary classification task with each input being 1D"""
         resized_length = 1000
-        config = Config('default-1d.yml')
+        config = Config('defaults/1d.yml')
         config.data['dataset']['params'] = {
             'val': {
                 'fraction': 0.1
@@ -88,8 +67,10 @@ class DataloaderTestCase(unittest.TestCase):
         self.assertTrue(signals.shape, (batch_size, 1, resized_length))
 
     def test_binary_classification_dataloader_classification_sampler(self):
-        """Test get_dataloader for binary classification task with classification sampler"""
-        config = Config('default-wiai.yml')
+        """Test get_dataloader for binary classification task with classification sampler
+        TODO: pass this test when datasets ready
+        """
+        config = Config('defaults/wiai.yml')
         config.data['sampler']['val'] = {
             'name': 'classification',
             'params': {
@@ -140,7 +121,9 @@ class DataloaderTestCase(unittest.TestCase):
         self.assertTrue(signals.shape, (batch_size, 1, n_mels, 20))
 
     def test_binary_classification_dataloader_3d(self):
-        """Test get_dataloader for binary classification task with each input being 3D"""
+        """Test get_dataloader for binary classification task with each input being 3D
+        TODO: pass this test when datasets ready
+        """
         n_fft = 512
         config = Config('default-stft.yml')
         config.data['dataset']['params']['val']['fraction'] = 0.1
@@ -170,6 +153,7 @@ class DataloaderTestCase(unittest.TestCase):
         batch_size = 8
 
         cfg['dataset']['params']['val']['fraction'] = 0.5
+        cfg['dataset']['params']['val']['as_frames'] = False
         _, dataset = get_dataloader(
             cfg, 'val', batch_size=batch_size, shuffle=True, drop_last=True)
 
