@@ -122,13 +122,12 @@ class DataloaderTestCase(unittest.TestCase):
 
     def test_binary_classification_dataloader_3d(self):
         """Test get_dataloader for binary classification task with each input being 3D
-        TODO: pass this test when datasets ready
         """
         n_fft = 512
-        config = Config('default-stft.yml')
+        config = Config('defaults/stft.yml')
         config.data['dataset']['params']['val']['fraction'] = 0.1
         cfg = config.data
-        batch_size = 8
+        batch_size = 1
 
         dataloader, _ = get_dataloader(
             cfg, 'val', batch_size=batch_size, shuffle=True, drop_last=True)

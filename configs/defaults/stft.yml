@@ -1,10 +1,10 @@
-description: default-small-net + data_config = clf-v1 for facility
+description: Overparameterized CNN with default stonybrook version with STFT transform
 
 model:
     name: classification
     type: binary
-    batch_size: 32
-    epochs: 500
+    batch_size: 16
+    epochs: 100
     optimizer:
       name: SGD
       args:
@@ -22,9 +22,10 @@ model:
             verbose: true
             threshold: 0.0001
             threshold_mode: abs
+        lr: 0.0001
     classes:
-      - non-covid
-      - covid
+      - non-cough
+      - cough
     save:
         period: 2
         monitor: precision
@@ -35,7 +36,6 @@ model:
         load_best: False
         resume_optimizer: False
 
-network:
     name: neural_net
     params:
         config:
@@ -151,17 +151,55 @@ network:
         - BatchNorm2d:
             num_features: 256
         - ReLU: {}
+        - MaxPool2d:
+            kernel_size: 2
+        - Conv2d:
+            in_channels: 256
+            out_channels: 512
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - BatchNorm2d:
+            num_features: 512
+        - ReLU: {}
+        - Conv2d:
+            in_channels: 512
+            out_channels: 512
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - BatchNorm2d:
+            num_features: 512
+        - ReLU: {}
+        - Conv2d:
+            in_channels: 512
+            out_channels: 512
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - BatchNorm2d:
+            num_features: 512
+        - ReLU: {}
         - AdaptiveAvgPool2d:
             output_size:
             - 1
             - 1
         - Flatten: {}
         - Linear:
-            in_features: 256
-            out_features: 128
+            in_features: 512
+            out_features: 256
         - ReLU: {}
         - Linear:
-            in_features: 128
+            in_features: 256
             out_features: 128
         - ReLU: {}
         - Linear:
@@ -174,55 +212,51 @@ data:
     name: classification
     params:
       classes:
-        - covid
+        - cough
   signal_transform:
     train:
     - name: Resample
       params:
         orig_freq: 44100
         new_freq: 16000
-    - name: Spectrogram
+    - name: STFT
       params:
         n_fft: 512
         window: hann
-        power: 2
-        normalized: true
-    - name: AmplitudeToDB
-      params: {}
     - name: Resize
       params:
         size:
           - 257
-          - 100
-    - name: Unsqueeze
+          - 20
+    - name: Rescale
       params: {}
     val:
     - name: Resample
       params:
         orig_freq: 44100
         new_freq: 16000
-    - name: Spectrogram
+    - name: STFT
       params:
         n_fft: 512
         window: hann
-        power: 2
-        normalized: true
-    - name: AmplitudeToDB
-      params: {}
     - name: Resize
       params:
         size:
           - 257
-          - 100
-    - name: Unsqueeze
+          - 20
+    - name: Rescale
       params: {}
   dataset:
     name: classification_dataset
     config:
-      - name: wiai-crowdsourced
-        version: default-clf
-      - name: wiai-facility
-        version: default-clf
+      - name: flusense
+        version: segmented-v1.0
+    params:
+      train:
+        fraction: 0.1
+      val:
+        fraction: 0.1
   collate_fn:
     name: classification_collate
     params: {}
+
