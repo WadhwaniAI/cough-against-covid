@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     mercurial \
     virtualenv \
     reprepro \
+    ffmpeg \
     ruby1.9.1 && rm -rf /var/lib/apt/lists/*
 
 # change working directory to /
