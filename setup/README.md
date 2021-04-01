@@ -48,12 +48,13 @@ Password: <Enter your dockerhub password when asked to enter>
   ```
 -->
 
-4. **Setup data and output folders**: In order to run code for this project, we expect a certain directory structure for storing dataset(s) and model outputs. For example, suppose you create a common folder: `/Users/piyushbagad/cac/`. The data and outputs will reside at `/Users/piyushbagad/cac/data/` and `/Users/piyushbagad/cac/outputs/` respectively. Next, in the `outputs/` folder, create a folder by your name (e.g. `piyush/`).
+4. **Setup data and output folders**: Create the following folder structure (to store data and outputs) inside `~/` or any other directory.
+
 ```bash
 cac/
 ├── data
 └── outputs
-    └── piyush
+    └── <your name>
 
 3 directories, 0 files
 ```
