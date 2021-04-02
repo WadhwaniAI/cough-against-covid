@@ -1,0 +1,322 @@
+description: Overparameterized CNN with flusense and using fixed 1 sec frames
+
+model:
+    name: classification
+    type: binary
+    batch_size: 32
+    epochs: 100
+    optimizer:
+      name: SGD
+      args:
+        lr: 0.001
+        momentum: 0.9
+        nesterov: true
+      scheduler:
+        update: epoch
+        value: loss
+        name: ReduceLROnPlateau
+        params:
+            mode: 'min'
+            factor: 0.1
+            patience: 5
+            verbose: true
+            threshold: 0.0001
+            threshold_mode: abs
+    classes:
+      - non-cough
+      - cough
+    save:
+        period: 2
+        monitor: precision
+        monitor_mode: max
+    load:
+        version: null
+        epoch: -1
+        load_best: False
+        resume_optimizer: False
+
+network:
+    name: neural_net
+    params:
+        config:
+        - name: Conv2d
+          params:
+            in_channels: 1
+            out_channels: 64
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 64
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
+            in_channels: 64
+            out_channels: 64
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 64
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
+            in_channels: 64
+            out_channels: 64
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 64
+        - name: ReLU
+          params: {}
+        - name: MaxPool2d
+          params:
+            kernel_size: 2
+        - name: Conv2d
+          params:
+            in_channels: 64
+            out_channels: 128
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 128
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
+            in_channels: 128
+            out_channels: 128
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 128
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
+            in_channels: 128
+            out_channels: 128
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 128
+        - name: ReLU
+          params: {}
+        - name: MaxPool2d
+          params:
+            kernel_size: 2
+        - name: Conv2d
+          params:
+            in_channels: 128
+            out_channels: 256
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 256
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
+            in_channels: 256
+            out_channels: 256
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 256
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
+            in_channels: 256
+            out_channels: 256
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 256
+        - name: ReLU
+          params: {}
+        - name: MaxPool2d
+          params:
+            kernel_size: 2
+        - name: Conv2d
+          params:
+            in_channels: 256
+            out_channels: 512
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 512
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
+            in_channels: 512
+            out_channels: 512
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 512
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
+            in_channels: 512
+            out_channels: 512
+            padding:
+            - 3
+            - 1
+            kernel_size:
+            - 7
+            - 3
+        - name: BatchNorm2d
+          params:
+            num_features: 512
+        - name: ReLU
+          params: {}
+        - name: AdaptiveAvgPool2d
+          params:
+            output_size:
+            - 1
+            - 1
+        - name: Flatten
+          params: {}
+        - name: Linear
+          params:
+            in_features: 512
+            out_features: 256
+        - name: ReLU
+          params: {}
+        - name: Linear
+          params:
+            in_features: 256
+            out_features: 128
+        - name: ReLU
+          params: {}
+        - name: Linear
+          params:
+            in_features: 128
+            out_features: 2
+
+data:
+  raw_waveform: false
+  as_frames: true
+  target_transform:
+    name: classification
+    params:
+      classes:
+        - cough
+  signal_transform:
+    train:
+    - name: Resample
+      params:
+        orig_freq: 44100
+        new_freq: 16000
+    - name: RandomPad
+      params:
+          target_size: 16000
+    - name: MFCC
+      params:
+        sample_rate: 16000
+        n_mfcc: 64
+        log_mels: true
+        melkwargs:
+          n_mels: 128
+    - name: Rescale
+      params: {}
+    - name: Unsqueeze
+      params: {}
+    val:
+    - name: Resample
+      params:
+        orig_freq: 44100
+        new_freq: 16000
+    - name: RandomPad
+      params:
+          target_size: 16000
+    - name: MFCC
+      params:
+        sample_rate: 16000
+        n_mfcc: 64
+        log_mels: true
+        melkwargs:
+          n_mels: 128
+    - name: Rescale
+      params: {}
+    - name: Unsqueeze
+      params: {}
+  dataset:
+    name: classification_dataset
+    config:
+      - name: flusense
+        version: segmented-v1.0
+    params:
+        train:
+          fraction: 1.
+          as_frames: true
+          frame_length: 1000
+          min_length: 100
+          hop_length: 500
+        val:
+          fraction: 1.
+          as_frames: true
+          frame_length: 1000
+          min_length: 100
+          hop_length: 500
+  collate_fn:
+    name: classification_collate
+    params: {}
