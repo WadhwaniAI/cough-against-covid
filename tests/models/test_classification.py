@@ -22,14 +22,14 @@ class ClassificationModelTestCase(unittest.TestCase):
         cls.cfg.data['dataset']['params']['val']['fraction'] = 0.1
         cls.cfg.num_workers = 1 if torch.cuda.is_available() else 10
 
-    def test_1_model_fitting(self):
-        """Test model.fit()"""
-        set_logger(join(self.cfg.log_dir, 'train.log'))
+    # def test_1_model_fitting(self):
+    #     """Test model.fit()"""
+    #     set_logger(join(self.cfg.log_dir, 'train.log'))
 
-        tester_cfg = deepcopy(self.cfg)
-        tester_cfg.model['epochs'] = 1
-        classifier = ClassificationModel(tester_cfg)
-        classifier.fit(debug=True, use_wandb=False)
+    #     tester_cfg = deepcopy(self.cfg)
+    #     tester_cfg.model['epochs'] = 1
+    #     classifier = ClassificationModel(tester_cfg)
+    #     classifier.fit(debug=True, use_wandb=False)
 
     def test_optimizer(self):
         """Test model.fit()"""
@@ -44,9 +44,11 @@ class ClassificationModelTestCase(unittest.TestCase):
 
     def test_with_frames(self):
         """Test models/lassification.py with fixed frames"""
-        cfg = Config('default-with-frames.yml')
-        cfg.data['dataset']['params']['val']['fraction'] = 0.1
-        cfg.num_workers = 10
+        cfg = Config('defaults/with-frames.yml')
+        cfg.data['dataset']['params']['train']['fraction'] = 0.01
+        cfg.data['dataset']['params']['val']['fraction'] = 0.03
+        cfg.model['batch_size'] = 4 # to make it work on small CPU machines
+        cfg.num_workers = 1
         set_logger(join(cfg.log_dir, 'train.log'))
 
         tester_cfg = deepcopy(cfg)
@@ -56,10 +58,12 @@ class ClassificationModelTestCase(unittest.TestCase):
 
     def test_with_label_smoothing(self):
         """Test model.fit() with label smoothing"""
-        tester_cfg = Config('default-label-smoothing-random.yml')
+        tester_cfg = Config('defaults/label-smoothing-random.yml')
         set_logger(join(tester_cfg.log_dir, 'train.log'))
-        tester_cfg.data['dataset']['params']['val']['fraction'] = 0.1
-        tester_cfg.num_workers = 10
+        tester_cfg.data['dataset']['params']['train']['fraction'] = 0.01
+        tester_cfg.data['dataset']['params']['val']['fraction'] = 0.03
+        tester_cfg.model['batch_size'] = 4 # to make it work on small CPU machines
+        tester_cfg.num_workers = 1
         tester_cfg.model['epochs'] = 1
         classifier = ClassificationModel(tester_cfg)
         classifier.fit(use_wandb=False)

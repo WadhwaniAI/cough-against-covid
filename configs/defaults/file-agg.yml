@@ -1,0 +1,177 @@
+description: resnet18-v4.0-bgd (new best model with file aggregation)
+
+data:
+  collate_fn:
+    name: classification_collate
+    params: {}
+
+  dataset:
+    config:
+    - name: flusense
+      version: segmented-v1.0
+    name: classification_dataset
+    params:
+      train: {}
+      val:
+        as_frames: True
+        frame_length: 2000
+        min_length: 2000
+        hop_length: 500
+
+  raw_waveform: false
+
+  sampler:
+    train:
+      name: classification
+      params:
+        mode: balanced
+    val:
+      name: default
+
+  signal_transform:
+    train:
+    - name: Resample
+      params:
+        new_freq: 16000
+        orig_freq: 44100
+    - name: RandomCrop
+      params:
+        crop_size: 32000
+        pad_mode: zero
+    - name: Spectrogram
+      params:
+        hop_length: 160
+        n_fft: 512
+        win_length: 512
+    - name: AmplitudeToDB
+      params: {}
+    - name: TimeMasking
+      params:
+        max_len: 50
+        max_num: 2
+    - name: FrequencyMasking
+      params:
+        max_len: 50
+        max_num: 2
+    - name: Rescale
+      params:
+        value: 100
+    - name: Unsqueeze
+      params: {}
+
+    val:
+    - name: Resample
+      params:
+        new_freq: 16000
+        orig_freq: 44100
+    - name: RandomPad
+      params:
+        target_size: 32000
+    - name: Spectrogram
+      params:
+        hop_length: 160
+        n_fft: 512
+        win_length: 512
+    - name: AmplitudeToDB
+      params: {}
+    - name: TimeMasking
+      params:
+        max_len: 50
+        max_num: 2
+    - name: FrequencyMasking
+      params:
+        max_len: 50
+        max_num: 2
+    - name: Rescale
+      params:
+        value: 100
+    - name: Unsqueeze
+      params: {}
+
+  target_transform:
+    name: classification
+    params:
+      classes:
+      - covid
+
+
+model:
+  batch_size: 32
+  classes:
+  - non-covid
+  - covid
+  epochs: 1000
+  eval:
+    maximize_metric: specificity
+    maximize_mode: val
+    aggregate:
+      train: {}
+      val:
+        method: median
+        at: softmax
+
+  load:
+    epoch: -1
+    load_best: false
+    resume_optimizer: false
+    resume_epoch: false
+    version: null
+  name: classification
+  optimizer:
+    args:
+      lr: 1.0e-05
+      weight_decay: 0.0001
+    name: AdamW
+  save:
+    monitor: specificity
+    monitor_mode: max
+    period: 1
+  subset_tracker:
+    train: {}
+    val: {}
+  type: binary
+
+
+network:
+  name: neural_net
+  params:
+    config:
+    - name: resnet18
+      params:
+        in_channels: 1
+        pretrained: true
+    - name: AdaptiveAvgPool2d
+      params:
+        output_size:
+        - 1
+        - 1
+    - name: Flatten
+      params: {}
+    - name: Linear
+      params:
+        in_features: 512
+        out_features: 256
+    - name: ReLU
+      params: {}
+    - name: Dropout
+      params:
+        p: 0.2
+    - name: Linear
+      params:
+        in_features: 256
+        out_features: 128
+    - name: ReLU
+      params: {}
+    - name: Dropout
+      params:
+        p: 0.2
+    - name: Linear
+      params:
+        in_features: 128
+        out_features: 2
+
+
+metrics_to_track:
+- precision
+- specificity
+- recall

@@ -19,10 +19,11 @@ class ClassificationModelTestCase(unittest.TestCase):
     """Class to check the checkpoint saving/loading of ClassificationModel"""
     @classmethod
     def setUpClass(cls):
-        version = 'default-file-agg.yml'
+        version = 'defaults/file-agg.yml'
         cls.cfg = Config(version)
-        cls.cfg.data['dataset']['params']['val']['fraction'] = 0.1
-        cls.cfg.num_workers = 10
+        cls.cfg.data['dataset']['params']['train']['fraction'] = 0.01
+        cls.cfg.data['dataset']['params']['val']['fraction'] = 0.03
+        cls.cfg.num_workers = 1 if torch.cuda.is_available() else 10
 
     def test_no_file_aggregation(self):
         """Tests model without file-level aggregation"""

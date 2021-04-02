@@ -22,8 +22,9 @@ class ClassificationModelEvaluationTestCase(unittest.TestCase):
     def setUpClass(cls):
         version = 'default.yml'
         cls.cfg = Config(version)
-        cls.cfg.data['dataset']['params']['val']['fraction'] = 0.1
-        cls.cfg.num_workers = 10
+        cls.cfg.data['dataset']['params']['train']['fraction'] = 0.01
+        cls.cfg.data['dataset']['params']['val']['fraction'] = 0.03
+        cls.cfg.num_workers = 1 if torch.cuda.is_available() else 10
 
     def test_1_model_fitting(self):
         """Test model.fit()"""
