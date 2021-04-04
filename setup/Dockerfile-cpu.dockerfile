@@ -43,3 +43,4 @@ RUN pip install termcolor natsort matplotlib seaborn natsort praatio
 RUN pip install noisereduce==1.1.0
 RUN pip install git+https://github.com/detly/gammatone.git
 RUN pip install py7zr multivolumefile natsort
+RUN pip install timm dataclasses
