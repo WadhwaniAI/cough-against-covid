@@ -12,7 +12,7 @@ For a given dataset, say our own dataset named `wiai-facility`, you need to foll
 
 ### Common storage folder
 
-For storing datasets and model outputs for this project, please create a root folder on your machine (could be anywhere), for example,`/Users/piyushbagad/cac/`. Inside that, create the following structure: (you should replace `piyush` folder with a folder by your username - it could be anything).
+For storing datasets and model outputs for this project, please create a root folder on your machine (could be anywhere), for example,`~/cac/`. Inside that, create the following structure: (you should replace `piyush` folder with a folder by your username - it could be anything).
 ```bash
 cac/
     |--data/
@@ -72,7 +72,7 @@ For a given dataset, you need to follow the steps given below to be able to run 
 
 > TEMPORARY: All the code should be run on `pb/datasets` branch.
 
-* **Step 1: Download**: Run the following commands. Note that `/Users/piyushbagad/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
+* **Step 1: Download**: Run the following commands. Note that `~/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
 ```bash
 cd /workspace/cough-against-covid/datasets/download/
 python coswara.py -p /data/coswara-15-03-21/
@@ -123,7 +123,7 @@ freesound-kaggle/
 
 ### Coswara Dataset
 
-* Download: Run the following commands. Note that `/Users/piyushbagad/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
+* Download: Run the following commands. Note that `~/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
 ```bash
 cd /workspace/cough-against-covid/datasets/download/
 python coswara.py -p /data/coswara-15-03-21/
@@ -234,14 +234,12 @@ esc-50/
 
 ### Cough Against COVID Dataset (Wadhwani AI)
 
-### ESC-50 Dataset
-
 * Download: Run the following commands.
 
-> Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `/Users/piyushbagad/cac/` to the common storage location that you have already set. 
+> Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `~/cac/` to the common storage location that you have already set. 
 ```bash
 odin_ip=192.168.100.70
-rsync -avzP -e "ssh -i /path/to/your/pem-file" username@$odin_ip:/scratche/data/cac/data/wiai-facility/wiai-facility-23-11-2020.7z* /Users/piyushbagad/cac/data/wiai-facility/
+rsync -avzP -e "ssh -i /path/to/your/pem-file" username@$odin_ip:/scratche/data/cac/data/wiai-facility/wiai-facility-23-11-2020.7z* ~/cac/data/wiai-facility/
 ```
 
 Once this step completes (takes about 40mins; each zip file is around 2GBs), run the following script (from inside docker container) that unzips the zip files.
@@ -277,6 +275,40 @@ wiai-facility/
 # 20200615_000817: timestamp of RTPCR test reciept for that patient
 ```
 
+### Cough Against COVID Crowdsourced Dataset (Wadhwani AI)
+
+* Download: Run the following commands.
+
+> Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `~/cac/` to the common storage location that you have already set. 
+```bash
+odin_ip=192.168.100.70
+rsync -avzP -e "ssh -i /path/to/your/pem-file" username@$odin_ip:/scratche/data/cac/data/wiai-crowdsourced/wiai-crowdsourced-15-03-2021.zip ~/cac/data/wiai-crowdsourced/
+```
+
+Once this step completes, run the following script (from inside docker container) that unzips the zip files.
+```bash
+cd /workspace/cough-against-covid/datasets/download
+python wiai-facility.py
+```
+
+You should see `/data/wiai-crowdsourced/raw/audio/` and `/data/wiai-crowdsourced/raw/annotations/` folders that contain our dataset.
+
+* Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/wiai-crowdsourced.ipynb`.
+
+* Versioning: We do not currently use this dataset for any of the tasks since the GT RTPCR labels are self-reported. However, in case you plan to use it, you create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-crowdsourced/default.ipynb`.
+
+The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files):
+```bash
+wiai-crowdsourced/
+├── processed
+│   ├── audio
+│   └── versions
+└── raw
+    ├── annotations
+    └── audio
+
+6 directories
+```
 
 <!-- 
 ### Ready-to-use Datasets
