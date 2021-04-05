@@ -3,7 +3,8 @@
 In order to use this code, you need to use the docker image we have relased along with the code for dependencies. For a basic tutorial on Docker, see [this](https://www.tutorialspoint.com/docker/docker_overview.htm). For installation steps, follow [this](https://www.tutorialspoint.com/docker/installing_docker_on_linux.htm). In simple terms, for our case, docker is like a self-enclosed virtual environment which anyone can download and run the code inside it instead of having to follow the tedious steps for installing dependencies. Check the installation by running:
 
 ```bash
-docker --version
+$ docker --version
+Docker version 19.03.12, build 48a66213fe
 ```
 
 Depending on whether you have a CPU-only machine or a GPU machine, you need to use different docker images. If you do have a GPU machine, make sure you are able to run `nvidia-smi` and see your GPUs. 
@@ -69,11 +70,16 @@ mkdir projects; cd projects;
 git clone git@github.com:WadhwaniAI/cough-against-covid.git
 ```
 
-> TEMPORARY: Please switch to pb/datasets branch using `git checkout pb/datasets` for further steps.
-
-* **Pull required docker image**: Note that this might change depending on whether this image works.
+* **Pull required docker image**: Note that this might change depending on whether this image works. For a CPU-only machine, run:
 ```bash
 docker pull wadhwaniai/cough-against-covid:py3-1.1
+```
+For a GPU machine, run:
+
+> Note: This image is not ready yet.
+
+```bash
+docker pull wadhwaniai/cough-against-covid:py3-1.2
 ```
 
 * **Fire a container using the docker image**: First, set the following enviroment variables:
@@ -89,10 +95,10 @@ Next, you can start a container by the following command:
 cd ~/projects/cough-against-covid/setup/
 
 # for a GPU machine
-bash create_container.sh -g 0 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
+bash create_container.sh -g 0 -n sample-container -e ~/cac/ -u piyush -p 8001
 
 # for a CPU machine
-bash create_container.sh -g -1 -n sample-container -e /Users/piyushbagad/cac/ -u piyush -p 8001
+bash create_container.sh -g -1 -n sample-container -e ~/cac/ -u piyush -p 8001
 
 
 >>> Explanation
@@ -107,6 +113,12 @@ Once you are inside the container, you can run the training/evaluation scripts. 
 ![image](https://user-images.githubusercontent.com/51699359/111505444-a0de2f00-876e-11eb-9cf1-67b070446ab8.png)
 
 Note that, inside the container, the code is mounted at `/workspace/cough-against-covid/`, the data is mounted at `/data/` and your outputs at `/outputs/`.
+
+For CPU-only machine, inside the container, run the following command to test you are able to load the right `torch` version:
+```bash
+$ python -c "import torch; print(torch.__version__)"
+1.6.0+cpu
+```
 
 #### (Optional) Starting Jupyter lab
 In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
