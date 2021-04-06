@@ -45,7 +45,12 @@ dataset/
     └── audio/
 ```
 
-* **Step 3 - Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. This is an important step and needs carefully attention. For example, if you want to split a dataset randomly into train, validation and test, you can use `XXX` notebook and save it as version `v1.0`. If you want to create a new (different) split of the *same* samples as in `v1.0`, then create `v1.1` and so on. If you decide to add more samples to the original dataset, then you should create `v2.0` and so on.
+* **Step 3 - Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. For example, if you want to split a dataset randomly into train, validation and test, you can use our given notebooks and save it as version `v1.0` and so on. For sake of ease of use, we provide relevant data versions (splits) already in `assets/data/`  folder for various datasets. You can  copy these in the common storage folder as follows:
+```bash
+cd /workspace/cough-against-covid/datasets/versioning/
+python datasets/versioning/copy_version_files.py
+```
+You can skip step `Versioning` from the processing for each dataset unless you wish to create a new split.
 
 ### Summary of Datasets
 
@@ -102,7 +107,7 @@ cd /workspace/cough-against-covid/datasets/download
 python freesound-kaggle.py
 ```
 * Clean (standardise) the dataset: Run the notebook - `cough-against-covid/datasets/cleaning/freesound-kaggle.ipynb`.
-* Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/freesound-kaggle/v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
+* Versioning (Optional): We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/freesound-kaggle/v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
 
 The final dataset folder structure as a result of above steps is organized as follows:
 ```bash
@@ -132,7 +137,7 @@ Check the data at `/data/coswara-15-03-21/`. The `raw/audio/` folder contains th
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/coswara.ipynb`.
 
-* Versioning: Run the notebook -  `datasets/versioning/cough-detection/coswara/v1.0.ipynb`. Note that this version is for cough-detection. If you want to use Coswara for COVID classification, then you need to create a new version.
+* Versioning (Optional): Run the notebook -  `datasets/versioning/cough-detection/coswara/v1.0.ipynb`. Note that this version is for cough-detection. If you want to use Coswara for COVID classification, then you need to create a new version.
 
 The final dataset folder structure as a result of above steps is organized as follows:
 ```bash
@@ -179,7 +184,7 @@ python flusense.py
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/flusense.ipynb`.
 
-* Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/flusense/segmented-v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
+* Versioning (Optional): We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/flusense/segmented-v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
 
 The final dataset folder structure as a result of above steps is organized as follows:
 ```bash
@@ -210,7 +215,7 @@ python esc50.py
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/esc50.ipynb`.
 
-* Versioning: We use this dataset for background noise addition. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/background/esc-50/default.ipynb`.
+* Versioning (Optional): We use this dataset for background noise addition. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/background/esc-50/default.ipynb`.
 
 
 The final dataset folder structure as a result of above steps is organized as follows:
@@ -252,7 +257,7 @@ You should see `/data/wiai-facility/raw/audio/` and `/data/wiai-facility/raw/ann
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/wiai-facility.ipynb`.
 
-* Versioning: We use this dataset for cough classification for COVID. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-facility/default.ipynb`.
+* Versioning (Optional): We use this dataset for cough classification for COVID. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-facility/default.ipynb`.
 
 
 The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files):
@@ -295,7 +300,7 @@ You should see `/data/wiai-crowdsourced/raw/audio/` and `/data/wiai-crowdsourced
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/wiai-crowdsourced.ipynb`.
 
-* Versioning: We do not currently use this dataset for any of the tasks since the GT RTPCR labels are self-reported. However, in case you plan to use it, you create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-crowdsourced/default.ipynb`.
+* Versioning (Optional): We do not currently use this dataset for any of the tasks since the GT RTPCR labels are self-reported. However, in case you plan to use it, you create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-crowdsourced/default.ipynb`.
 
 The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files):
 ```bash
