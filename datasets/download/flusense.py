@@ -53,11 +53,10 @@ if __name__ == "__main__":
         for file in zip_files:
             assert exists(file), f"Zip file {file} missing. \
                 Please see README to download AudioSet files from GDrive."
-            unzip_folder = file.split('.zip')[0]
             call(f"unzip '{file}' -d {repo_dir}/", shell=True)
 
-    new_unzip_folder = unzip_folder.replace('FluSense audio', 'FluSense-audio')
-    call(f"mv '{unzip_folder}' {new_unzip_folder}", shell=True)
+    new_unzipped_folder = unzipped_folder.replace('FluSense audio', 'FluSense-audio')
+    call(f"mv '{unzipped_folder}' {new_unzipped_folder}", shell=True)
 
     print(colored("4. LINKING DATA TO RAW FOLDER ...", 'yellow'))
 
