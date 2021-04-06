@@ -45,13 +45,7 @@ if __name__ == "__main__":
 
     # check if all zip files exists
     print(colored("3. UNZIPPING FOLDERS ...", 'yellow'))
-    zip_fnames = [
-        'FluSense audio-20210321T144002Z-002.zip',
-        'FluSense audio-20210321T144002Z-004.zip',
-        'FluSense audio-20210321T144002Z-001.zip',
-        'FluSense audio-20210321T144002Z-003.zip'
-    ]
-    zip_files = [join(args.dpath, 'FluSense-data', x) for x in zip_fnames]
+    zip_files = glob(join(args.dpath, 'FluSense-data', 'FluSense*.zip'))
     unzipped_folder = join(args.dpath, "FluSense-data/FluSense audio/")
     wav_files = glob(join(unzipped_folder, '*.wav'))
 
