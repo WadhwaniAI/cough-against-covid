@@ -1,3 +1,31 @@
+"""
+Trainer script.
+
+Example:
+>>> python train.py -v experiments/resnet18-coughnet.yml --wandb_entity wadhwani
+
+usage: train.py [-h] -v VERSION [-n NUM_WORKERS] [--debug] [-o] [--resume]
+                [--id ID] [--no-wandb] [--seed SEED]
+                [--wandb_entity WANDB_ENTITY]
+
+Trains a model
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v VERSION, --version VERSION
+                        path to the experiment config file
+  -n NUM_WORKERS, --num_workers NUM_WORKERS
+                        number of CPU workers to use
+  --debug               specify where a debugging run
+  -o, --overfit-batch   specify whether the run is to test overfitting on a
+                        batch
+  --resume              whether to resume experiment in wandb
+  --id ID               experiment ID in wandb
+  --no-wandb            whether to ignore using wandb
+  --seed SEED           seed for the experiment
+  --wandb_entity WANDB_ENTITY
+                        your wandb account name
+"""
 import warnings
 import logging
 import argparse
@@ -24,7 +52,7 @@ def main(args):
 
     set_logger(join(config.log_dir, 'train.log'))
     logging.info(args)
-    os.environ['WANDB_ENTITY'] = "wadhwani"
+    os.environ['WANDB_ENTITY'] = args.wandb_entity
     os.environ['WANDB_PROJECT'] = "cough-against-covid"
     os.environ['WANDB_DIR'] = dirname(config.checkpoint_dir)
 
@@ -58,5 +86,7 @@ if __name__ == '__main__':
                         help='whether to ignore using wandb')
     parser.add_argument('--seed', type=int, default=42,
                         help='seed for the experiment')
+    parser.add_argument('--wandb_entity', default='wadhwani', type=str,
+                        help='your wandb account name')
     args = parser.parse_args()
     main(args)
