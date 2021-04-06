@@ -1,0 +1,1729 @@
+all:
+  file:
+  - /data/wiai-crowdsourced/processed/audio/user_20508732c77c1d2452816a36f8640356623518e1_20200811_204301_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_20508732c77c1d2452816a36f8640356623518e1_20200811_204301_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_20508732c77c1d2452816a36f8640356623518e1_20200811_204301_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e7cc43f81257cd60a393c6ce9a860b030b795d4_20200808_154430_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e7cc43f81257cd60a393c6ce9a860b030b795d4_20200808_154430_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e7cc43f81257cd60a393c6ce9a860b030b795d4_20200808_154430_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c0b11577f7357bf381bde63662f40235b89ef6d5_20200728_111256_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c0b11577f7357bf381bde63662f40235b89ef6d5_20200728_111256_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c0b11577f7357bf381bde63662f40235b89ef6d5_20200728_111256_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6677bcf800cca0954bfe78e5501fbbba19ec0b5_20200717_115411_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6677bcf800cca0954bfe78e5501fbbba19ec0b5_20200717_115411_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6677bcf800cca0954bfe78e5501fbbba19ec0b5_20200717_115411_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4bfa79c44f7bd6906034ce18bd4a65633ab23ba6_20200710_162854_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4bfa79c44f7bd6906034ce18bd4a65633ab23ba6_20200710_162854_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4bfa79c44f7bd6906034ce18bd4a65633ab23ba6_20200710_162854_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fbecae61ad9a6cc7291f1c27788cda2347c523fa_20200701_042709_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fbecae61ad9a6cc7291f1c27788cda2347c523fa_20200701_042709_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fbecae61ad9a6cc7291f1c27788cda2347c523fa_20200701_042709_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0ef40bc9848b82fc773d63b10f086c8cb5c5b13_20200616_053157_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0ef40bc9848b82fc773d63b10f086c8cb5c5b13_20200616_053157_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0ef40bc9848b82fc773d63b10f086c8cb5c5b13_20200616_053157_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_398e6f49ce3b5231fb6d74cc86e6f4315ef516d9_20200616_043132_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_398e6f49ce3b5231fb6d74cc86e6f4315ef516d9_20200616_043132_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_398e6f49ce3b5231fb6d74cc86e6f4315ef516d9_20200616_043132_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_64f6ee229781d75d897bec38f10b1a4dd76d73cc_20200614_013152_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_64f6ee229781d75d897bec38f10b1a4dd76d73cc_20200614_013152_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_64f6ee229781d75d897bec38f10b1a4dd76d73cc_20200614_013152_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_402001d7db286f0de61c17e001f9b5ae8a79bdad_20200608_015910_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_402001d7db286f0de61c17e001f9b5ae8a79bdad_20200608_015910_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_402001d7db286f0de61c17e001f9b5ae8a79bdad_20200608_015910_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_484ca65ed668564a218e04d56a8280f1628a450c_20200530_094014_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_484ca65ed668564a218e04d56a8280f1628a450c_20200530_094014_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_484ca65ed668564a218e04d56a8280f1628a450c_20200530_094014_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb30a21810bac7eba519671c929317c378031b07_20200527_045924_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb30a21810bac7eba519671c929317c378031b07_20200527_045924_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb30a21810bac7eba519671c929317c378031b07_20200527_045924_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa747e4c5c31fd9b557173afe8e05767a089f3ed_20200526_105724_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa747e4c5c31fd9b557173afe8e05767a089f3ed_20200526_105724_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa747e4c5c31fd9b557173afe8e05767a089f3ed_20200526_105724_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a565f2786f9b9e8468a1d4ebb16e21dc66da53fb_20200522_093519_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a565f2786f9b9e8468a1d4ebb16e21dc66da53fb_20200522_093519_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a565f2786f9b9e8468a1d4ebb16e21dc66da53fb_20200522_093519_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_80136193a13a33c8c118e2e0dae57f68543a8935_20200520_102441_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_80136193a13a33c8c118e2e0dae57f68543a8935_20200520_102441_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_80136193a13a33c8c118e2e0dae57f68543a8935_20200520_102441_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_78d97c84ad1a74a50ec78fa20665817e166c47d9_20200516_002638_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_78d97c84ad1a74a50ec78fa20665817e166c47d9_20200516_002638_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_78d97c84ad1a74a50ec78fa20665817e166c47d9_20200516_002638_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_338768366da62752338e4c3322950016fb75a197_20200515_130237_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_338768366da62752338e4c3322950016fb75a197_20200515_130237_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_338768366da62752338e4c3322950016fb75a197_20200515_130237_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_bb79507fb55c16c3b0d5c10c9e0e582af1af3d30_20200515_063552_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_bb79507fb55c16c3b0d5c10c9e0e582af1af3d30_20200515_063552_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_bb79507fb55c16c3b0d5c10c9e0e582af1af3d30_20200515_063552_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1c33a78d5e8934acf26a63da4ffb08bf75247009_20200515_060824_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1c33a78d5e8934acf26a63da4ffb08bf75247009_20200515_060824_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1c33a78d5e8934acf26a63da4ffb08bf75247009_20200515_060824_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5ecf31fedf06914ba41fc22647d8ca0c3f662ec6_20200515_044620_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5ecf31fedf06914ba41fc22647d8ca0c3f662ec6_20200515_044620_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5ecf31fedf06914ba41fc22647d8ca0c3f662ec6_20200515_044620_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_823776525776c8f23a87176c59d25759da7a52c4_20200513_230833_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_823776525776c8f23a87176c59d25759da7a52c4_20200513_230833_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_823776525776c8f23a87176c59d25759da7a52c4_20200513_230833_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6ce90537e4dc3d9adc3799b6673fcd83fb559a45_20200513_075427_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6ce90537e4dc3d9adc3799b6673fcd83fb559a45_20200513_075427_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6ce90537e4dc3d9adc3799b6673fcd83fb559a45_20200513_075427_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5b482d1afc39304e35d04cfb478dbd9bfdecd915_20200513_061311_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5b482d1afc39304e35d04cfb478dbd9bfdecd915_20200513_061311_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5b482d1afc39304e35d04cfb478dbd9bfdecd915_20200513_061311_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b46d06377617d46cb9ae6f616ffaf36eb267b0c0_20200512_152157_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b46d06377617d46cb9ae6f616ffaf36eb267b0c0_20200512_152157_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b46d06377617d46cb9ae6f616ffaf36eb267b0c0_20200512_152157_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de7246b0dfaec083573a8a3016e4449fa98820fe_20200512_140255_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de7246b0dfaec083573a8a3016e4449fa98820fe_20200512_140255_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de7246b0dfaec083573a8a3016e4449fa98820fe_20200512_140255_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e7ac8c71bc71f80ca22dcea8b76008f6260cac06_20200508_021308_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e7ac8c71bc71f80ca22dcea8b76008f6260cac06_20200508_021308_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e7ac8c71bc71f80ca22dcea8b76008f6260cac06_20200508_021308_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2bc4bd2a97bb340e9bedf0dfcd4b4e4ac7069e2f_20200507_162449_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2bc4bd2a97bb340e9bedf0dfcd4b4e4ac7069e2f_20200507_162449_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2bc4bd2a97bb340e9bedf0dfcd4b4e4ac7069e2f_20200507_162449_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_46b0bbe36c322ed56af25c2d86822b7aa0998662_20200507_102556_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_46b0bbe36c322ed56af25c2d86822b7aa0998662_20200507_102556_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_46b0bbe36c322ed56af25c2d86822b7aa0998662_20200507_102556_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174409_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174409_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174409_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174355_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174355_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174355_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa22f8dd307457acc7dab84e353fb8b597d548ea_20200506_170637_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa22f8dd307457acc7dab84e353fb8b597d548ea_20200506_170637_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa22f8dd307457acc7dab84e353fb8b597d548ea_20200506_170637_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_53a293c57bf1f166ae678150d157adb644f4b20a_20200505_153045_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_53a293c57bf1f166ae678150d157adb644f4b20a_20200505_153045_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_53a293c57bf1f166ae678150d157adb644f4b20a_20200505_153045_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_34914eed30c7b9893209bdbe825f6bae5538e34f_20200504_074411_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_34914eed30c7b9893209bdbe825f6bae5538e34f_20200504_074411_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_34914eed30c7b9893209bdbe825f6bae5538e34f_20200504_074411_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2df11069d0eb445995ae1c6b2697f019fb44b6d6_20200504_074000_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2df11069d0eb445995ae1c6b2697f019fb44b6d6_20200504_074000_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2df11069d0eb445995ae1c6b2697f019fb44b6d6_20200504_074000_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_0e904d0f283cc39394207a1de34c8fb998801b79_20200503_200946_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_0e904d0f283cc39394207a1de34c8fb998801b79_20200503_200946_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_0e904d0f283cc39394207a1de34c8fb998801b79_20200503_200946_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3850cba140076e28b4ccdf9228b305546bcf8d97_20200501_110314_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3850cba140076e28b4ccdf9228b305546bcf8d97_20200501_110314_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3850cba140076e28b4ccdf9228b305546bcf8d97_20200501_110314_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d0c342c296d5f4e6dd7fcf739a58054cefd3f7c4_20200501_102150_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d0c342c296d5f4e6dd7fcf739a58054cefd3f7c4_20200501_102150_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d0c342c296d5f4e6dd7fcf739a58054cefd3f7c4_20200501_102150_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3236c2ca88c8709f3baef8561662c27539162029_20200501_023304_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3236c2ca88c8709f3baef8561662c27539162029_20200501_023304_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3236c2ca88c8709f3baef8561662c27539162029_20200501_023304_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e0a29434666b9855c9b34f8654ebebb35061ce8d_20200430_224942_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e0a29434666b9855c9b34f8654ebebb35061ce8d_20200430_224942_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e0a29434666b9855c9b34f8654ebebb35061ce8d_20200430_224942_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6b96038889ae7561fadc989b8855aea3f685465_20200430_142852_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6b96038889ae7561fadc989b8855aea3f685465_20200430_142852_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6b96038889ae7561fadc989b8855aea3f685465_20200430_142852_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_494444b8ce1fff01cf2652ccbe1958c9d79bd510_20200430_142020_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_494444b8ce1fff01cf2652ccbe1958c9d79bd510_20200430_142020_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_494444b8ce1fff01cf2652ccbe1958c9d79bd510_20200430_142020_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5302e2f47d7c35d1ef8c4440b1302d7592b28a1b_20200430_092807_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5302e2f47d7c35d1ef8c4440b1302d7592b28a1b_20200430_092807_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5302e2f47d7c35d1ef8c4440b1302d7592b28a1b_20200430_092807_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_86fe0d9c31f671c62ad5c40b05ed9aeaa4310816_20200429_114204_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_86fe0d9c31f671c62ad5c40b05ed9aeaa4310816_20200429_114204_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_86fe0d9c31f671c62ad5c40b05ed9aeaa4310816_20200429_114204_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0db2cc1232549dcbd345c324217efe2f7c63195_20200429_110704_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0db2cc1232549dcbd345c324217efe2f7c63195_20200429_110704_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0db2cc1232549dcbd345c324217efe2f7c63195_20200429_110704_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6e5a74b427e07888e4671bd3ec5450e63a461fe8_20200429_101839_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6e5a74b427e07888e4671bd3ec5450e63a461fe8_20200429_101839_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6e5a74b427e07888e4671bd3ec5450e63a461fe8_20200429_101839_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fdffcc1bf01daf7b1f6e6cb3827130886e68b78e_20200429_043815_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fdffcc1bf01daf7b1f6e6cb3827130886e68b78e_20200429_043815_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fdffcc1bf01daf7b1f6e6cb3827130886e68b78e_20200429_043815_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb772b5211a88769066548d2169505ca4f5814d1_20200428_063903_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb772b5211a88769066548d2169505ca4f5814d1_20200428_063903_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb772b5211a88769066548d2169505ca4f5814d1_20200428_063903_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fb8e0c4ddf7431eec31dfce172ab25926a1589bf_20200426_042649_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fb8e0c4ddf7431eec31dfce172ab25926a1589bf_20200426_042649_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fb8e0c4ddf7431eec31dfce172ab25926a1589bf_20200426_042649_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_72601253d878c5e5ee8161d60222cd3556ed2ef5_20200425_221335_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_72601253d878c5e5ee8161d60222cd3556ed2ef5_20200425_221335_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_72601253d878c5e5ee8161d60222cd3556ed2ef5_20200425_221335_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f0c6ad4b417a538f8a3a0fe377b48a7bce33d7f2_20200423_192028_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f0c6ad4b417a538f8a3a0fe377b48a7bce33d7f2_20200423_192028_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f0c6ad4b417a538f8a3a0fe377b48a7bce33d7f2_20200423_192028_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_04125c3f6cbbafe3a51e0543fb7556c323a0237b_20200422_053654_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_04125c3f6cbbafe3a51e0543fb7556c323a0237b_20200422_053654_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_04125c3f6cbbafe3a51e0543fb7556c323a0237b_20200422_053654_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9b464c4edb791fae4735336d7a8a6c78ac2262cc_20200421_165828_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9b464c4edb791fae4735336d7a8a6c78ac2262cc_20200421_165828_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9b464c4edb791fae4735336d7a8a6c78ac2262cc_20200421_165828_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cdc85b8240513519b637421065eb4d3a99624309_20200421_053631_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cdc85b8240513519b637421065eb4d3a99624309_20200421_053631_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cdc85b8240513519b637421065eb4d3a99624309_20200421_053631_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_08d22b14b7014fff09ca9e1b2bd5629f14bd0fcd_20200420_161849_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_08d22b14b7014fff09ca9e1b2bd5629f14bd0fcd_20200420_161849_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_08d22b14b7014fff09ca9e1b2bd5629f14bd0fcd_20200420_161849_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_103aeb3b76549c735651905e6a33cbfc543efce5_20200420_075616_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_103aeb3b76549c735651905e6a33cbfc543efce5_20200420_075616_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_103aeb3b76549c735651905e6a33cbfc543efce5_20200420_075616_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a23d457d994382d2b495aa3facb2540851e03395_20200420_030646_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a23d457d994382d2b495aa3facb2540851e03395_20200420_030646_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a23d457d994382d2b495aa3facb2540851e03395_20200420_030646_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e8b218af744c5dd89643b965d89d36510c76d056_20200419_133401_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e8b218af744c5dd89643b965d89d36510c76d056_20200419_133401_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e8b218af744c5dd89643b965d89d36510c76d056_20200419_133401_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e237ae5efc4ac4c471a720acd2bff59eb3b7e98_20200419_054142_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e237ae5efc4ac4c471a720acd2bff59eb3b7e98_20200419_054142_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e237ae5efc4ac4c471a720acd2bff59eb3b7e98_20200419_054142_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8ed3b07ba976cb95eb4a729798b83cd39db52779_20200419_015657_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8ed3b07ba976cb95eb4a729798b83cd39db52779_20200419_015657_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8ed3b07ba976cb95eb4a729798b83cd39db52779_20200419_015657_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de464d9cb67849101f8989c99d123f699441b0bd_20200418_232101_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de464d9cb67849101f8989c99d123f699441b0bd_20200418_232101_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de464d9cb67849101f8989c99d123f699441b0bd_20200418_232101_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_81c5d885126df58e6b0607cfa75a4a289faa9a0d_20200418_161952_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_81c5d885126df58e6b0607cfa75a4a289faa9a0d_20200418_161952_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_81c5d885126df58e6b0607cfa75a4a289faa9a0d_20200418_161952_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d706ab3b11d5a84acfd4d5fe02f93325c03c0ee1_20200418_145806_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d706ab3b11d5a84acfd4d5fe02f93325c03c0ee1_20200418_145806_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d706ab3b11d5a84acfd4d5fe02f93325c03c0ee1_20200418_145806_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1de732ebcd5685b6c44c6ac3937cbe56d9fbd3a7_20200418_123512_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1de732ebcd5685b6c44c6ac3937cbe56d9fbd3a7_20200418_123512_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1de732ebcd5685b6c44c6ac3937cbe56d9fbd3a7_20200418_123512_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eebe63973c889a94d28f12e105dab0a80ca8e482_20200418_043858_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eebe63973c889a94d28f12e105dab0a80ca8e482_20200418_043858_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eebe63973c889a94d28f12e105dab0a80ca8e482_20200418_043858_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a9230539086d109f29312d6c6648de4d7b33318d_20200418_032350_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a9230539086d109f29312d6c6648de4d7b33318d_20200418_032350_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a9230539086d109f29312d6c6648de4d7b33318d_20200418_032350_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_51c63e8872414fbee9b84745c5c084f53017d5ae_20200417_062952_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_51c63e8872414fbee9b84745c5c084f53017d5ae_20200417_062952_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_51c63e8872414fbee9b84745c5c084f53017d5ae_20200417_062952_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_af91ca0c4082bfef62c60f656be4c9f252d8fee9_20200417_002417_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_af91ca0c4082bfef62c60f656be4c9f252d8fee9_20200417_002417_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_af91ca0c4082bfef62c60f656be4c9f252d8fee9_20200417_002417_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cb52af1e6db7f41de28bf4dd122877a7f6b10730_20200416_135258_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cb52af1e6db7f41de28bf4dd122877a7f6b10730_20200416_135258_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cb52af1e6db7f41de28bf4dd122877a7f6b10730_20200416_135258_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9568ac30d707907fd6974fc444e7c9b11508c63e_20200416_082848_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9568ac30d707907fd6974fc444e7c9b11508c63e_20200416_082848_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9568ac30d707907fd6974fc444e7c9b11508c63e_20200416_082848_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4f93db31c25df85546e472a13748be9a0ba4489b_20200414_153911_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4f93db31c25df85546e472a13748be9a0ba4489b_20200414_153911_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4f93db31c25df85546e472a13748be9a0ba4489b_20200414_153911_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_92334e5d33ae1e7f562b966970e47f32a431d1a4_20200414_120712_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_92334e5d33ae1e7f562b966970e47f32a431d1a4_20200414_120712_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_92334e5d33ae1e7f562b966970e47f32a431d1a4_20200414_120712_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4c0ddeb7f9aa1f5a7028f9e04bde7b9833654159_20200414_093747_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4c0ddeb7f9aa1f5a7028f9e04bde7b9833654159_20200414_093747_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4c0ddeb7f9aa1f5a7028f9e04bde7b9833654159_20200414_093747_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_448e9874cbcf3083cc85dac8770d937c62af6f77_20200414_074642_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_448e9874cbcf3083cc85dac8770d937c62af6f77_20200414_074642_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_448e9874cbcf3083cc85dac8770d937c62af6f77_20200414_074642_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_15471394647f2882b38f11056079676b8d8aae77_20200412_061945_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_15471394647f2882b38f11056079676b8d8aae77_20200412_061945_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_15471394647f2882b38f11056079676b8d8aae77_20200412_061945_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4094445a4f879392efefcc37a71729c16ece3986_20200411_010610_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4094445a4f879392efefcc37a71729c16ece3986_20200411_010610_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4094445a4f879392efefcc37a71729c16ece3986_20200411_010610_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b85cb2d53d78a079442224d9e32859d771e07f61_20200410_121622_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b85cb2d53d78a079442224d9e32859d771e07f61_20200410_121622_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b85cb2d53d78a079442224d9e32859d771e07f61_20200410_121622_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cc1ba7bc88b6d564a5a34c32175a7957736c0a30_20200410_045736_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cc1ba7bc88b6d564a5a34c32175a7957736c0a30_20200410_045736_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cc1ba7bc88b6d564a5a34c32175a7957736c0a30_20200410_045736_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e29ed84a3a71b89d3d80ce371d83ef6c38c6be28_20200410_033120_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e29ed84a3a71b89d3d80ce371d83ef6c38c6be28_20200410_033120_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e29ed84a3a71b89d3d80ce371d83ef6c38c6be28_20200410_033120_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_95ccfe6d4b2f4b09d2c2d8d696e2d458a4186863_20200409_145125_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_95ccfe6d4b2f4b09d2c2d8d696e2d458a4186863_20200409_145125_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_95ccfe6d4b2f4b09d2c2d8d696e2d458a4186863_20200409_145125_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fafd9c9abdb6b184342ca0981c600b766f5e6bda_20200409_141438_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fafd9c9abdb6b184342ca0981c600b766f5e6bda_20200409_141438_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fafd9c9abdb6b184342ca0981c600b766f5e6bda_20200409_141438_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5505905502dbd29d2b18a60cc266c920247f9145_20200409_045455_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5505905502dbd29d2b18a60cc266c920247f9145_20200409_045455_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5505905502dbd29d2b18a60cc266c920247f9145_20200409_045455_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c164c3dac5431a5f1465a2ec9aca79ebf66fb81f_20200409_012448_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c164c3dac5431a5f1465a2ec9aca79ebf66fb81f_20200409_012448_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c164c3dac5431a5f1465a2ec9aca79ebf66fb81f_20200409_012448_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ea7b3be6a93697028b3b985ff4178248aea12433_20200408_160253_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ea7b3be6a93697028b3b985ff4178248aea12433_20200408_160253_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ea7b3be6a93697028b3b985ff4178248aea12433_20200408_160253_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f500d389802247f0aaf14314c91f16a1dbe0fd52_20200408_155456_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f500d389802247f0aaf14314c91f16a1dbe0fd52_20200408_155456_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f500d389802247f0aaf14314c91f16a1dbe0fd52_20200408_155456_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_939b216bc78326527960fa620bc4811f6b9733df_20200408_122605_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_939b216bc78326527960fa620bc4811f6b9733df_20200408_122605_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_939b216bc78326527960fa620bc4811f6b9733df_20200408_122605_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_514e3f0dba3e10606608bb67d3d2dbb8aac93454_20200408_104404_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_514e3f0dba3e10606608bb67d3d2dbb8aac93454_20200408_104404_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_514e3f0dba3e10606608bb67d3d2dbb8aac93454_20200408_104404_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e91733dc175bf97f7931a8289b9ad7ca1b639d9a_20200408_071916_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e91733dc175bf97f7931a8289b9ad7ca1b639d9a_20200408_071916_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e91733dc175bf97f7931a8289b9ad7ca1b639d9a_20200408_071916_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1361799ee387c50aedc5effcf7a0e1a48cb979c3_20200408_030317_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1361799ee387c50aedc5effcf7a0e1a48cb979c3_20200408_030317_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1361799ee387c50aedc5effcf7a0e1a48cb979c3_20200408_030317_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d9e65221aa6a8c0eadbb754fa0159730536680b3_20200407_180237_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d9e65221aa6a8c0eadbb754fa0159730536680b3_20200407_180237_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d9e65221aa6a8c0eadbb754fa0159730536680b3_20200407_180237_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5a96d3287b5122efe30e1feefdc0d4a79bd2e26f_20200407_140626_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5a96d3287b5122efe30e1feefdc0d4a79bd2e26f_20200407_140626_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5a96d3287b5122efe30e1feefdc0d4a79bd2e26f_20200407_140626_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2d594dd27ba95a409da70740c13b7a204bf1d1e3_20200407_132329_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2d594dd27ba95a409da70740c13b7a204bf1d1e3_20200407_132329_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2d594dd27ba95a409da70740c13b7a204bf1d1e3_20200407_132329_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8949ab79c87c3579936c5066deb6681b3c6e145a_20200407_102157_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8949ab79c87c3579936c5066deb6681b3c6e145a_20200407_102157_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8949ab79c87c3579936c5066deb6681b3c6e145a_20200407_102157_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ffe024b015904d7fca4241c320131b3876204672_20200407_100650_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ffe024b015904d7fca4241c320131b3876204672_20200407_100650_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ffe024b015904d7fca4241c320131b3876204672_20200407_100650_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c7189febd4b297f9aa009a0efbb4def89fc38b28_20200407_094834_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c7189febd4b297f9aa009a0efbb4def89fc38b28_20200407_094834_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c7189febd4b297f9aa009a0efbb4def89fc38b28_20200407_094834_cough_3.wav
+  label:
+  - classification: &id001
+    - cough
+    - negative
+  - classification: &id002
+    - cough
+    - negative
+  - classification: &id003
+    - cough
+    - negative
+  - classification: &id031
+    - cough
+    - returning participant
+  - classification: &id032
+    - cough
+    - returning participant
+  - classification: &id033
+    - cough
+    - returning participant
+  - classification: &id034
+    - cough
+    - negative
+  - classification: &id035
+    - cough
+    - negative
+  - classification: &id036
+    - cough
+    - negative
+  - classification: &id259
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id260
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id261
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id037
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id038
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id039
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id262
+    - cough
+    - positive
+  - classification: &id263
+    - cough
+    - positive
+  - classification: &id264
+    - cough
+    - positive
+  - classification: &id040
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id041
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id042
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id043
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id044
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id045
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id046
+    - cough
+    - not tested + home quarantine
+  - classification: &id047
+    - cough
+    - not tested + home quarantine
+  - classification: &id048
+    - cough
+    - not tested + home quarantine
+  - classification: &id049
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id050
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id051
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id052
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id053
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id054
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id055
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id056
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id057
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id058
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id059
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id060
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id061
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id062
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id063
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id064
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id065
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id066
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id067
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id068
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id069
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id070
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id071
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id072
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id073
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id074
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id075
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id076
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id077
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id078
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id079
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id080
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id081
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id082
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id083
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id084
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id085
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id086
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id087
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id088
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id089
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id090
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id091
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id092
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id093
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id094
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id095
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id096
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id097
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id098
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id099
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id100
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id101
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id102
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id103
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id104
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id105
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id004
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id005
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id006
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id106
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id107
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id108
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id109
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id110
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id111
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id112
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id113
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id114
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id115
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id116
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id117
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id118
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id119
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id120
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id265
+    - cough
+    - positive
+  - classification: &id266
+    - cough
+    - positive
+  - classification: &id267
+    - cough
+    - positive
+  - classification: &id268
+    - cough
+    - not tested + home quarantine
+  - classification: &id269
+    - cough
+    - not tested + home quarantine
+  - classification: &id270
+    - cough
+    - not tested + home quarantine
+  - classification: &id271
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id272
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id273
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id121
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id122
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id123
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id007
+    - cough
+    - negative
+  - classification: &id008
+    - cough
+    - negative
+  - classification: &id009
+    - cough
+    - negative
+  - classification: &id124
+    - cough
+    - not tested + home quarantine
+  - classification: &id125
+    - cough
+    - not tested + home quarantine
+  - classification: &id126
+    - cough
+    - not tested + home quarantine
+  - classification: &id127
+    - cough
+    - positive
+  - classification: &id128
+    - cough
+    - positive
+  - classification: &id129
+    - cough
+    - positive
+  - classification: &id130
+    - cough
+    - negative
+  - classification: &id131
+    - cough
+    - negative
+  - classification: &id132
+    - cough
+    - negative
+  - classification: &id133
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id134
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id135
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id136
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id137
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id138
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id139
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id140
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id141
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id142
+    - cough
+    - not tested + home quarantine
+  - classification: &id143
+    - cough
+    - not tested + home quarantine
+  - classification: &id144
+    - cough
+    - not tested + home quarantine
+  - classification: &id145
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id146
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id147
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id148
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id149
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id150
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id151
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id152
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id153
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id154
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id155
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id156
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id157
+    - cough
+    - positive
+  - classification: &id158
+    - cough
+    - positive
+  - classification: &id159
+    - cough
+    - positive
+  - classification: &id160
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id161
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id162
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id163
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id164
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id165
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id166
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id167
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id168
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id169
+    - cough
+    - returning participant
+  - classification: &id170
+    - cough
+    - returning participant
+  - classification: &id171
+    - cough
+    - returning participant
+  - classification: &id172
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id173
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id174
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id175
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id176
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id177
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id178
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id179
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id180
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id181
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id182
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id183
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id274
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id275
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id276
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id184
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id185
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id186
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id187
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id188
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id189
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id190
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id191
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id192
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id193
+    - cough
+    - negative
+  - classification: &id194
+    - cough
+    - negative
+  - classification: &id195
+    - cough
+    - negative
+  - classification: &id010
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id011
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id012
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id196
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id197
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id198
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id277
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id278
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id279
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id199
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id200
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id201
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id202
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id203
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id204
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id205
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id206
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id207
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id208
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id209
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id210
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id211
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id212
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id213
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id214
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id215
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id216
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id217
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id218
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id219
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id013
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id014
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id015
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id220
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id221
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id222
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id223
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id224
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id225
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id226
+    - cough
+    - awaiting
+  - classification: &id227
+    - cough
+    - awaiting
+  - classification: &id228
+    - cough
+    - awaiting
+  - classification: &id016
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id017
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id018
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id229
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id230
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id231
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id232
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id233
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id234
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id019
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id020
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id021
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id235
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id236
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id237
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id238
+    - cough
+    - awaiting
+  - classification: &id239
+    - cough
+    - awaiting
+  - classification: &id240
+    - cough
+    - awaiting
+  - classification: &id022
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id023
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id024
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id241
+    - cough
+    - not tested + home quarantine
+  - classification: &id242
+    - cough
+    - not tested + home quarantine
+  - classification: &id243
+    - cough
+    - not tested + home quarantine
+  - classification: &id244
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id245
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id246
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id247
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id248
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id249
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id025
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id026
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id027
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id250
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id251
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id252
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id028
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id029
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id030
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id280
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id281
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id282
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id253
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id254
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id255
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id256
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id257
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id258
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id283
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id284
+    - cough
+    - not tested + no symptoms/consultation
+  - classification: &id285
+    - cough
+    - not tested + no symptoms/consultation
+description: version for COVID vs non COVID task(s) on cough with random split
+test:
+  file:
+  - /data/wiai-crowdsourced/processed/audio/user_20508732c77c1d2452816a36f8640356623518e1_20200811_204301_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_20508732c77c1d2452816a36f8640356623518e1_20200811_204301_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_20508732c77c1d2452816a36f8640356623518e1_20200811_204301_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3236c2ca88c8709f3baef8561662c27539162029_20200501_023304_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3236c2ca88c8709f3baef8561662c27539162029_20200501_023304_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3236c2ca88c8709f3baef8561662c27539162029_20200501_023304_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eebe63973c889a94d28f12e105dab0a80ca8e482_20200418_043858_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eebe63973c889a94d28f12e105dab0a80ca8e482_20200418_043858_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eebe63973c889a94d28f12e105dab0a80ca8e482_20200418_043858_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_15471394647f2882b38f11056079676b8d8aae77_20200412_061945_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_15471394647f2882b38f11056079676b8d8aae77_20200412_061945_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_15471394647f2882b38f11056079676b8d8aae77_20200412_061945_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e29ed84a3a71b89d3d80ce371d83ef6c38c6be28_20200410_033120_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e29ed84a3a71b89d3d80ce371d83ef6c38c6be28_20200410_033120_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e29ed84a3a71b89d3d80ce371d83ef6c38c6be28_20200410_033120_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5505905502dbd29d2b18a60cc266c920247f9145_20200409_045455_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5505905502dbd29d2b18a60cc266c920247f9145_20200409_045455_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5505905502dbd29d2b18a60cc266c920247f9145_20200409_045455_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f500d389802247f0aaf14314c91f16a1dbe0fd52_20200408_155456_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f500d389802247f0aaf14314c91f16a1dbe0fd52_20200408_155456_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f500d389802247f0aaf14314c91f16a1dbe0fd52_20200408_155456_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1361799ee387c50aedc5effcf7a0e1a48cb979c3_20200408_030317_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1361799ee387c50aedc5effcf7a0e1a48cb979c3_20200408_030317_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1361799ee387c50aedc5effcf7a0e1a48cb979c3_20200408_030317_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5a96d3287b5122efe30e1feefdc0d4a79bd2e26f_20200407_140626_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5a96d3287b5122efe30e1feefdc0d4a79bd2e26f_20200407_140626_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5a96d3287b5122efe30e1feefdc0d4a79bd2e26f_20200407_140626_cough_3.wav
+  label:
+  - classification: *id001
+  - classification: *id002
+  - classification: *id003
+  - classification: *id004
+  - classification: *id005
+  - classification: *id006
+  - classification: *id007
+  - classification: *id008
+  - classification: *id009
+  - classification: *id010
+  - classification: *id011
+  - classification: *id012
+  - classification: *id013
+  - classification: *id014
+  - classification: *id015
+  - classification: *id016
+  - classification: *id017
+  - classification: *id018
+  - classification: *id019
+  - classification: *id020
+  - classification: *id021
+  - classification: *id022
+  - classification: *id023
+  - classification: *id024
+  - classification: *id025
+  - classification: *id026
+  - classification: *id027
+  - classification: *id028
+  - classification: *id029
+  - classification: *id030
+train:
+  file:
+  - /data/wiai-crowdsourced/processed/audio/user_7e7cc43f81257cd60a393c6ce9a860b030b795d4_20200808_154430_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e7cc43f81257cd60a393c6ce9a860b030b795d4_20200808_154430_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e7cc43f81257cd60a393c6ce9a860b030b795d4_20200808_154430_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c0b11577f7357bf381bde63662f40235b89ef6d5_20200728_111256_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c0b11577f7357bf381bde63662f40235b89ef6d5_20200728_111256_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c0b11577f7357bf381bde63662f40235b89ef6d5_20200728_111256_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4bfa79c44f7bd6906034ce18bd4a65633ab23ba6_20200710_162854_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4bfa79c44f7bd6906034ce18bd4a65633ab23ba6_20200710_162854_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4bfa79c44f7bd6906034ce18bd4a65633ab23ba6_20200710_162854_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0ef40bc9848b82fc773d63b10f086c8cb5c5b13_20200616_053157_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0ef40bc9848b82fc773d63b10f086c8cb5c5b13_20200616_053157_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0ef40bc9848b82fc773d63b10f086c8cb5c5b13_20200616_053157_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_398e6f49ce3b5231fb6d74cc86e6f4315ef516d9_20200616_043132_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_398e6f49ce3b5231fb6d74cc86e6f4315ef516d9_20200616_043132_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_398e6f49ce3b5231fb6d74cc86e6f4315ef516d9_20200616_043132_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_64f6ee229781d75d897bec38f10b1a4dd76d73cc_20200614_013152_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_64f6ee229781d75d897bec38f10b1a4dd76d73cc_20200614_013152_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_64f6ee229781d75d897bec38f10b1a4dd76d73cc_20200614_013152_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_402001d7db286f0de61c17e001f9b5ae8a79bdad_20200608_015910_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_402001d7db286f0de61c17e001f9b5ae8a79bdad_20200608_015910_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_402001d7db286f0de61c17e001f9b5ae8a79bdad_20200608_015910_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_484ca65ed668564a218e04d56a8280f1628a450c_20200530_094014_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_484ca65ed668564a218e04d56a8280f1628a450c_20200530_094014_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_484ca65ed668564a218e04d56a8280f1628a450c_20200530_094014_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb30a21810bac7eba519671c929317c378031b07_20200527_045924_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb30a21810bac7eba519671c929317c378031b07_20200527_045924_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb30a21810bac7eba519671c929317c378031b07_20200527_045924_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa747e4c5c31fd9b557173afe8e05767a089f3ed_20200526_105724_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa747e4c5c31fd9b557173afe8e05767a089f3ed_20200526_105724_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa747e4c5c31fd9b557173afe8e05767a089f3ed_20200526_105724_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a565f2786f9b9e8468a1d4ebb16e21dc66da53fb_20200522_093519_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a565f2786f9b9e8468a1d4ebb16e21dc66da53fb_20200522_093519_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a565f2786f9b9e8468a1d4ebb16e21dc66da53fb_20200522_093519_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_80136193a13a33c8c118e2e0dae57f68543a8935_20200520_102441_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_80136193a13a33c8c118e2e0dae57f68543a8935_20200520_102441_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_80136193a13a33c8c118e2e0dae57f68543a8935_20200520_102441_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_78d97c84ad1a74a50ec78fa20665817e166c47d9_20200516_002638_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_78d97c84ad1a74a50ec78fa20665817e166c47d9_20200516_002638_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_78d97c84ad1a74a50ec78fa20665817e166c47d9_20200516_002638_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_338768366da62752338e4c3322950016fb75a197_20200515_130237_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_338768366da62752338e4c3322950016fb75a197_20200515_130237_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_338768366da62752338e4c3322950016fb75a197_20200515_130237_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_bb79507fb55c16c3b0d5c10c9e0e582af1af3d30_20200515_063552_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_bb79507fb55c16c3b0d5c10c9e0e582af1af3d30_20200515_063552_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_bb79507fb55c16c3b0d5c10c9e0e582af1af3d30_20200515_063552_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1c33a78d5e8934acf26a63da4ffb08bf75247009_20200515_060824_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1c33a78d5e8934acf26a63da4ffb08bf75247009_20200515_060824_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1c33a78d5e8934acf26a63da4ffb08bf75247009_20200515_060824_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5ecf31fedf06914ba41fc22647d8ca0c3f662ec6_20200515_044620_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5ecf31fedf06914ba41fc22647d8ca0c3f662ec6_20200515_044620_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5ecf31fedf06914ba41fc22647d8ca0c3f662ec6_20200515_044620_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_823776525776c8f23a87176c59d25759da7a52c4_20200513_230833_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_823776525776c8f23a87176c59d25759da7a52c4_20200513_230833_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_823776525776c8f23a87176c59d25759da7a52c4_20200513_230833_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6ce90537e4dc3d9adc3799b6673fcd83fb559a45_20200513_075427_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6ce90537e4dc3d9adc3799b6673fcd83fb559a45_20200513_075427_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6ce90537e4dc3d9adc3799b6673fcd83fb559a45_20200513_075427_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5b482d1afc39304e35d04cfb478dbd9bfdecd915_20200513_061311_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5b482d1afc39304e35d04cfb478dbd9bfdecd915_20200513_061311_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5b482d1afc39304e35d04cfb478dbd9bfdecd915_20200513_061311_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b46d06377617d46cb9ae6f616ffaf36eb267b0c0_20200512_152157_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b46d06377617d46cb9ae6f616ffaf36eb267b0c0_20200512_152157_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b46d06377617d46cb9ae6f616ffaf36eb267b0c0_20200512_152157_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de7246b0dfaec083573a8a3016e4449fa98820fe_20200512_140255_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de7246b0dfaec083573a8a3016e4449fa98820fe_20200512_140255_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de7246b0dfaec083573a8a3016e4449fa98820fe_20200512_140255_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e7ac8c71bc71f80ca22dcea8b76008f6260cac06_20200508_021308_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e7ac8c71bc71f80ca22dcea8b76008f6260cac06_20200508_021308_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e7ac8c71bc71f80ca22dcea8b76008f6260cac06_20200508_021308_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2bc4bd2a97bb340e9bedf0dfcd4b4e4ac7069e2f_20200507_162449_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2bc4bd2a97bb340e9bedf0dfcd4b4e4ac7069e2f_20200507_162449_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2bc4bd2a97bb340e9bedf0dfcd4b4e4ac7069e2f_20200507_162449_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_46b0bbe36c322ed56af25c2d86822b7aa0998662_20200507_102556_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_46b0bbe36c322ed56af25c2d86822b7aa0998662_20200507_102556_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_46b0bbe36c322ed56af25c2d86822b7aa0998662_20200507_102556_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d07421c66a23a5c7b53c65f5924f565ac7689e7f_20200506_183637_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174409_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174409_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174409_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174355_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174355_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c025b5215914bb3377bb947af0f60c19d114aa98_20200506_174355_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa22f8dd307457acc7dab84e353fb8b597d548ea_20200506_170637_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa22f8dd307457acc7dab84e353fb8b597d548ea_20200506_170637_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fa22f8dd307457acc7dab84e353fb8b597d548ea_20200506_170637_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_53a293c57bf1f166ae678150d157adb644f4b20a_20200505_153045_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_53a293c57bf1f166ae678150d157adb644f4b20a_20200505_153045_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_53a293c57bf1f166ae678150d157adb644f4b20a_20200505_153045_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_34914eed30c7b9893209bdbe825f6bae5538e34f_20200504_074411_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_34914eed30c7b9893209bdbe825f6bae5538e34f_20200504_074411_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_34914eed30c7b9893209bdbe825f6bae5538e34f_20200504_074411_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d0c342c296d5f4e6dd7fcf739a58054cefd3f7c4_20200501_102150_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d0c342c296d5f4e6dd7fcf739a58054cefd3f7c4_20200501_102150_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d0c342c296d5f4e6dd7fcf739a58054cefd3f7c4_20200501_102150_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e0a29434666b9855c9b34f8654ebebb35061ce8d_20200430_224942_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e0a29434666b9855c9b34f8654ebebb35061ce8d_20200430_224942_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e0a29434666b9855c9b34f8654ebebb35061ce8d_20200430_224942_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6b96038889ae7561fadc989b8855aea3f685465_20200430_142852_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6b96038889ae7561fadc989b8855aea3f685465_20200430_142852_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6b96038889ae7561fadc989b8855aea3f685465_20200430_142852_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_494444b8ce1fff01cf2652ccbe1958c9d79bd510_20200430_142020_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_494444b8ce1fff01cf2652ccbe1958c9d79bd510_20200430_142020_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_494444b8ce1fff01cf2652ccbe1958c9d79bd510_20200430_142020_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5302e2f47d7c35d1ef8c4440b1302d7592b28a1b_20200430_092807_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5302e2f47d7c35d1ef8c4440b1302d7592b28a1b_20200430_092807_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_5302e2f47d7c35d1ef8c4440b1302d7592b28a1b_20200430_092807_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_86fe0d9c31f671c62ad5c40b05ed9aeaa4310816_20200429_114204_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_86fe0d9c31f671c62ad5c40b05ed9aeaa4310816_20200429_114204_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_86fe0d9c31f671c62ad5c40b05ed9aeaa4310816_20200429_114204_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0db2cc1232549dcbd345c324217efe2f7c63195_20200429_110704_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0db2cc1232549dcbd345c324217efe2f7c63195_20200429_110704_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a0db2cc1232549dcbd345c324217efe2f7c63195_20200429_110704_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6e5a74b427e07888e4671bd3ec5450e63a461fe8_20200429_101839_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6e5a74b427e07888e4671bd3ec5450e63a461fe8_20200429_101839_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_6e5a74b427e07888e4671bd3ec5450e63a461fe8_20200429_101839_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fdffcc1bf01daf7b1f6e6cb3827130886e68b78e_20200429_043815_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fdffcc1bf01daf7b1f6e6cb3827130886e68b78e_20200429_043815_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fdffcc1bf01daf7b1f6e6cb3827130886e68b78e_20200429_043815_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb772b5211a88769066548d2169505ca4f5814d1_20200428_063903_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb772b5211a88769066548d2169505ca4f5814d1_20200428_063903_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_eb772b5211a88769066548d2169505ca4f5814d1_20200428_063903_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fb8e0c4ddf7431eec31dfce172ab25926a1589bf_20200426_042649_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fb8e0c4ddf7431eec31dfce172ab25926a1589bf_20200426_042649_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fb8e0c4ddf7431eec31dfce172ab25926a1589bf_20200426_042649_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_72601253d878c5e5ee8161d60222cd3556ed2ef5_20200425_221335_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_72601253d878c5e5ee8161d60222cd3556ed2ef5_20200425_221335_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_72601253d878c5e5ee8161d60222cd3556ed2ef5_20200425_221335_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f0c6ad4b417a538f8a3a0fe377b48a7bce33d7f2_20200423_192028_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f0c6ad4b417a538f8a3a0fe377b48a7bce33d7f2_20200423_192028_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_f0c6ad4b417a538f8a3a0fe377b48a7bce33d7f2_20200423_192028_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_04125c3f6cbbafe3a51e0543fb7556c323a0237b_20200422_053654_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_04125c3f6cbbafe3a51e0543fb7556c323a0237b_20200422_053654_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_04125c3f6cbbafe3a51e0543fb7556c323a0237b_20200422_053654_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9b464c4edb791fae4735336d7a8a6c78ac2262cc_20200421_165828_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9b464c4edb791fae4735336d7a8a6c78ac2262cc_20200421_165828_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9b464c4edb791fae4735336d7a8a6c78ac2262cc_20200421_165828_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cdc85b8240513519b637421065eb4d3a99624309_20200421_053631_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cdc85b8240513519b637421065eb4d3a99624309_20200421_053631_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cdc85b8240513519b637421065eb4d3a99624309_20200421_053631_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_08d22b14b7014fff09ca9e1b2bd5629f14bd0fcd_20200420_161849_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_08d22b14b7014fff09ca9e1b2bd5629f14bd0fcd_20200420_161849_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_08d22b14b7014fff09ca9e1b2bd5629f14bd0fcd_20200420_161849_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_103aeb3b76549c735651905e6a33cbfc543efce5_20200420_075616_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_103aeb3b76549c735651905e6a33cbfc543efce5_20200420_075616_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_103aeb3b76549c735651905e6a33cbfc543efce5_20200420_075616_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a23d457d994382d2b495aa3facb2540851e03395_20200420_030646_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a23d457d994382d2b495aa3facb2540851e03395_20200420_030646_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a23d457d994382d2b495aa3facb2540851e03395_20200420_030646_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e8b218af744c5dd89643b965d89d36510c76d056_20200419_133401_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e8b218af744c5dd89643b965d89d36510c76d056_20200419_133401_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e8b218af744c5dd89643b965d89d36510c76d056_20200419_133401_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e237ae5efc4ac4c471a720acd2bff59eb3b7e98_20200419_054142_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e237ae5efc4ac4c471a720acd2bff59eb3b7e98_20200419_054142_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_7e237ae5efc4ac4c471a720acd2bff59eb3b7e98_20200419_054142_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de464d9cb67849101f8989c99d123f699441b0bd_20200418_232101_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de464d9cb67849101f8989c99d123f699441b0bd_20200418_232101_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_de464d9cb67849101f8989c99d123f699441b0bd_20200418_232101_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_81c5d885126df58e6b0607cfa75a4a289faa9a0d_20200418_161952_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_81c5d885126df58e6b0607cfa75a4a289faa9a0d_20200418_161952_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_81c5d885126df58e6b0607cfa75a4a289faa9a0d_20200418_161952_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d706ab3b11d5a84acfd4d5fe02f93325c03c0ee1_20200418_145806_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d706ab3b11d5a84acfd4d5fe02f93325c03c0ee1_20200418_145806_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d706ab3b11d5a84acfd4d5fe02f93325c03c0ee1_20200418_145806_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1de732ebcd5685b6c44c6ac3937cbe56d9fbd3a7_20200418_123512_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1de732ebcd5685b6c44c6ac3937cbe56d9fbd3a7_20200418_123512_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_1de732ebcd5685b6c44c6ac3937cbe56d9fbd3a7_20200418_123512_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a9230539086d109f29312d6c6648de4d7b33318d_20200418_032350_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a9230539086d109f29312d6c6648de4d7b33318d_20200418_032350_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_a9230539086d109f29312d6c6648de4d7b33318d_20200418_032350_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_af91ca0c4082bfef62c60f656be4c9f252d8fee9_20200417_002417_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_af91ca0c4082bfef62c60f656be4c9f252d8fee9_20200417_002417_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_af91ca0c4082bfef62c60f656be4c9f252d8fee9_20200417_002417_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cb52af1e6db7f41de28bf4dd122877a7f6b10730_20200416_135258_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cb52af1e6db7f41de28bf4dd122877a7f6b10730_20200416_135258_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cb52af1e6db7f41de28bf4dd122877a7f6b10730_20200416_135258_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9568ac30d707907fd6974fc444e7c9b11508c63e_20200416_082848_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9568ac30d707907fd6974fc444e7c9b11508c63e_20200416_082848_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_9568ac30d707907fd6974fc444e7c9b11508c63e_20200416_082848_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4f93db31c25df85546e472a13748be9a0ba4489b_20200414_153911_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4f93db31c25df85546e472a13748be9a0ba4489b_20200414_153911_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4f93db31c25df85546e472a13748be9a0ba4489b_20200414_153911_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_92334e5d33ae1e7f562b966970e47f32a431d1a4_20200414_120712_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_92334e5d33ae1e7f562b966970e47f32a431d1a4_20200414_120712_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_92334e5d33ae1e7f562b966970e47f32a431d1a4_20200414_120712_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4c0ddeb7f9aa1f5a7028f9e04bde7b9833654159_20200414_093747_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4c0ddeb7f9aa1f5a7028f9e04bde7b9833654159_20200414_093747_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4c0ddeb7f9aa1f5a7028f9e04bde7b9833654159_20200414_093747_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_448e9874cbcf3083cc85dac8770d937c62af6f77_20200414_074642_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_448e9874cbcf3083cc85dac8770d937c62af6f77_20200414_074642_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_448e9874cbcf3083cc85dac8770d937c62af6f77_20200414_074642_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4094445a4f879392efefcc37a71729c16ece3986_20200411_010610_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4094445a4f879392efefcc37a71729c16ece3986_20200411_010610_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_4094445a4f879392efefcc37a71729c16ece3986_20200411_010610_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b85cb2d53d78a079442224d9e32859d771e07f61_20200410_121622_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b85cb2d53d78a079442224d9e32859d771e07f61_20200410_121622_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_b85cb2d53d78a079442224d9e32859d771e07f61_20200410_121622_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cc1ba7bc88b6d564a5a34c32175a7957736c0a30_20200410_045736_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cc1ba7bc88b6d564a5a34c32175a7957736c0a30_20200410_045736_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_cc1ba7bc88b6d564a5a34c32175a7957736c0a30_20200410_045736_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_95ccfe6d4b2f4b09d2c2d8d696e2d458a4186863_20200409_145125_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_95ccfe6d4b2f4b09d2c2d8d696e2d458a4186863_20200409_145125_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_95ccfe6d4b2f4b09d2c2d8d696e2d458a4186863_20200409_145125_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fafd9c9abdb6b184342ca0981c600b766f5e6bda_20200409_141438_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fafd9c9abdb6b184342ca0981c600b766f5e6bda_20200409_141438_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fafd9c9abdb6b184342ca0981c600b766f5e6bda_20200409_141438_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c164c3dac5431a5f1465a2ec9aca79ebf66fb81f_20200409_012448_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c164c3dac5431a5f1465a2ec9aca79ebf66fb81f_20200409_012448_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c164c3dac5431a5f1465a2ec9aca79ebf66fb81f_20200409_012448_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ea7b3be6a93697028b3b985ff4178248aea12433_20200408_160253_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ea7b3be6a93697028b3b985ff4178248aea12433_20200408_160253_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ea7b3be6a93697028b3b985ff4178248aea12433_20200408_160253_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_939b216bc78326527960fa620bc4811f6b9733df_20200408_122605_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_939b216bc78326527960fa620bc4811f6b9733df_20200408_122605_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_939b216bc78326527960fa620bc4811f6b9733df_20200408_122605_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_514e3f0dba3e10606608bb67d3d2dbb8aac93454_20200408_104404_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_514e3f0dba3e10606608bb67d3d2dbb8aac93454_20200408_104404_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_514e3f0dba3e10606608bb67d3d2dbb8aac93454_20200408_104404_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e91733dc175bf97f7931a8289b9ad7ca1b639d9a_20200408_071916_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e91733dc175bf97f7931a8289b9ad7ca1b639d9a_20200408_071916_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_e91733dc175bf97f7931a8289b9ad7ca1b639d9a_20200408_071916_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d9e65221aa6a8c0eadbb754fa0159730536680b3_20200407_180237_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d9e65221aa6a8c0eadbb754fa0159730536680b3_20200407_180237_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d9e65221aa6a8c0eadbb754fa0159730536680b3_20200407_180237_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8949ab79c87c3579936c5066deb6681b3c6e145a_20200407_102157_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8949ab79c87c3579936c5066deb6681b3c6e145a_20200407_102157_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8949ab79c87c3579936c5066deb6681b3c6e145a_20200407_102157_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ffe024b015904d7fca4241c320131b3876204672_20200407_100650_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ffe024b015904d7fca4241c320131b3876204672_20200407_100650_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_ffe024b015904d7fca4241c320131b3876204672_20200407_100650_cough_3.wav
+  label:
+  - classification: *id031
+  - classification: *id032
+  - classification: *id033
+  - classification: *id034
+  - classification: *id035
+  - classification: *id036
+  - classification: *id037
+  - classification: *id038
+  - classification: *id039
+  - classification: *id040
+  - classification: *id041
+  - classification: *id042
+  - classification: *id043
+  - classification: *id044
+  - classification: *id045
+  - classification: *id046
+  - classification: *id047
+  - classification: *id048
+  - classification: *id049
+  - classification: *id050
+  - classification: *id051
+  - classification: *id052
+  - classification: *id053
+  - classification: *id054
+  - classification: *id055
+  - classification: *id056
+  - classification: *id057
+  - classification: *id058
+  - classification: *id059
+  - classification: *id060
+  - classification: *id061
+  - classification: *id062
+  - classification: *id063
+  - classification: *id064
+  - classification: *id065
+  - classification: *id066
+  - classification: *id067
+  - classification: *id068
+  - classification: *id069
+  - classification: *id070
+  - classification: *id071
+  - classification: *id072
+  - classification: *id073
+  - classification: *id074
+  - classification: *id075
+  - classification: *id076
+  - classification: *id077
+  - classification: *id078
+  - classification: *id079
+  - classification: *id080
+  - classification: *id081
+  - classification: *id082
+  - classification: *id083
+  - classification: *id084
+  - classification: *id085
+  - classification: *id086
+  - classification: *id087
+  - classification: *id088
+  - classification: *id089
+  - classification: *id090
+  - classification: *id091
+  - classification: *id092
+  - classification: *id093
+  - classification: *id094
+  - classification: *id095
+  - classification: *id096
+  - classification: *id097
+  - classification: *id098
+  - classification: *id099
+  - classification: *id100
+  - classification: *id101
+  - classification: *id102
+  - classification: *id103
+  - classification: *id104
+  - classification: *id105
+  - classification: *id004
+  - classification: *id005
+  - classification: *id006
+  - classification: *id106
+  - classification: *id107
+  - classification: *id108
+  - classification: *id109
+  - classification: *id110
+  - classification: *id111
+  - classification: *id112
+  - classification: *id113
+  - classification: *id114
+  - classification: *id115
+  - classification: *id116
+  - classification: *id117
+  - classification: *id118
+  - classification: *id119
+  - classification: *id120
+  - classification: *id121
+  - classification: *id122
+  - classification: *id123
+  - classification: *id124
+  - classification: *id125
+  - classification: *id126
+  - classification: *id127
+  - classification: *id128
+  - classification: *id129
+  - classification: *id130
+  - classification: *id131
+  - classification: *id132
+  - classification: *id133
+  - classification: *id134
+  - classification: *id135
+  - classification: *id136
+  - classification: *id137
+  - classification: *id138
+  - classification: *id139
+  - classification: *id140
+  - classification: *id141
+  - classification: *id142
+  - classification: *id143
+  - classification: *id144
+  - classification: *id145
+  - classification: *id146
+  - classification: *id147
+  - classification: *id148
+  - classification: *id149
+  - classification: *id150
+  - classification: *id151
+  - classification: *id152
+  - classification: *id153
+  - classification: *id154
+  - classification: *id155
+  - classification: *id156
+  - classification: *id157
+  - classification: *id158
+  - classification: *id159
+  - classification: *id160
+  - classification: *id161
+  - classification: *id162
+  - classification: *id163
+  - classification: *id164
+  - classification: *id165
+  - classification: *id166
+  - classification: *id167
+  - classification: *id168
+  - classification: *id169
+  - classification: *id170
+  - classification: *id171
+  - classification: *id172
+  - classification: *id173
+  - classification: *id174
+  - classification: *id175
+  - classification: *id176
+  - classification: *id177
+  - classification: *id178
+  - classification: *id179
+  - classification: *id180
+  - classification: *id181
+  - classification: *id182
+  - classification: *id183
+  - classification: *id184
+  - classification: *id185
+  - classification: *id186
+  - classification: *id187
+  - classification: *id188
+  - classification: *id189
+  - classification: *id190
+  - classification: *id191
+  - classification: *id192
+  - classification: *id193
+  - classification: *id194
+  - classification: *id195
+  - classification: *id196
+  - classification: *id197
+  - classification: *id198
+  - classification: *id199
+  - classification: *id200
+  - classification: *id201
+  - classification: *id202
+  - classification: *id203
+  - classification: *id204
+  - classification: *id205
+  - classification: *id206
+  - classification: *id207
+  - classification: *id208
+  - classification: *id209
+  - classification: *id210
+  - classification: *id211
+  - classification: *id212
+  - classification: *id213
+  - classification: *id214
+  - classification: *id215
+  - classification: *id216
+  - classification: *id217
+  - classification: *id218
+  - classification: *id219
+  - classification: *id220
+  - classification: *id221
+  - classification: *id222
+  - classification: *id223
+  - classification: *id224
+  - classification: *id225
+  - classification: *id226
+  - classification: *id227
+  - classification: *id228
+  - classification: *id229
+  - classification: *id230
+  - classification: *id231
+  - classification: *id232
+  - classification: *id233
+  - classification: *id234
+  - classification: *id235
+  - classification: *id236
+  - classification: *id237
+  - classification: *id238
+  - classification: *id239
+  - classification: *id240
+  - classification: *id241
+  - classification: *id242
+  - classification: *id243
+  - classification: *id244
+  - classification: *id245
+  - classification: *id246
+  - classification: *id247
+  - classification: *id248
+  - classification: *id249
+  - classification: *id250
+  - classification: *id251
+  - classification: *id252
+  - classification: *id253
+  - classification: *id254
+  - classification: *id255
+  - classification: *id256
+  - classification: *id257
+  - classification: *id258
+val:
+  file:
+  - /data/wiai-crowdsourced/processed/audio/user_d6677bcf800cca0954bfe78e5501fbbba19ec0b5_20200717_115411_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6677bcf800cca0954bfe78e5501fbbba19ec0b5_20200717_115411_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_d6677bcf800cca0954bfe78e5501fbbba19ec0b5_20200717_115411_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fbecae61ad9a6cc7291f1c27788cda2347c523fa_20200701_042709_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fbecae61ad9a6cc7291f1c27788cda2347c523fa_20200701_042709_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_fbecae61ad9a6cc7291f1c27788cda2347c523fa_20200701_042709_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2df11069d0eb445995ae1c6b2697f019fb44b6d6_20200504_074000_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2df11069d0eb445995ae1c6b2697f019fb44b6d6_20200504_074000_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2df11069d0eb445995ae1c6b2697f019fb44b6d6_20200504_074000_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_0e904d0f283cc39394207a1de34c8fb998801b79_20200503_200946_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_0e904d0f283cc39394207a1de34c8fb998801b79_20200503_200946_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_0e904d0f283cc39394207a1de34c8fb998801b79_20200503_200946_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3850cba140076e28b4ccdf9228b305546bcf8d97_20200501_110314_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3850cba140076e28b4ccdf9228b305546bcf8d97_20200501_110314_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_3850cba140076e28b4ccdf9228b305546bcf8d97_20200501_110314_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8ed3b07ba976cb95eb4a729798b83cd39db52779_20200419_015657_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8ed3b07ba976cb95eb4a729798b83cd39db52779_20200419_015657_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_8ed3b07ba976cb95eb4a729798b83cd39db52779_20200419_015657_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_51c63e8872414fbee9b84745c5c084f53017d5ae_20200417_062952_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_51c63e8872414fbee9b84745c5c084f53017d5ae_20200417_062952_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_51c63e8872414fbee9b84745c5c084f53017d5ae_20200417_062952_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2d594dd27ba95a409da70740c13b7a204bf1d1e3_20200407_132329_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2d594dd27ba95a409da70740c13b7a204bf1d1e3_20200407_132329_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_2d594dd27ba95a409da70740c13b7a204bf1d1e3_20200407_132329_cough_3.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c7189febd4b297f9aa009a0efbb4def89fc38b28_20200407_094834_cough_1.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c7189febd4b297f9aa009a0efbb4def89fc38b28_20200407_094834_cough_2.wav
+  - /data/wiai-crowdsourced/processed/audio/user_c7189febd4b297f9aa009a0efbb4def89fc38b28_20200407_094834_cough_3.wav
+  label:
+  - classification: *id259
+  - classification: *id260
+  - classification: *id261
+  - classification: *id262
+  - classification: *id263
+  - classification: *id264
+  - classification: *id265
+  - classification: *id266
+  - classification: *id267
+  - classification: *id268
+  - classification: *id269
+  - classification: *id270
+  - classification: *id271
+  - classification: *id272
+  - classification: *id273
+  - classification: *id274
+  - classification: *id275
+  - classification: *id276
+  - classification: *id277
+  - classification: *id278
+  - classification: *id279
+  - classification: *id280
+  - classification: *id281
+  - classification: *id282
+  - classification: *id283
+  - classification: *id284
+  - classification: *id285
