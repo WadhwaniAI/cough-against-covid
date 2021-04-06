@@ -9,6 +9,7 @@ FROM nvcr.io/nvidia/pytorch:20.01-py3
 RUN apt-get update && apt-get install -y \
     tmux \
     p7zip-full p7zip-rar \
+    rsync \
     aufs-tools \
     automake \
     build-essential \

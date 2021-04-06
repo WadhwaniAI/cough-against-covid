@@ -2,6 +2,10 @@
 Generic helpers for file/string operations.
 """
 import re
+from os.path import dirname, realpath
+
+
+repo_path = dirname(dirname(dirname(realpath(__file__))))
 
 
 class DotDict(dict):
