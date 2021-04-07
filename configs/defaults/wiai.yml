@@ -39,7 +39,8 @@ network:
     name: neural_net
     params:
         config:
-        - Conv2d:
+        - name: Conv2d
+          params:
             in_channels: 1
             out_channels: 64
             padding:
@@ -48,10 +49,13 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 64
-        - ReLU: {}
-        - Conv2d:
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
             in_channels: 64
             out_channels: 64
             padding:
@@ -60,10 +64,13 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 64
-        - ReLU: {}
-        - Conv2d:
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
             in_channels: 64
             out_channels: 64
             padding:
@@ -72,12 +79,16 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 64
-        - ReLU: {}
-        - MaxPool2d:
+        - name: ReLU
+          params: {}
+        - name: MaxPool2d
+          params:
             kernel_size: 2
-        - Conv2d:
+        - name: Conv2d
+          params:
             in_channels: 64
             out_channels: 128
             padding:
@@ -86,10 +97,13 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 128
-        - ReLU: {}
-        - Conv2d:
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
             in_channels: 128
             out_channels: 128
             padding:
@@ -98,10 +112,13 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 128
-        - ReLU: {}
-        - Conv2d:
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
             in_channels: 128
             out_channels: 128
             padding:
@@ -110,12 +127,16 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 128
-        - ReLU: {}
-        - MaxPool2d:
+        - name: ReLU
+          params: {}
+        - name: MaxPool2d
+          params:
             kernel_size: 2
-        - Conv2d:
+        - name: Conv2d
+          params:
             in_channels: 128
             out_channels: 256
             padding:
@@ -124,10 +145,13 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 256
-        - ReLU: {}
-        - Conv2d:
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
             in_channels: 256
             out_channels: 256
             padding:
@@ -136,10 +160,13 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 256
-        - ReLU: {}
-        - Conv2d:
+        - name: ReLU
+          params: {}
+        - name: Conv2d
+          params:
             in_channels: 256
             out_channels: 256
             padding:
@@ -148,23 +175,32 @@ network:
             kernel_size:
             - 7
             - 3
-        - BatchNorm2d:
+        - name: BatchNorm2d
+          params:
             num_features: 256
-        - ReLU: {}
-        - AdaptiveAvgPool2d:
+        - name: ReLU
+          params: {}
+        - name: AdaptiveAvgPool2d
+          params:
             output_size:
             - 1
             - 1
-        - Flatten: {}
-        - Linear:
+        - name: Flatten
+          params: {}
+        - name: Linear
+          params:
             in_features: 256
             out_features: 128
-        - ReLU: {}
-        - Linear:
+        - name: ReLU
+          params: {}
+        - name: Linear
+          params:
             in_features: 128
             out_features: 128
-        - ReLU: {}
-        - Linear:
+        - name: ReLU
+          params: {}
+        - name: Linear
+          params:
             in_features: 128
             out_features: 2
 
