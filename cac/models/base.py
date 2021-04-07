@@ -606,7 +606,13 @@ class Model(Estimator):
 
         best_metric_values = None
 
-        for epochID in range(self.model_config['epochs']):
+        # run val epoch before any training
+        val_results = self.process_epoch(
+            val_dataloader, 'val', training=False, use_wandb=use_wandb
+        )
+        self.epoch_counter += 1
+
+        for epochID in range(1, self.model_config['epochs'] + 1):
             if not debug:
                 # train epoch
                 train_results = self.process_epoch(
