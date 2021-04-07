@@ -7,8 +7,8 @@
 # -p: port number (this is needed if you want to start jupyter lab on a remote machine)
 
 
-# set docker image
-image=wadhwaniai/cough-against-covid:py3-1.1
+# set docker image (GPU machine)
+image=wadhwaniai/cough-against-covid:py3-1.2
 
 # get inputs
 while getopts "g:n:u:e:p:" OPTION; do
@@ -37,6 +37,8 @@ fi
 command="nvidia-docker"
 if [ "$gpu" ==  -1  ];then
        command="docker"
+	   # set image for CPU only machine
+	   image=wadhwaniai/cough-against-covid:py3-1.1
 fi
 
 echo "=> Firing docker container with $command"

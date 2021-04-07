@@ -120,6 +120,12 @@ $ python -c "import torch; print(torch.__version__)"
 1.6.0+cpu
 ```
 
+For GPU machine, inside the container, run the following command to test you are able to load the right `torch` version:
+```bash
+$ python -c "import torch; print(torch.__version__)"
+1.6.0
+```
+
 #### (Optional) Starting Jupyter lab
 In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
 ```bash

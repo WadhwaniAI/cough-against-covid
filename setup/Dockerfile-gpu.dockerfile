@@ -1,6 +1,6 @@
 # build the image required for setting up the repository
 # Example run: 
-# $ docker build -t wadhwaniai/cough-against-covid:py3-1.1 -f Dockerfile-cpu.dockerfile .
+# $ docker build -t wadhwaniai/cough-against-covid:py3-1.2 -f Dockerfile-gpu.dockerfile .
 # Creates a docker image with desired dependencies
 
 # base image
@@ -32,13 +32,11 @@ ENV PYTHONPATH /workspace/cough-against-covid
 # set actual working directory
 WORKDIR /workspace/cough-against-covid
 
-# copy the requirements file to the working directory
-COPY requirements.txt .
-
-# Install the required packages
+# Update pip
 RUN pip --no-cache-dir install -U pip
-RUN pip install torch==1.6.0+cpu torchvision==0.7.0+cpu torchaudio==0.6.0 torchsummary==1.5.1 \
-    -f https://download.pytorch.org/whl/torch_stable.html
+
+# Installing with CUDA 10.2 by default (see https://pytorch.org/get-started/previous-versions/)
+RUN pip install torch==1.6.0 torchvision==0.7.0 torchaudio==0.6.0 torchsummary==1.5.1 
 RUN pip install kornia==0.4.0 wandb==0.9.1 siren-torch==1.1 xgboost==1.1.1
 RUN pip install termcolor natsort matplotlib seaborn natsort praatio
 RUN pip install noisereduce==1.1.0
