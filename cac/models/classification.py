@@ -163,12 +163,15 @@ class ClassificationModel(Model):
 
         if at == 'softmax':
             predictions = F.softmax(predictions, -1)
+        elif at == 'sigmoid':
+            predictions = torch.sigmoid(predictions.squeeze())
         else:
             raise NotImplementedError
 
         if len(classes) == 2:
             # only works for binary classification as of now
-            predictions = predictions[:, 1]
+            if at == 'softmax':
+                predictions = predictions[:, 1]
             indices = defaultdict()
             for path in unique_paths:
                 indices = np.where(paths == path)[0]
@@ -192,9 +195,12 @@ class ClassificationModel(Model):
                 else:
                     raise NotImplementedError
 
-                inverse_softmax = torch.Tensor(
-                        [0.0, logit(file_prediction)])
-                agg_predictions.append(inverse_softmax)
+                if at == 'softmax':
+                    inverse_softmax = torch.Tensor([0.0, logit(file_prediction)])
+                    agg_predictions.append(inverse_softmax)
+                elif at =='sigmoid':
+                    inverse_sigmoid = torch.Tensor([logit(file_prediction)])
+                    agg_predictions.append(inverse_sigmoid)
         else:
             raise NotImplementedError
 
@@ -400,8 +406,13 @@ class ClassificationModel(Model):
         :return: dictionary of metrics as provided in the config file
         """
         if as_logits:
-            # convert to softmax scores from logits
-            predictions = F.softmax(predictions, -1)
+            # convert logits to probabilities using sigmoid/softmax
+            if len(predictions.shape) == 1:
+                predictions = torch.sigmoid(predictions)
+            elif (len(predictions.shape) == 2 and predictions.shape[1] == 1):
+                predictions = torch.sigmoid(predictions.squeeze())
+            else:
+                predictions = F.softmax(predictions, -1)
 
         targets = targets.cpu()
         predict_proba = predictions.detach().cpu()

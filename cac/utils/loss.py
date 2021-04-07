@@ -121,6 +121,66 @@ class LabelSmoothingLoss(nn.Module):
         return loss, cache
 
 
+class BCEWithLogitsLoss(nn.Module):
+    """
+    Computes binary cross entropy loss based on nn.BCEWithLogitsLoss
+    but has additional checks on shape and dtype of predictions and targets.
+    """
+    def __init__(self, **kwargs):
+        super(BCEWithLogitsLoss, self).__init__()
+        self.criterion = nn.BCEWithLogitsLoss(**kwargs)
+
+    def __call__(self, output: torch.float32, target: torch.float32):
+        """
+        :param output: predicted classification score, typically output of neural network,
+            needs to be of shape (B, 1) or (B,) single-label case or (B, L) for multi-label case
+        :type output: torch.float32
+        :param target: target class, needs to be of shape (B, 1) or (B,) single-label case or
+            (B, L) for multi-label case, should be of same type as output
+        :type target: torch.float32
+        """
+        output, target = self._check_inputs(output, target)
+        return self.criterion(output, target)
+
+    def _check_inputs(self, output, target):
+        # check if output is float32
+        if not output.dtype != torch.float32:
+            output = output.type(torch.float32)
+
+        # make target of same type as output
+        target = target.type_as(output)
+
+        # depending on target.shape, reshape output
+        if len(target.shape) == 1:
+            # simple single-label case (B,)
+            if len(output.shape) not in [1, 2]:
+                raise ValueError(
+                    f'output shape must be (B, 1) or (B,) if target shape is (B, {target.shape[-1]})'
+                )
+            if len(output.shape) == 2:
+                output = output.squeeze(1)
+
+        elif len(target.shape) == 2:
+            if target.shape[-1] == 1:
+                # again, single-label case (B, 1)
+                if len(output.shape) not in [1, 2]:
+                    raise ValueError(
+                        f'output shape must be (B, 1) or (B,) if target shape is (B, {target.shape[-1]})'
+                    )
+                if len(output.shape) == 1:
+                    output = output.unsqueeze(1)
+            else:
+                # multi-label case (B, L)
+                assert output.shape == target.shape
+        else:
+            raise ValueError(
+                f'target shape must be (B, l), l in [0, .., L] but found {target.shape}'
+            )
+        
+        return output, target
+
+
 loss_factory = Factory()
 loss_factory.register_builder('cross-entropy', nn.CrossEntropyLoss)
+loss_factory.register_builder('binary-cross-entropy', BCEWithLogitsLoss)
 loss_factory.register_builder('label-smoothing', LabelSmoothingLoss)
