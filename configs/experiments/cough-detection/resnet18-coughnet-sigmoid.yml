@@ -4,7 +4,7 @@ model:
     name: classification
     type: binary
     batch_size: 32
-    epochs: 100
+    epochs: 1000
     loss:
       train:
         name: binary-cross-entropy
@@ -69,7 +69,6 @@ network:
         - name: Linear
           params:
             in_features: 128
-            # need only 1 output neuron for sigmoid
             out_features: 1
 
 data:
@@ -158,13 +157,12 @@ data:
   dataset:
     name: classification_dataset
     config:
+      - name: flusense
+        version: segmented-v1.0
       - name: freesound-kaggle
         version: v1.0
-    params:
-      train:
-        fraction: 0.1
-      val:
-        fraction: 0.1
+      - name: coswara-15-03-21
+        version: v1.0
   sampler:
     train:
         name: classification
