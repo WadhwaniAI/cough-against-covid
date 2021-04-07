@@ -3,7 +3,7 @@ description: flusense/resnet18-coughnet-crop + DB-scaled MelSpectrogram as repre
 model:
     name: classification
     type: binary
-    batch_size: 1
+    batch_size: 32
     epochs: 1000
     optimizer:
       name: AdamW

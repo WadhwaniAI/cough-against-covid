@@ -2,6 +2,10 @@
 Trainer script.
 
 Example:
+To set number of CPUs to 10:
+>>> taskset --cpu-list 0-10 python train.py -v experiments/resnet18-coughnet.yml --wandb_entity wadhwani
+
+To use all CPUs:
 >>> python train.py -v experiments/resnet18-coughnet.yml --wandb_entity wadhwani
 
 usage: train.py [-h] -v VERSION [-n NUM_WORKERS] [--debug] [-o] [--resume]
