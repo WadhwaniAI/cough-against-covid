@@ -200,7 +200,7 @@ class Config:
         # check aggregation method for combining predictions
         aggregate_config = params['model']['eval']['aggregate']
         if 'at' in aggregate_config['val']:
-            assert aggregate_config['val']['at'] in ['softmax']
+            assert aggregate_config['val']['at'] in ['softmax','sigmoid']
 
     def update_from_params(self, params: Dict):
         """Updates parameters from dict"""
