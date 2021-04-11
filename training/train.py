@@ -76,7 +76,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Trains a model")
     parser.add_argument('-v', '--version', required=True, type=str,
                         help='path to the experiment config file')
-    parser.add_argument('-n', '--num_workers', default=mp.cpu_count(), type=int,
+    parser.add_argument('-n', '--num_workers', default=10, type=int,
                         help='number of CPU workers to use')
     parser.add_argument('--debug', action='store_true',
                         help='specify where a debugging run')
