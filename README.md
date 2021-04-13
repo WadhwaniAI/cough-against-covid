@@ -1,5 +1,5 @@
 # Cough Against COVID-19
-Code relase for the [Cough Against COVID-19](https://www.wadhwaniai.org/work/cough-against-covid/) Project by Wadhwani AI supported by the Gates' Foundation.
+Code relase for the [Cough Against COVID-19](https://www.wadhwaniai.org/work/cough-against-covid/) Project by the [Wadhwani Institute for Artificial Intelligence](https://www.wadhwaniai.org/) supported by the Gates' Foundation.
 
 #### [Project page](https://www.wadhwaniai.org/work/cough-against-covid/) | [Code](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection) | [Paper (ArXiV)](https://arxiv.org/abs/2009.08790) | [Data](Coming-soon)
 
@@ -22,10 +22,10 @@ Next, you need to create a new `.yml` config file (like [this](https://github.co
 
 ```yml
 dataset:
-name: classification_dataset
-config:
+  name: classification_dataset
+  config:
     - name: <name-of-your-dataset>
-    version: <version-of-your-dataset>
+      version: <version-of-your-dataset>
 ```
 You can also play around with various other hyperparameters in the config like optimizer, scheduler, batch sampler method, random crop duration, network architecture etc.
 
