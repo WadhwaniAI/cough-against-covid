@@ -9,8 +9,7 @@ Code relase for the [Cough Against COVID-19](https://www.wadhwaniai.org/work/cou
     </embed>
 </object>
  -->
- <!-- ![Cough Against COVID-19](./assets/media/teaser-v6.pdf){width=65%} -->
- ![Cough Against COVID-19](https://github.com/WadhwaniAI/cough-against-covid/blob/pb/cough-detection/assets/media/teaser-v6.pdf){width=65%}
+ ![Cough Against COVID-19](./assets/media/teaser-v6.png)
 
 
 ## Setup
