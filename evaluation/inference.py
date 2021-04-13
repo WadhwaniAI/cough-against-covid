@@ -2,8 +2,8 @@
 
 Example:
 
-$ cfg=cough-clf/mixup/wiai-v9.4/resnet18/base-best-step-scheduler.yml
-$ python inference.py -v $cfg -u piyush -e 100 -dv v9.4 -m test --at softmax
+$ cfg=experiments/covid-detection/v9_7_cough_adam_1e-4.yml
+$ python inference.py -v $cfg -u piyush -e 1 -dv v9.7 -m val --at softmax
 
 TODO: Add ignore_cache option, use cache when available to save time
 """

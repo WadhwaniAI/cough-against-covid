@@ -40,7 +40,15 @@ You can also play around with various other hyperparameters in the config like o
 
 ## Evaluation
 
-#### Evaluating on existing datasets
+#### Evaluating a trained model on a given dataset
+
+If you train a model on our given datasets, you can follow the instructions [here](./evaluation/README.md) to evaluate that model on a given dataset.
+
+#### Evaluating any custom model on a given dataset
+
+Coming soon!
 
 #### Demo Google Collab notebook
+
+Coming soon!
 
