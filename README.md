@@ -42,7 +42,7 @@ You can also play around with various other hyperparameters in the config like o
 
 #### Evaluating a trained model on a given dataset
 
-If you train a model on our given datasets, you can follow the instructions [here](./evaluation/README.md) to evaluate that model on a given dataset.
+If you train a model on our given datasets using a config, you can follow the instructions [here](./evaluation/README.md) to evaluate that model on a given dataset.
 
 #### Evaluating any custom model on a given dataset
 
