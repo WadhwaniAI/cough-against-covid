@@ -351,7 +351,7 @@ class Model(Estimator):
             self, data_loader: DataLoader, mode: str = None,
             training: bool = False, use_wandb: bool = True,
             log_summary: bool = True, overfit_batch: bool = False,
-            compute_metrics: bool = True):
+            compute_metrics: bool = True, threshold: float = None):
         """Basic epoch function (Used for train/val/test epochs)
         Args:
         :param dataloader: torch DataLoader for the epoch
@@ -369,6 +369,9 @@ class Model(Estimator):
         :type overfit_batch: bool
         :param compute_metrics: whether to compute metrics
         :type compute_metrics: bool
+        :param threshold: threshold to be used to compute predicted labels
+        :type threshold: float, defaults to None, if None, it is computed by
+            optimising given criterion
         """
         instance_losses = defaultdict(list)
         batch_losses = defaultdict(list)
@@ -511,14 +514,18 @@ class Model(Estimator):
         results['instance_losses'] = instance_losses
 
         if compute_metrics:
-            maximize_mode = self.model_config['eval'].get('maximize_mode', mode)
-            maximize_mode = maximize_mode if maximize_mode in all_data else mode
-            logging.info(
-                'Finding optimal evaluation params based on: {}'.format(
-                    maximize_mode))
+            if threshold is None:
+                maximize_mode = self.model_config['eval'].get('maximize_mode', mode)
+                maximize_mode = maximize_mode if maximize_mode in all_data else mode
+                logging.info(
+                    'Finding optimal evaluation params based on: {}'.format(
+                        maximize_mode))
+                eval_params = self.get_eval_params(
+                    all_data[maximize_mode]['epoch_data'])
+            else:
+                eval_params = {'recall': None, 'threshold': threshold}
 
-            eval_params = self.get_eval_params(
-                all_data[maximize_mode]['epoch_data'])
+            logging.info(color(f"Using threshold = {threshold:.3f}", "blue"))
 
             # remove mode from all_data
             all_data.pop(mode, None)
