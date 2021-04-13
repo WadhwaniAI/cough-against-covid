@@ -163,6 +163,7 @@ class ClassificationModel(Model):
 
         if at == 'softmax':
             predictions = F.softmax(predictions, -1)
+            predictions = predictions[:, 1]
         elif at == 'sigmoid':
             predictions = torch.sigmoid(predictions.squeeze())
         else:
@@ -170,8 +171,6 @@ class ClassificationModel(Model):
 
         if len(classes) == 2:
             # only works for binary classification as of now
-            if at == 'softmax':
-                predictions = predictions[:, 1]
             indices = defaultdict()
             for path in unique_paths:
                 indices = np.where(paths == path)[0]
