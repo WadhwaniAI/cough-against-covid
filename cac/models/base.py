@@ -524,8 +524,7 @@ class Model(Estimator):
                     all_data[maximize_mode]['epoch_data'])
             else:
                 eval_params = {'recall': None, 'threshold': threshold}
-
-            logging.info(color(f"Using threshold = {threshold:.3f}", "blue"))
+                logging.info(color(f"Using threshold = {threshold:.3f}", "blue"))
 
             # remove mode from all_data
             all_data.pop(mode, None)
