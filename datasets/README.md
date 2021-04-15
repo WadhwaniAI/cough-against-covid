@@ -48,7 +48,7 @@ dataset/
 * **Step 3 - Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. For example, if you want to split a dataset randomly into train, validation and test, you can use our given notebooks and save it as version `v1.0` and so on. For sake of ease of use, we provide relevant data versions (splits) already in `assets/data/`  folder for various datasets. You can  copy these in the common storage folder as follows:
 ```bash
 cd /workspace/cough-against-covid/datasets/versioning/
-python datasets/versioning/copy_version_files.py
+python copy_version_files.py
 ```
 You can skip step `Versioning` from the processing for each dataset unless you wish to create a new split.
 
