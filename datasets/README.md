@@ -12,7 +12,7 @@ For a given dataset, say our own dataset named `wiai-facility`, you need to foll
 
 ### Common storage folder
 
-For storing datasets and model outputs for this project, please create a root folder on your machine (could be anywhere), for example,`/Users/piyushbagad/cac/`. Inside that, create the following structure: (you should replace `piyush` folder with a folder by your username - it could be anything).
+For storing datasets and model outputs for this project, please create a root folder on your machine (could be anywhere), for example,`~/cac/`. Inside that, create the following structure: (you should replace `piyush` folder with a folder by your username - it could be anything).
 ```bash
 cac/
     |--data/
@@ -45,7 +45,12 @@ dataset/
     └── audio/
 ```
 
-* **Step 3 - Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. This is an important step and needs carefully attention. For example, if you want to split a dataset randomly into train, validation and test, you can use `XXX` notebook and save it as version `v1.0`. If you want to create a new (different) split of the *same* samples as in `v1.0`, then create `v1.1` and so on. If you decide to add more samples to the original dataset, then you should create `v2.0` and so on.
+* **Step 3 - Versioning**: Once steps 1 and 2 are done, you can use the code in `versioning/` to create dataset version files. For example, if you want to split a dataset randomly into train, validation and test, you can use our given notebooks and save it as version `v1.0` and so on. For sake of ease of use, we provide relevant data versions (splits) already in `assets/data/`  folder for various datasets. You can  copy these in the common storage folder as follows:
+```bash
+cd /workspace/cough-against-covid/datasets/versioning/
+python copy_version_files.py
+```
+You can skip step `Versioning` from the processing for each dataset unless you wish to create a new split.
 
 ### Summary of Datasets
 
@@ -72,7 +77,7 @@ For a given dataset, you need to follow the steps given below to be able to run 
 
 > TEMPORARY: All the code should be run on `pb/datasets` branch.
 
-* **Step 1: Download**: Run the following commands. Note that `/Users/piyushbagad/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
+* **Step 1: Download**: Run the following commands. Note that `~/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
 ```bash
 cd /workspace/cough-against-covid/datasets/download/
 python coswara.py -p /data/coswara-15-03-21/
@@ -102,7 +107,7 @@ cd /workspace/cough-against-covid/datasets/download
 python freesound-kaggle.py
 ```
 * Clean (standardise) the dataset: Run the notebook - `cough-against-covid/datasets/cleaning/freesound-kaggle.ipynb`.
-* Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/freesound-kaggle/v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
+* Versioning (Optional): We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/freesound-kaggle/v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
 
 The final dataset folder structure as a result of above steps is organized as follows:
 ```bash
@@ -123,7 +128,7 @@ freesound-kaggle/
 
 ### Coswara Dataset
 
-* Download: Run the following commands. Note that `/Users/piyushbagad/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
+* Download: Run the following commands. Note that `~/cac/data/` is being mounted to the container at `/data` and thus the dataset folder you pass can be `/data/coswara-15-03-21/`.
 ```bash
 cd /workspace/cough-against-covid/datasets/download/
 python coswara.py -p /data/coswara-15-03-21/
@@ -132,7 +137,7 @@ Check the data at `/data/coswara-15-03-21/`. The `raw/audio/` folder contains th
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/coswara.ipynb`.
 
-* Versioning: Run the notebook -  `datasets/versioning/cough-detection/coswara/v1.0.ipynb`. Note that this version is for cough-detection. If you want to use Coswara for COVID classification, then you need to create a new version.
+* Versioning (Optional): Run the notebook -  `datasets/versioning/cough-detection/coswara/v1.0.ipynb`. Note that this version is for cough-detection. If you want to use Coswara for COVID classification, then you need to create a new version.
 
 The final dataset folder structure as a result of above steps is organized as follows:
 ```bash
@@ -179,7 +184,7 @@ python flusense.py
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/flusense.ipynb`.
 
-* Versioning: We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/flusense/segmented-v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
+* Versioning (Optional): We use this dataset for cough-detection task only. Thus, we create version `v1.0` using notebook - `cough-against-covid/datasets/versioning/cough-detection/flusense/segmented-v1.0.ipynb`. If you want to try a new split, you can create a new notebook.
 
 The final dataset folder structure as a result of above steps is organized as follows:
 ```bash
@@ -210,7 +215,7 @@ python esc50.py
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/esc50.ipynb`.
 
-* Versioning: We use this dataset for background noise addition. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/background/esc-50/default.ipynb`.
+* Versioning (Optional): We use this dataset for background noise addition. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/background/esc-50/default.ipynb`.
 
 
 The final dataset folder structure as a result of above steps is organized as follows:
@@ -234,14 +239,12 @@ esc-50/
 
 ### Cough Against COVID Dataset (Wadhwani AI)
 
-### ESC-50 Dataset
-
 * Download: Run the following commands.
 
-> Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `/Users/piyushbagad/cac/` to the common storage location that you have already set. 
+> Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `~/cac/` to the common storage location that you have already set. 
 ```bash
 odin_ip=192.168.100.70
-rsync -avzP -e "ssh -i /path/to/your/pem-file" username@$odin_ip:/scratche/data/cac/data/wiai-facility/wiai-facility-23-11-2020.7z* /Users/piyushbagad/cac/data/wiai-facility/
+rsync -avzP -e "ssh -i /path/to/your/pem-file" username@$odin_ip:/scratche/data/cac/data/wiai-facility/wiai-facility-23-11-2020.7z* ~/cac/data/wiai-facility/
 ```
 
 Once this step completes (takes about 40mins; each zip file is around 2GBs), run the following script (from inside docker container) that unzips the zip files.
@@ -254,7 +257,7 @@ You should see `/data/wiai-facility/raw/audio/` and `/data/wiai-facility/raw/ann
 
 * Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/wiai-facility.ipynb`.
 
-* Versioning: We use this dataset for cough classification for COVID. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-facility/default.ipynb`.
+* Versioning (Optional): We use this dataset for cough classification for COVID. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-facility/default.ipynb`.
 
 
 The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files):
@@ -277,6 +280,40 @@ wiai-facility/
 # 20200615_000817: timestamp of RTPCR test reciept for that patient
 ```
 
+### Cough Against COVID Crowdsourced Dataset (Wadhwani AI)
+
+* Download: Run the following commands.
+
+> Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `~/cac/` to the common storage location that you have already set. 
+```bash
+odin_ip=192.168.100.70
+rsync -avzP -e "ssh -i /path/to/your/pem-file" username@$odin_ip:/scratche/data/cac/data/wiai-crowdsourced/wiai-crowdsourced-15-03-2021.zip ~/cac/data/wiai-crowdsourced/
+```
+
+Once this step completes, run the following script (from inside docker container) that unzips the zip files.
+```bash
+cd /workspace/cough-against-covid/datasets/download
+python wiai-facility.py
+```
+
+You should see `/data/wiai-crowdsourced/raw/audio/` and `/data/wiai-crowdsourced/raw/annotations/` folders that contain our dataset.
+
+* Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/wiai-crowdsourced.ipynb`.
+
+* Versioning (Optional): We do not currently use this dataset for any of the tasks since the GT RTPCR labels are self-reported. However, in case you plan to use it, you create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-crowdsourced/default.ipynb`.
+
+The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files):
+```bash
+wiai-crowdsourced/
+├── processed
+│   ├── audio
+│   └── versions
+└── raw
+    ├── annotations
+    └── audio
+
+6 directories
+```
 
 <!-- 
 ### Ready-to-use Datasets
