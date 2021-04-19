@@ -45,3 +45,5 @@ RUN pip install noisereduce==1.1.0
 RUN pip install git+https://github.com/detly/gammatone.git
 RUN pip install py7zr multivolumefile natsort praatio plotly
 RUN pip install librosa==0.7.2
+RUN pip install timm==0.4.5 dataclasses==0.8
+
