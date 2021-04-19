@@ -45,13 +45,7 @@ if __name__ == "__main__":
 
     # check if all zip files exists
     print(colored("3. UNZIPPING FOLDERS ...", 'yellow'))
-    zip_fnames = [
-        'FluSense audio-20210321T144002Z-002.zip',
-        'FluSense audio-20210321T144002Z-004.zip',
-        'FluSense audio-20210321T144002Z-001.zip',
-        'FluSense audio-20210321T144002Z-003.zip'
-    ]
-    zip_files = [join(args.dpath, 'FluSense-data', x) for x in zip_fnames]
+    zip_files = glob(join(args.dpath, 'FluSense-data', 'FluSense*.zip'))
     unzipped_folder = join(args.dpath, "FluSense-data/FluSense audio/")
     wav_files = glob(join(unzipped_folder, '*.wav'))
 
@@ -59,11 +53,10 @@ if __name__ == "__main__":
         for file in zip_files:
             assert exists(file), f"Zip file {file} missing. \
                 Please see README to download AudioSet files from GDrive."
-            unzip_folder = file.split('.zip')[0]
             call(f"unzip '{file}' -d {repo_dir}/", shell=True)
 
-    new_unzip_folder = unzip_folder.replace('FluSense audio', 'FluSense-audio')
-    call(f"mv '{unzip_folder}' {new_unzip_folder}", shell=True)
+    new_unzipped_folder = unzipped_folder.replace('FluSense audio', 'FluSense-audio')
+    call(f"mv '{unzipped_folder}' {new_unzipped_folder}", shell=True)
 
     print(colored("4. LINKING DATA TO RAW FOLDER ...", 'yellow'))
 
