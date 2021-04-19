@@ -5,8 +5,6 @@ import unittest
 from cac.networks.backbones.efficientnet import EfficientNet
 
 
-# TODO: enet-b2/4/5/7  do not work on CPU machines (Process is KILLED).
-# For now, skipping these tests.
 class EfficientNetTestCase(unittest.TestCase):
     """Class to check the EfficientNet backbone"""
     def test_efficientnet_b0(self):
