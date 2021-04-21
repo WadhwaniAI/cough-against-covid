@@ -3,6 +3,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+def plot_raw_audio_signal_with_markings(signal: np.ndarray, markings: list,
+    title: str = 'Raw audio signal with markings'):
+
+    plt.figure(figsize=(23, 4))
+    plt.grid()
+
+    plt.plot(signal)
+    for value in markings:
+        plt.axvline(x=value, c='red')
+    plt.xlabel('Time')
+    plt.title(title)
+
+    plt.show()
+    plt.close()
+
+
 def fig2data(fig: plt.Figure):
     """Convert a Matplotlib figure to a numpy array with RGBA channels
 
