@@ -6,4 +6,19 @@ To directly do the above (processed attributes file from `/data/wiai-facilitiy/p
 1. Run the script `python process_attributes.py -a attributes` directly
 2. Use the notebook `process_attributes.ipynb` to try out different stuff
 
+### Training Neural Models
+* Start docker container
+```bash
+bash create_container.sh -g <gpu-number> -n <container-name> -e <common-storage-folder> -u <your-user-folder> -p <port-number>
 
+$ example: bash create_container.sh -g 0 -n sc-1 -e ~/cac/ -u piyush -p 8001
+```
+
+* Run training, for example, with config file:
+```bash
+$ cfg=default-context-neural.yml
+$ python training/train.py -v $cfg --wandb_entity <your-W&B-account-name>
+```
+
+### Training Classical Models
+// TO-DO //
