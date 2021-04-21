@@ -1,8 +1,8 @@
 ## Instructions for Context Based Classification
 
-There are two ways to get started here, 
+The data_prep section creates the necessary pickle files to run the context classification notebooks. There are two ways to get started here, 
 ### 1. Working on same splits
-This step creates creates the pickle file necessary for running the classification notebooks. Run the `context-data-prep-script.py` script in the following manner (we want to create splits corresponding to `configs/default-clf.yml` using the attributes file `/data/wiai-facility/processed/attributes.csv`),
+If you want to have the same splits as the ones that you created for the cough experiments, Run the `context-data-prep-script.py` script in the following manner (we want to create splits corresponding to `configs/default-clf.yml` using the attributes file `/data/wiai-facility/processed/attributes.csv`),
 ```bash
 cd analysis/context-classification/data_prep
 python context-data-prep-script.py -v default-clf -a attributes
