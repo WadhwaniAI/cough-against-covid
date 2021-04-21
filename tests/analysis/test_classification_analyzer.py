@@ -19,8 +19,8 @@ class ClassificationAnalyzerTestCase(unittest.TestCase):
     def setUpClass(cls):
         cfg = 'experiments/covid-detection/v9_4_cough_adam_1e-4.yml'
         cls.config = Config(cfg)
-        print(f"WARNING: If you have not run expt with config {cfg}, tests will fail. Please run\
-            `python training/train.py -v {cfg}` before running this test.")
+        print(f"WARNING: If you have not run expt with config {cfg}, tests will fail.\
+            Please run\ `python training/train.py -v {cfg}` before running this test.")
         cls.data_loader, _ = get_dataloader(
             cls.config.data, 'val', 10,
             num_workers=4, shuffle=False, drop_last=False)
