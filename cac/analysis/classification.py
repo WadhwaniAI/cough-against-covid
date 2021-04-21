@@ -161,7 +161,7 @@ class ClassificationAnalyzer(ModelAnalyzer):
 
         all_metrics = self.model.compute_epoch_metrics(
             predictions, targets, threshold=threshold,
-            recall=recall, as_logits=as_logits, verbose=False)
+            recall=recall, as_logits=as_logits)
 
         display_metrics_keys = ['confusion_matrix', 'pr-curve', 'roc-curve', 'ss-curve']
         display_metrics = dict((k, all_metrics[k]) for k in tuple(display_metrics_keys))
