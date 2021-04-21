@@ -53,7 +53,7 @@ network:
 
 data:
   raw_waveform: True
-  attributes_file: /data/wiai-facility/processed/attributes_joint_clf_mod.csv
+  attributes_file: /data/wiai-facility/processed/attributes_context_processed.csv
   target_transform:
     name: classification
     params:
