@@ -23,6 +23,11 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     ruby1.9.1 && rm -rf /var/lib/apt/lists/*
 
+# for latex in matplotlib + jupyter
+RUN apt-get install cm-super
+RUN apt-get -y install texlive-latex-recommended texlive-pictures texlive-latex-extra
+RUN apt-get install dvipng
+
 # change working directory to /
 WORKDIR /
 
@@ -45,3 +50,5 @@ RUN pip install noisereduce==1.1.0
 RUN pip install git+https://github.com/detly/gammatone.git
 RUN pip install py7zr multivolumefile natsort praatio plotly
 RUN pip install librosa==0.7.2
+RUN pip install timm==0.4.5 dataclasses==0.8 ipywidgets==7.6.3
+

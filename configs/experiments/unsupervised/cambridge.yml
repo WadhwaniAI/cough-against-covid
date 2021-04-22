@@ -1,0 +1,74 @@
+description: Unsupervised representation learning using MFCC based features with PCA and on facility
+
+model:
+    name: dimensionality_reduction
+    method:
+      name: PCA
+      params:
+        n_components: 2
+
+data:
+  raw_waveform: false
+  signal_transform:
+    all:
+    - name: Resample
+      params:
+        orig_freq: 44100
+        new_freq: 16000
+    - name: FixedPad
+      params:
+        target_size: 16000
+        accept_longer_than_target: true
+    - name: ToNumpy
+      params: {}
+    - name: ModifiedEnsemble
+      params:
+        as_numpy: True
+        combine: concat
+        transforms_cfg:
+          - name: Duration
+            params:
+              rate: 16000
+          - name: Tempo
+            params:
+              rate: 16000
+          - name: Onsets
+            params:
+              rate: 16000
+          - name: RMSEnergy
+            params: {}
+          - name: SpectralRolloff
+            params:
+              rate: 16000
+          - name: SpectralCentroid
+            params:
+              rate: 16000
+          - name: ZeroCrossingRate
+            params: {}
+          - name: DeltaMFCC
+            params:
+              rate: 16000
+              order: 0
+              n_mfcc: 13
+          - name: DeltaMFCC
+            params:
+              rate: 16000
+              order: 1
+              n_mfcc: 13
+          - name: DeltaMFCC
+            params:
+              rate: 16000
+              order: 2
+              n_mfcc: 13
+    - name: ToTensor
+      params: {}
+
+  dataset:
+    name: unsupervised_dataset
+    config:
+      - name: wiai-facility
+        version: default-unsupervised-mini
+  collate_fn:
+    name: unsupervised_collate
+    params:
+      zero_pad: False
