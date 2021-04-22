@@ -15,6 +15,10 @@ data:
       params:
         orig_freq: 44100
         new_freq: 16000
+    - name: FixedPad
+      params:
+        target_size: 16000
+        accept_longer_than_target: true
     - name: ToNumpy
       params: {}
     - name: ModifiedEnsemble
