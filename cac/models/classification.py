@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 import torch.nn.functional as F
 import wandb
 from sklearn.metrics import precision_recall_curve, accuracy_score,\
-    recall_score, precision_score, roc_curve, roc_auc_score
+    recall_score, precision_score, roc_curve, roc_auc_score, auc
 import matplotlib.pyplot as plt
 
 from cac.data.audio import AudioItem
@@ -448,6 +448,7 @@ class ClassificationModel(Model):
 
             metrics = {
                 'accuracy': accuracy_score(targets, predicted_labels),
+                'auc': auc(targets, predicted_labels),
                 'confusion_matrix': confusion_matrix.cm,
                 'precision': precision_score(targets, predicted_labels),
                 'recall': recall_score(

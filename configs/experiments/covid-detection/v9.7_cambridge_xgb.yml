@@ -1,0 +1,148 @@
+description: Cambridge features | XGB | v9.7
+
+model:
+  name: classical
+  type: binary
+  batch_size: 32
+  classes:
+    - non-covid
+    - covid
+  method:
+    name: XGBClassifier
+    params:
+      random_state: 0
+  subset_tracker:
+    train: {}
+    val: {}
+  eval:
+    maximize_metric: specificity
+    maximize_mode: val
+
+data:
+  raw_waveform: false
+
+  target_transform:
+    name: classification
+    params:
+      classes:
+        - covid
+
+  signal_transform:
+    train:
+      - name: Resample
+        params:
+          orig_freq: 44100
+          new_freq: 16000
+      - name: ToNumpy
+        params: {}
+      - name: ModifiedEnsemble
+        params:
+          as_numpy: True
+          combine: concat
+          transforms_cfg:
+            - name: Duration
+              params:
+                rate: 16000
+            - name: Tempo
+              params:
+                rate: 16000
+            - name: Onsets
+              params:
+                rate: 16000
+            - name: RMSEnergy
+              params: {}
+            - name: SpectralRolloff
+              params:
+                rate: 16000
+            - name: SpectralCentroid
+              params:
+                rate: 16000
+            - name: ZeroCrossingRate
+              params: {}
+            - name: DeltaMFCC
+              params:
+                rate: 16000
+                order: 0
+                n_mfcc: 13
+            - name: DeltaMFCC
+              params:
+                rate: 16000
+                order: 1
+                n_mfcc: 13
+            - name: DeltaMFCC
+              params:
+                rate: 16000
+                order: 2
+                n_mfcc: 13
+      - name: ToTensor
+        params: {}
+
+    val:
+      - name: Resample
+        params:
+          orig_freq: 44100
+          new_freq: 16000
+      - name: ToNumpy
+        params: {}
+      - name: ModifiedEnsemble
+        params:
+          as_numpy: True
+          combine: concat
+          transforms_cfg:
+            - name: Duration
+              params:
+                rate: 16000
+            - name: Tempo
+              params:
+                rate: 16000
+            - name: Onsets
+              params:
+                rate: 16000
+            - name: RMSEnergy
+              params: {}
+            - name: SpectralRolloff
+              params:
+                rate: 16000
+            - name: SpectralCentroid
+              params:
+                rate: 16000
+            - name: ZeroCrossingRate
+              params: {}
+            - name: DeltaMFCC
+              params:
+                rate: 16000
+                order: 0
+                n_mfcc: 13
+            - name: DeltaMFCC
+              params:
+                rate: 16000
+                order: 1
+                n_mfcc: 13
+            - name: DeltaMFCC
+              params:
+                rate: 16000
+                order: 2
+                n_mfcc: 13
+      - name: ToTensor
+        params: {}
+
+  dataset:
+    name: classification_dataset
+    config:
+      - name: wiai-facility
+        version: v9.7
+    params:
+      train:
+        fraction: 0.01
+      val:
+        fraction: 0.01
+
+  sampler:
+      train:
+        name: default
+      val:
+        name: default
+
+  collate_fn:
+    name: classification_collate
+    params: {'zero_pad': False}

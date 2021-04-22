@@ -1,0 +1,102 @@
+description: AI4COVID features | XGB | v9.7
+
+model:
+  name: classical
+  type: binary
+  batch_size: 32
+  classes:
+    - non-covid
+    - covid
+  method:
+    name: XGBClassifier
+    params:
+      random_state: 0
+  subset_tracker:
+    train: {}
+    val: {}
+  eval:
+    maximize_metric: specificity
+    maximize_mode: val
+
+data:
+  raw_waveform: false
+
+  target_transform:
+    name: classification
+    params:
+      classes:
+        - covid
+
+  signal_transform:
+    train:
+      - name: Resample
+        params:
+          orig_freq: 44100
+          new_freq: 16000
+      - name: MFCC
+        params:
+          sample_rate: 16000
+          n_mfcc: 64
+          log_mels: true
+          melkwargs:
+            n_mels: 128
+      - name: Rescale
+        params: {}
+      - name: Ensemble
+        params:
+          transforms_cfg:
+            - - name: 'PCA'
+                params:
+                  n_components: 10
+                  norm: True
+                  norm_order: 1
+            - - name: 'AxisMean'
+                params: {}
+          combine: concat
+
+    val:
+      - name: Resample
+        params:
+          orig_freq: 44100
+          new_freq: 16000
+      - name: MFCC
+        params:
+          sample_rate: 16000
+          n_mfcc: 64
+          log_mels: true
+          melkwargs:
+            n_mels: 128
+      - name: Rescale
+        params: {}
+      - name: Ensemble
+        params:
+          transforms_cfg:
+            - - name: 'PCA'
+                params:
+                  n_components: 10
+                  norm: True
+                  norm_order: 1
+            - - name: 'AxisMean'
+                params: {}
+          combine: concat
+
+  dataset:
+    name: classification_dataset
+    config:
+      - name: wiai-facility
+        version: v9.7
+    params:
+      train:
+        fraction: 0.01
+      val:
+        fraction: 0.01
+
+  sampler:
+      train:
+        name: default
+      val:
+        name: default
+
+  collate_fn:
+    name: classification_collate
+    params: {'zero_pad': False}
