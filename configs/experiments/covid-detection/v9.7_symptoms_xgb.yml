@@ -1,0 +1,76 @@
+description: AI4COVID features | XGB | v9.7
+
+model:
+  name: classical
+  type: binary
+  batch_size: 32
+  classes:
+    - non-covid
+    - covid
+  method:
+    name: XGBClassifier
+    params:
+      random_state: 0
+  subset_tracker:
+    train: {}
+    val: {}
+  eval:
+    maximize_metric: specificity
+    maximize_mode: val
+
+data:
+  raw_waveform: True
+  target_transform:
+    name: classification
+    params:
+      classes:
+        - covid
+
+  signal_transform:
+    train: {}
+    val: {}
+       
+  dataset:
+    name: context_classification_dataset
+    config:
+      - name: wiai-facility
+        version: v9.7
+    params:
+      train:
+        attributes_file: /data/wiai-facility/processed/attributes_context_processed.csv
+        features:
+          - enroll_patient_age
+          - enroll_patient_temperature
+          - enroll_days_with_cough
+          - enroll_days_with_shortness_of_breath
+          - enroll_days_with_fever
+          - enroll_travel_history   
+          - enroll_contact_with_confirmed_covid_case 
+          - enroll_health_worker       
+          - enroll_fever
+          - enroll_cough  
+          - enroll_shortness_of_breath
+      val:
+        attributes_file: /data/wiai-facility/processed/attributes_context_processed.csv
+        features:
+          - enroll_patient_age
+          - enroll_patient_temperature
+          - enroll_days_with_cough
+          - enroll_days_with_shortness_of_breath
+          - enroll_days_with_fever
+          - enroll_travel_history   
+          - enroll_contact_with_confirmed_covid_case 
+          - enroll_health_worker       
+          - enroll_fever
+          - enroll_cough  
+          - enroll_shortness_of_breath
+
+  sampler:
+      train:
+        name: default
+      val:
+        name: default
+
+  collate_fn:
+    name: context_classification_collate
+    params: {}
