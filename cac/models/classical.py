@@ -14,13 +14,14 @@ from torch.utils.data import DataLoader
 import torch.nn.functional as F
 import wandb
 from sklearn.metrics import precision_recall_curve, accuracy_score,\
-    recall_score, precision_score, roc_curve
+    recall_score, precision_score, roc_curve, auc
 import matplotlib.pyplot as plt
 
 from cac.data.dataloader import get_dataloader
+from cac.utils.metrics import factory as metric_factory
 from cac.data.utils import read_dataset_from_config
 from cac.models.base import Estimator
-from cac.models.utils import tensorize
+from cac.models.utils import tensorize, get_subsets
 from cac.utils.logger import color, set_logger
 from cac.utils.io import save_pkl, load_pkl
 from cac.sklearn import factory as method_factory
@@ -54,12 +55,39 @@ class ClassicalModel(Estimator):
         method = method_factory.create(method_name, **method_config['params'])
         return method
 
-    def _prepare_data(self, data_loader, mode):
+    def _prepare_data(self, data_loader, mode, debug, batch_size):
         """Prepares data in np.ndarray format to be ingested into classical methods"""
-        dataset = next(iter(data_loader))
-        X = dataset['signals'].numpy()
-        y = dataset['labels'].numpy()
-        items = np.array(dataset['items'])
+        logging.info(color(f'Loading {mode} data ...', 'blue'))
+        if debug:
+            dataset = data_loader.dataset
+            culprit_idx = -1
+            for i in tqdm(range(len(dataset)), desc='Iterating over dataset to find culprit idx'):
+                try:
+                    x = dataset[i]
+                except:
+                    culprit_idx = i
+                    break
+            if culprit_idx > -1:
+                import ipdb; ipdb.set_trace()
+                x = dataset[culprit_idx]
+
+        if batch_size > -1:
+            signals, labels, items = [], [], []
+            iterator = iter(data_loader)
+            for j in tqdm(range(len(iterator)), desc='Iterating over batches'):
+                batch = next(iterator)
+                signals.append(batch['signals']),
+                labels.append(batch['labels'])
+                items.extend(batch['items'])
+            X = torch.cat(signals).numpy()
+            y = torch.cat(labels).numpy()
+            items = np.array(items)
+
+        else:
+            dataset = next(iter(data_loader))
+            X = dataset['signals'].numpy()
+            y = dataset['labels'].numpy()
+            items = np.array(dataset['items'])
 
         self._check_data(X, y, mode)
 
@@ -71,24 +99,25 @@ class ClassicalModel(Estimator):
 
         return data
 
-    def load_data(self):
+    def load_data(self, batch_size: int = -1, debug: bool = False):
         """Loads train and val datasets"""
+
         train_dataloader, _ = get_dataloader(
             self.data_config, 'train',
-            batch_size=-1,
+            batch_size=batch_size,
             num_workers=self.config.num_workers,
             shuffle=True,
             drop_last=False)
-        train_data = self._prepare_data(train_dataloader, 'train')
+        train_data = self._prepare_data(train_dataloader, 'train', debug, batch_size)
         X_train, y_train, items_train = train_data['X'], train_data['y'], train_data['items']
 
         val_dataloader, _ = get_dataloader(
             self.data_config, 'val',
-            batch_size=-1,
+            batch_size=batch_size,
             num_workers=self.config.num_workers,
             shuffle=False,
             drop_last=False)
-        val_data = self._prepare_data(val_dataloader, 'val')
+        val_data = self._prepare_data(val_dataloader, 'val', debug, batch_size)
         X_val, y_val, items_val = val_data['X'], val_data['y'], val_data['items']
 
         return (X_train, y_train, items_train), (X_val, y_val, items_val)
@@ -101,9 +130,54 @@ class ClassicalModel(Estimator):
         if mode == 'train':
             assert len(np.unique(y)) > 1, 'Training data has labels of only 1 type.'
 
+    def get_eval_params(self, epoch_data: dict) -> Tuple:
+        """Get evaluation params by optimizing on the given data
+        :param epoch_data: dictionary of various values in the epoch
+        :type epoch_data: dict
+        :return: dict containing evaluation parameters
+        """
+        metrics = self.compute_metrics(
+                epoch_data['predictions'], epoch_data['targets'])
+        param_keys = ['recall', 'threshold']
+        params = {key: metrics[key] for key in param_keys}
+        return params
+
+    def compute_predicted_labels(self, predictions: Any, threshold: float,
+            as_logits: bool = False, as_numpy=True, classes: List = None):
+        predictions = tensorize(predictions)
+
+        if as_logits:
+            # convert to softmax scores from logits
+            predictions = F.softmax(predictions, -1)
+
+        predict_proba = predictions.detach().cpu()
+
+        if classes is None:
+            classes = self.model_config['classes']
+
+        if len(classes) == 2:
+            if len(predict_proba.shape) != 1:
+                if len(predict_proba.shape) == 2 and predict_proba.shape[1] == 2:
+                    predict_proba = predict_proba[:, 1]
+
+                else:
+                    raise ValueError('Acceptable shapes for predict_proba for \
+                        binary classification are (N,) and (N, 2). Got \
+                        {}'.format(predict_proba.shape))
+
+        predicted_labels = torch.ge(predict_proba, threshold).cpu()
+
+        if as_numpy:
+            predicted_labels = predicted_labels.numpy()
+
+        predicted_labels = predicted_labels.astype(int)
+
+        return predicted_labels
+
     def compute_metrics(
             self, predictions: Any, targets: Any,
-            threshold: float = None, recall: float = 0.9) -> dict:
+            threshold: float = None, recall: float = 0.9,
+            as_logits: bool = False, classes: List[str] = None) -> dict:
         """Computes metrics for the epoch
 
         :param targets: ground truth
@@ -115,27 +189,49 @@ class ClassicalModel(Estimator):
         :type threshold: float, defaults to None
         :param recall: minimum recall to choose the optimal threshold
         :type recall: float, defaults to 0.9
+        :param as_logits: whether the predictions are logits; if as_logits=True, the values
+            are converted into softmax scores before further processing.
+        :type as_logits: bool, defaults to False
+        :param classes: list of classes in the target
+        :type classes: List[str], defaults to None
 
         :return: dictionary of metrics as provided in the config file
         """
+        print(f"Using threshold={threshold}")
         predictions = tensorize(predictions)
         targets = tensorize(targets)
 
-        # convert to prediction probabilites from logits
-        predict_proba = F.softmax(predictions, -1)
-        targets = targets.cpu()
-        predict_proba = predict_proba.detach().cpu()
+        if as_logits:
+            # convert to softmax scores from logits
+            predictions = F.softmax(predictions, -1)
 
-        if self.model_config['type'] == 'binary':
-            predict_proba = predict_proba[:, 1]
+        targets = targets.cpu()
+        predict_proba = predictions.detach().cpu()
+
+        if classes is None:
+            classes = self.model_config['classes']
+
+        if len(classes) == 2:
+            if len(predict_proba.shape) != 1:
+                if len(predict_proba.shape) == 2 and predict_proba.shape[1] == 2:
+                    predict_proba = predict_proba[:, 1]
+
+                else:
+                    raise ValueError('Acceptable shapes for predict_proba for \
+                        binary classification are (N,) and (N, 2). Got \
+                        {}'.format(predict_proba.shape))
 
             if threshold is None:
-                _, _, threshold = PrecisionAtRecall(recall=recall)(
-                    targets, predict_proba)
+                logging.info('Finding optimal threshold based on: {}'.format(
+                    self.model_config['eval']['maximize_metric']))
+                maximize_fn = metric_factory.create(
+                    self.model_config['eval']['maximize_metric'],
+                    **{'recall': recall})
+                _, _, threshold = maximize_fn(targets, predict_proba)
 
-            predictions = torch.ge(predict_proba, threshold).cpu()
-            confusion_matrix = ConfusionMatrix(self.model_config['classes'])
-            confusion_matrix(targets, predictions)
+            predicted_labels = torch.ge(predict_proba, threshold).cpu()
+            confusion_matrix = ConfusionMatrix(classes)
+            confusion_matrix(targets, predicted_labels)
 
             tp = confusion_matrix.tp
             fp = confusion_matrix.fp
@@ -143,10 +239,11 @@ class ClassicalModel(Estimator):
             fp = confusion_matrix.fp
 
             metrics = {
-                'accuracy': accuracy_score(targets, predictions),
+                'accuracy': accuracy_score(targets, predicted_labels),
                 'confusion_matrix': confusion_matrix.cm,
-                'precision': precision_score(targets, predictions),
-                'recall': recall_score(targets, predictions, zero_division=1),
+                'precision': precision_score(targets, predicted_labels),
+                'recall': recall_score(
+                    targets, predicted_labels, zero_division=1),
                 'threshold': float(threshold),
                 'ppv': confusion_matrix.ppv,
                 'npv': confusion_matrix.npv,
@@ -164,6 +261,7 @@ class ClassicalModel(Estimator):
             plt.close()
 
             fprs, tprs, _ = roc_curve(targets, predict_proba)
+            metrics['auc-roc'] = auc(fprs, tprs)
             metrics['roc-curve'] = plot_classification_metric_curve(
                 fprs, tprs, xlabel='False Positive Rate',
                 ylabel='True Positive Rate')
@@ -175,7 +273,14 @@ class ClassicalModel(Estimator):
                 ylabel='Specificity')
             plt.close()
         else:
-            raise NotImplementedError()
+            predicted_labels = torch.argmax(predict_proba, -1).cpu()
+            confusion_matrix = ConfusionMatrix(classes)
+            confusion_matrix(targets, predicted_labels)
+
+            metrics = {
+                'accuracy': accuracy_score(targets, predicted_labels),
+                'confusion_matrix': confusion_matrix.cm,
+            }
 
         return metrics
 
@@ -260,9 +365,7 @@ class ClassicalModel(Estimator):
 
         return subsets_to_track
 
-    def get_subset_data(
-            self, predictions: Any, targets: Any,
-            indices: List[int]) -> Tuple:
+    def get_subset_data(self, epoch_data: dict, indices: List[int]) -> Tuple:
         """Get data for the subset specified by the indices
 
         :param targets: Targets for the epoch
@@ -271,14 +374,22 @@ class ClassicalModel(Estimator):
         :type predictions: Any
         :param indices: list of integers specifying the subset to select
         :type indices: List[int]
+        :param epoch_data: dictionary of various values in the epoch
+        :type epoch_data: dict
 
-        :return: tuple of inputs, predictions and targets at the specified indices
+        :return: dict of epoch_data at the given indices
         """
-        return predictions[indices], targets[indices]
+        subset_data = dict()
+        _epoch_data = dict()
+        for key in epoch_data:
+            _epoch_data[key] = epoch_data[key][indices]
+        subset_data['epoch_data'] = _epoch_data
+
+        return subset_data
 
     def log_summary(
             self, X: np.ndarray, y: np.ndarray, mode: str,
-            items: List[Any], use_wandb: bool = True):
+            items: List[Any], use_wandb: bool = True, save_cache: bool = True, return_predictions=False):
         """Computes and logs metrics for given dataset (X, y) and its
         subsets to be tracked
 
@@ -290,73 +401,156 @@ class ClassicalModel(Estimator):
         :type mode: str
         :param items: Audio items containing info about the original signal
         :type items: List[Any]
-        :use_wandb: flag to decide whether to log to W&B
+        :param use_wandb: flag to decide whether to log to W&B
         :type use_wandb: bool, defaults to True
+        :param save_cache: flag to decide whether to save computed metrics and data
+        :type save_cache: bool
         """
+        results = {}
+
         y_predict_proba = self.method.predict_proba(X)
         y_predict_proba = np.round(y_predict_proba, decimals=4)
-        metrics = self.compute_metrics(y_predict_proba, y)
+
+        epoch_data = {'predictions': y_predict_proba, 'targets': y, 'items': items}
+        all_data = {
+            mode: {
+                'epoch_data': epoch_data
+            }
+        }
+
+        if hasattr(self, 'subsets_to_track'):
+            # track subsets if they exist for the current `mode`
+            for subset_mode, subset_paths in self.subsets_to_track[mode].items():
+                # match each subset with the larger set using
+                # the corresponding IDs (paths)
+                subset_indices = [
+                    index for index, item in enumerate(epoch_data['items'])
+                    if item.path in subset_paths]
+
+                # get the subset data
+                subset_data = self.get_subset_data(
+                    epoch_data, subset_indices)
+                subset_data['subset_indices'] = subset_indices
+                all_data[subset_mode] = subset_data
+
+        maximize_mode = self.model_config['eval'].get('maximize_mode', mode)
+        maximize_mode = maximize_mode if maximize_mode in all_data else mode
+        logging.info(
+            'Finding optimal evaluation params based on: {}'.format(
+                maximize_mode))
+        eval_params = self.get_eval_params(
+            all_data[maximize_mode]['epoch_data'])
+
+        # remove mode from all_data
+        all_data.pop(mode, None)
+
+        # calculate metrics for the epoch
+        logging.info(f'Computing metrics for {mode}')
+
+        metrics = self.compute_metrics(
+            epoch_data['predictions'], epoch_data['targets'],
+            **eval_params)
+
+        results[mode] = metrics
+        results[mode]['predictions'] = epoch_data['predictions']
+        results[mode]['predicted_labels'] = self.compute_predicted_labels(epoch_data['predictions'], threshold=eval_params['threshold'])
+        results[mode]['targets'] = epoch_data['targets']
+        results[mode]['eval_params'] = eval_params
 
         if use_wandb:
             self._update_wandb(mode, metrics, y_predict_proba, y, items)
 
-        # track subsets if they exist for the current `mode`
-        for subset_mode, subset_paths in self.subsets_to_track[mode].items():
-            # match each subset with the larger set using
-            # the corresponding IDs (paths)
-            subset_indices = [
-                index for index, item in enumerate(items)
-                if item.path in subset_paths]
-            subset_items = items[subset_indices]
+        for subset_mode, subset_data in all_data.items():
+            # calculate subset metrics
+            subset_metrics = self.compute_metrics(
+                subset_data['epoch_data']['predictions'],
+                subset_data['epoch_data']['targets'],
+                **eval_params)
 
-            # get the subset data
-            subset_y_predict_proba, subset_y = self.get_subset_data(
-                y_predict_proba, y, subset_indices)
-
-            # calculate the subset losses and metrics
-            subset_metrics = self.compute_metrics(subset_y_predict_proba, subset_y)
+            results[subset_mode] = subset_metrics
+            results[subset_mode]['predictions'] = subset_data['epoch_data']['predictions']
+            results[subset_mode]['predicted_labels'] = self.compute_predicted_labels(
+                subset_data['epoch_data']['predictions'], threshold=eval_params['threshold']
+            )
+            results[subset_mode]['targets'] = subset_data['epoch_data']['targets']
+            results[subset_mode]['eval_params'] = eval_params
 
             if use_wandb:
                 self._update_wandb(subset_mode, subset_metrics,
-                    subset_y_predict_proba, subset_y, subset_items)
+                    subset_data['epoch_data']['predictions'],
+                    subset_data['epoch_data']['targets'],
+                    subset_data['epoch_data']['items'])
 
-    def fit(self, use_wandb: bool = True):
+        if save_cache:
+            for _mode in results.keys():
+                save_path = join(self.config.log_dir, f'epochwise/{_mode}/{self.fixed_epoch}.pt')
+                print(f"- Saving logs for {_mode} at {save_path}")
+                save_dict = results[_mode]
+
+                save_dict['paths'] = [item.path for item in items]
+                save_dict['start'] = [item.start if hasattr(item, 'start') else None for item in items]
+                save_dict['end'] = [item.end if hasattr(item, 'end') else None for item in items]
+
+                makedirs(dirname(save_path), exist_ok=True)
+                torch.save(save_dict, save_path)
+
+        return results
+
+    def fit(self, data=None, use_wandb: bool = True, debug: bool = False,
+            overfit_batch: bool = False, return_predictions: bool = False
+        ):
         """Entry point to fitting the model to data
 
+        :param data: tuple of train and val data, precisely  of the form
+            `(X_train, y_train, items_train), (X_val, y_val, items_val)`.
+            By default, train and val data will be loaded based on config
+        :type data: tuple(tuple), defaults to None
         :param use_wandb: flag to decide whether to log visualizations to wandb
         :type use_wandb: bool
         """
-        # logging.info(color('Loading train and val data ...', 'blue'))
-        (X_train, y_train, items_train), (X_val, y_val, items_val) = self.load_data()
+        if data is not None:
+            (X_train, y_train, items_train), (X_val, y_val, items_val) = data
+        else:
+            (X_train, y_train, items_train), (X_val, y_val, items_val) = self.load_data(
+                batch_size=self.model_config.get('batch_size', -1), debug=debug
+            )
 
         logging.info(color('Setting up subsets to track ...', 'blue'))
-        self.subsets_to_track = self.setup_subsets(self.model_config['subset_tracker'])
+        # setup subset trackers
+        self.subsets_to_track = defaultdict()
+        for mode in self.model_config['subset_tracker']:
+            # each mode (train/val) can have multiple subsets that we
+            # want to track
+            self.subsets_to_track[mode] = get_subsets(
+                self.model_config['subset_tracker'][mode])
 
         logging.info(color('Fitting model to training data ...', 'blue'))
         self.method.fit(X_train, y_train)
 
         logging.info(color('Logging to W&B ...', 'blue'))
-        self.log_summary(X_train, y_train, 'train', items_train, use_wandb)
-        self.log_summary(X_val, y_val, 'val', items_val, use_wandb)
 
+        train_results = self.log_summary(X_train, y_train, 'train', items_train, use_wandb)
+        val_results = self.log_summary(X_val, y_val, 'val', items_val, use_wandb)
 
-    def evaluate(self, data_loader):
+        if return_predictions:
+            return train_results, val_results
+
+    def evaluate(self, data, return_predictions=True):
         """Evaluate the model on given data
-
-        :param data_loader: data_loader made from the evaluation dataset
-        :type data_loader: DataLoader
-
-        :returns metrics: dict with all metrics computed on given data
         """
-        data = self._prepare_data(data_loader, 'val')
-        X, y = data['X'], data['y']
+        (X, y, items) = data
 
         y_predict_proba = self.method.predict_proba(X)
         y_predict_proba = np.round(y_predict_proba, decimals=4)
 
+        if return_predictions:
+            return y_predict_proba
+
+        # metrics = self.compute_metrics(y_predict_proba, y)
         metrics = self.compute_metrics(y_predict_proba, y)
 
         return metrics
+
 
 class ClassicalModelBuilder:
     def __init__(self):
