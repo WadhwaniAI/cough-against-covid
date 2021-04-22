@@ -1,4 +1,4 @@
-description: v9.8 running on TabNet + use scheduler + default sampler
+description: default-context-neural running on TabNet + use scheduler + default sampler
 
 model:
     name: classification
@@ -53,7 +53,6 @@ network:
 
 data:
   raw_waveform: True
-  attributes_file: /data/wiai-facility/processed/attributes_context_processed.csv
   target_transform:
     name: classification
     params:
@@ -63,19 +62,6 @@ data:
   signal_transform:
     train: {}
     val: {}
-
-  features:
-    - enroll_patient_age
-    - enroll_patient_temperature
-    - enroll_days_with_cough
-    - enroll_days_with_shortness_of_breath
-    - enroll_days_with_fever
-    - enroll_travel_history   
-    - enroll_contact_with_confirmed_covid_case 
-    - enroll_health_worker       
-    - enroll_fever
-    - enroll_cough  
-    - enroll_shortness_of_breath
        
   dataset:
     name: context_classification_dataset
@@ -83,8 +69,35 @@ data:
       - name: wiai-facility
         version: v9.8
     params:
-      train: {}
-      val: {}
+      train: 
+        attributes_file: /data/wiai-facility/processed/attributes_context_processed.csv
+        features:
+          - enroll_patient_age
+          - enroll_patient_temperature
+          - enroll_days_with_cough
+          - enroll_days_with_shortness_of_breath
+          - enroll_days_with_fever
+          - enroll_travel_history   
+          - enroll_contact_with_confirmed_covid_case 
+          - enroll_health_worker       
+          - enroll_fever
+          - enroll_cough  
+          - enroll_shortness_of_breath
+      val: 
+        attributes_file: /data/wiai-facility/processed/attributes_context_processed.csv
+        features:
+          - enroll_patient_age
+          - enroll_patient_temperature
+          - enroll_days_with_cough
+          - enroll_days_with_shortness_of_breath
+          - enroll_days_with_fever
+          - enroll_travel_history   
+          - enroll_contact_with_confirmed_covid_case 
+          - enroll_health_worker       
+          - enroll_fever
+          - enroll_cough  
+          - enroll_shortness_of_breath
+  
   sampler:
     train:
         name: classification
