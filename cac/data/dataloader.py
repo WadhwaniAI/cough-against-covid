@@ -14,6 +14,59 @@ from cac.data.sampler import sampler_factory
 from cac.data.transforms import DataProcessor, annotation_factory
 from cac.utils.logger import color
 
+def context_classification_collate(
+        batch: Tuple[Dict], zero_pad: bool = False,
+        stack: bool = True) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Collate function for classification model to handle variable-length signals
+
+    :param batch: A tuple of dicts of processed signals and the corresponding labels
+    :type batch: Tuple[Dict]
+    :param zero_pad: whether to zero pad each input to maximum length sequence
+        in a batch, defaults to False
+    :type zero_pad: bool
+    :param stack: whether to stack inputs on dim 0 or not, if inputs are variable lengths
+        and `zero_pad=False`, `stack=False` is mandatory
+    :type stack: bool
+    :returns: A dict containing:
+        1) tensor, batch of processed signals zero-padded and stacked on their 0 dim
+        2) tensor, batch of corresponding labels
+    """
+    signals = []
+    labels = []
+    items = []
+
+    for data_point in batch:
+        signal = data_point['signal']
+
+        if zero_pad:
+            # transposing here to make it the right shape for zero padding
+            # last dimension is assumed to represent timesteps
+            signal = signal.transpose(0, -1)
+
+        signals.append(signal)
+        labels.append(data_point['label'])
+        items.append(data_point['item'])
+
+    if zero_pad:
+        # zero pad the list of sequences to the length of the longest
+        # sequence and permute the dimensions to match the shape orientation
+        # pre zero-padding.
+        signals = pad_sequence(signals, batch_first=True)
+
+        # transposing shape back to timsteps-last
+        signals = signals.transpose(1, -1)
+    else:
+        if stack:
+            signals = torch.stack(signals)
+
+    collated_batch = {
+        'signals': signals.squeeze(),
+        'labels': torch.Tensor(labels),
+        'items': items
+    }
+
+    return collated_batch
+
 
 def classification_collate(
         batch: Tuple[Dict], zero_pad: bool = False,
