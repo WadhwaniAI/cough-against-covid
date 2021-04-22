@@ -14,7 +14,9 @@ from cac.data.transforms import DataProcessor, STFT, TimeMasking,\
     FrequencyMasking, BackgroundNoise, RandomCrop, RandomPad, Volume,\
     Flatten, Squeeze, Unsqueeze, Ensemble, Reshape, ISTFT, Standardize, \
     Identity, Flip, Sometimes, TimeStretch, AddValue, Transpose, Log, \
-    FixedPad
+    FixedPad, Duration, Tempo, Onsets, \
+    RMSEnergy, SpectralRolloff, SpectralCentroid, ZeroCrossingRate, \
+    DeltaMFCC, AxisStats, ToNumpy, ToTensor
 
 
 class DataProcessorTestCase(unittest.TestCase):
@@ -28,7 +30,10 @@ class DataProcessorTestCase(unittest.TestCase):
         }
         data_info = read_dataset_from_config(dataset_config)
         cls.signal, cls.rate = librosa.load(data_info['file'][0])
+        cls.numpy_signal = cls.signal.copy()
         cls.signal = torch.from_numpy(cls.signal)
+        cls.default_stats = ['Mean', 'Median', 'Min', 'Max', 'RMS', 'FirstQuartile',\
+            'ThirdQuartile', 'IQR', 'StandardDeviation', 'Skewness', 'Kurtosis']
 
     def test_time_stretch(self):
         """Checks TimeStretch"""
@@ -1230,6 +1235,200 @@ class DataProcessorTestCase(unittest.TestCase):
 
         t_dummy = processor(dummy)
         assert_array_almost_equal(dummy, t_dummy)
+
+    def test_duration(self):
+        """Tests Duration"""
+        cfg = [
+            {
+                'name': 'Duration',
+                'params': {'rate': self.rate}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        duration = processor(self.numpy_signal)
+
+        self.assertEqual(librosa.get_duration(self.numpy_signal, sr=self.rate), duration[0])
+
+    def test_tempo(self):
+        """Tests Tempo"""
+        cfg = [
+            {
+                'name': 'Tempo',
+                'params': {'rate': self.rate}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        tempo = processor(self.numpy_signal)
+
+        self.assertEqual(len(tempo), 1)
+
+    def test_onsets(self):
+        """Tests Onsets"""
+        cfg = [
+            {
+                'name': 'Onsets',
+                'params': {'rate': self.rate}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        onsets = processor(self.numpy_signal)
+
+        self.assertEqual(len(onsets), 1)
+        self.assertEqual(onsets[0], 405)
+
+    def test_rmsenergy_without_stats(self):
+        """Tests RMSEnergy"""
+        cfg = [
+            {
+                'name': 'RMSEnergy',
+                'params': {'stats': []}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        energy = processor(self.numpy_signal)
+
+        self.assertEqual(energy.shape, (9155,))
+
+    def test_rmsenergy_with_stats(self):
+        """Tests RMSEnergy"""
+        cfg = [
+            {
+                'name': 'RMSEnergy',
+                'params': {'stats': self.default_stats}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        energy = processor(self.numpy_signal)
+
+        self.assertEqual(len(energy), len(self.default_stats))
+
+    def test_spectral_rolloff(self):
+        """Tests SpectralRolloff"""
+        cfg = [
+            {
+                'name': 'SpectralRolloff',
+                'params': {'rate': self.rate, 'stats': self.default_stats}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        sr = processor(self.numpy_signal)
+
+        self.assertEqual(len(sr), len(self.default_stats))
+
+    def test_spectral_centroid(self):
+        """Tests SpectralCentroid"""
+        cfg = [
+            {
+                'name': 'SpectralCentroid',
+                'params': {'rate': self.rate, 'stats': self.default_stats}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        sc = processor(self.numpy_signal)
+
+        self.assertEqual(len(sc), len(self.default_stats))
+
+    def test_zero_crossing_rate(self):
+        """Tests ZeroCrossingRate"""
+        cfg = [
+            {
+                'name': 'ZeroCrossingRate',
+                'params': {'stats': self.default_stats}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        zcr = processor(self.numpy_signal)
+
+        self.assertEqual(len(zcr), len(self.default_stats))
+
+    def test_delta_mfcc_without_stats(self):
+        """Tests DeltaMFCC"""
+        n_mfcc = 13
+        cfg = [
+            {
+                'name': 'DeltaMFCC',
+                'params': {'order': 0, 'rate': self.rate, 'n_mfcc': n_mfcc, 'stats': []}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        mfcc = processor(self.numpy_signal)
+
+        self.assertEqual(mfcc.shape, (n_mfcc, 9155))
+
+    def test_delta_mfcc_with_stats(self):
+        """Tests DeltaMFCC"""
+        n_mfcc = 13
+        cfg = [
+            {
+                'name': 'DeltaMFCC',
+                'params': {'order': 0, 'rate': self.rate, 'n_mfcc': n_mfcc, 'stats': self.default_stats}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        mfcc = processor(self.numpy_signal)
+
+        self.assertEqual(len(mfcc), n_mfcc * len(self.default_stats))
+
+    def test_delta_mfcc_second_order_without_stats(self):
+        """Tests DeltaMFCC"""
+        n_mfcc = 13
+        cfg = [
+            {
+                'name': 'DeltaMFCC',
+                'params': {'order': 2, 'rate': self.rate, 'n_mfcc': n_mfcc, 'stats': []}
+            }
+        ]
+
+        processor = DataProcessor(cfg)
+        mfcc = processor(self.numpy_signal)
+
+        self.assertEqual(mfcc.shape, (n_mfcc, 9155))
+
+    def test_axis_stats(self):
+        """Tests AxisStats"""
+        stats_computer = AxisStats(['Mean', 'Median'], axis=-1)
+        x = self.numpy_signal
+        y = stats_computer(x)
+
+        self.assertEqual(np.array([np.mean(x), np.median(x)]).all(), y.all())
+
+    def test_to_numpy(self):
+        """Tests ToNumpy"""
+        to_numpy = ToNumpy()
+        t = torch.randn(100)
+        x = to_numpy(t)
+
+        self.assertIsInstance(x, np.ndarray)
+        self.assertEqual(x.all(), t.numpy().all())
+
+    def test_to_tensor_to_cpu(self):
+        """Tests ToTensor"""
+        to_tensor = ToTensor(device='cpu')
+        x = np.random.random(100)
+        t = to_tensor(x)
+
+        self.assertIsInstance(t, torch.Tensor)
+        assert_array_almost_equal(x, t.numpy())
+
+    def test_to_tensor_to_gpu(self):
+        """Tests ToTensor"""
+        to_tensor = ToTensor(device='cuda')
+        x = np.random.random(100)
+        t = to_tensor(x)
+
+        self.assertIsInstance(t, torch.Tensor)
+        self.assertEqual(t.device.type, 'cuda')
+        assert_array_almost_equal(x, t.cpu().numpy())
 
 
 if __name__ == "__main__":

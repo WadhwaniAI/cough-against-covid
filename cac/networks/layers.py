@@ -17,6 +17,7 @@ from cac.networks.backbones.vgg import vgg11, vgg13, vgg16, vgg19, vgg11_bn,\
     vgg13_bn, vgg16_bn, vgg19_bn
 from cac.networks.backbones.torchvggish.vggish import VGGish
 from cac.networks.backbones.tab_network import TabNet  
+from cac.networks.backbones.efficientnet import EfficientNet
 from siren import Sine
 
 
@@ -137,3 +138,5 @@ factory.register_builder('Sine', Sine)
 factory.register_builder('LinearWithBinaryLabels', LinearWithBinaryLabels)
 factory.register_builder('vggish', VGGish)
 factory.register_builder('tabnet', TabNet)
+factory.register_builder('efficientnet', EfficientNet)
+

@@ -6,6 +6,7 @@ import random
 import sys
 import numpy as np
 from sklearn.decomposition import PCA as _PCA
+import librosa
 import noisereduce
 import kornia
 import torch
@@ -21,6 +22,8 @@ from cac.data.base import BaseDataset
 from cac.data.utils import read_dataset_from_config
 from cac.utils.typing import TransformDict, DatasetConfigDict
 from cac.factory import Factory
+from cac.utils.viz import plot_raw_audio_signal_with_markings
+from cac.stats import factory as stats_factory, DEFAULT_STATS
 
 
 class Resize:
@@ -1480,6 +1483,316 @@ class Ensemble:
 
         return output_signal
 
+class ToNumpy:
+    """docstring for ToNumpy"""
+    def __init__(self):
+        pass
+
+    def __call__(self, t: torch.Tensor):
+        self._check_input(t)
+        return t.cpu().numpy()
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, torch.Tensor)
+
+
+class ToTensor:
+    """docstring for ToTensor"""
+    def __init__(self, device='cpu'):
+        self.device = device
+
+    def __call__(self, x: np.ndarray):
+        self._check_input(x)
+        return torch.from_numpy(x).to(self.device)
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+
+
+class AxisStats:
+    """Computes and concatenates multiple `stats` of input at given `axis`"""
+    def __init__(self, stats: List[str] = DEFAULT_STATS, axis: int = -1):
+        self.stats = stats
+        self.axis = axis
+
+    def __call__(self, x: np.ndarray):
+        agg_stats = []
+        for stat in self.stats:
+            stat_computer = stats_factory.create(stat, **{'axis': self.axis})
+            agg_stats.append(stat_computer(x))
+        agg_stats = np.hstack(agg_stats)
+
+        return agg_stats
+
+
+class Duration:
+    """Returns the duration of the input signal"""
+    def __init__(self, rate):
+        self.rate = rate
+
+    def __call__(self, signal: np.ndarray) -> float:
+        duration = librosa.get_duration(y=signal, sr=self.rate)
+        return np.array([duration])
+
+
+class Onsets:
+    """Returns number of onsets in audio signal"""
+    def __init__(self, rate: int, **kwargs):
+        self.rate = rate
+        self.kwargs = kwargs
+
+    def __call__(self, signal: np.ndarray, verbose : bool = False) -> int:
+        self._check_input(signal)
+
+        onset_frames = librosa.onset.onset_detect(signal, sr=self.rate, **self.kwargs)
+        onset_times = librosa.frames_to_time(onset_frames)
+        onset_times = [int(x * self.rate) for x in onset_times]
+
+        if verbose:
+            plot_raw_audio_signal_with_markings(signal, onset_times)
+
+        return np.array([len(onset_times)])
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+        assert len(_input.shape) == 1
+
+
+class Tempo:
+    """Computes tempo in audio (beats per minute)"""
+    def __init__(self, rate: int, n_fft : int = 2048, hop_length : int = 512, **kwargs):
+        kwargs['n_fft'] = n_fft
+        kwargs['hop_length'] = hop_length
+        self.kwargs = kwargs
+        self.rate = rate
+
+    def __call__(self, signal: np.ndarray) -> np.ndarray:
+        self._check_input(signal)
+
+        onset_env = librosa.onset.onset_strength(signal, sr=self.rate, **self.kwargs)
+        return librosa.beat.tempo(onset_env, sr=self.rate)
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+        assert len(_input.shape) == 1
+
+
+class ZeroCrossingRate:
+    """Computes the zero-crossing rate of an audio time series."""
+    def __init__(self, frame_length : int = 2048, hop_length : int = 512, stats: List[str] = DEFAULT_STATS, **kwargs):
+        kwargs['frame_length'] = frame_length
+        kwargs['hop_length'] = hop_length
+        self.kwargs = kwargs
+        self.stats = stats
+        self.stats_computer = AxisStats(stats=stats, axis=-1)
+
+    def __call__(self, signal: np.ndarray) -> np.ndarray:
+        self._check_input(signal)
+
+        zcr = librosa.feature.zero_crossing_rate(signal, **self.kwargs).flatten()
+
+        if len(self.stats):
+            zcr = self.stats_computer(zcr)
+
+        return zcr
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+        assert len(_input.shape) == 1
+
+
+class SpectralRolloff:
+    """Compute roll-off frequency.
+    The roll-off frequency is defined for each frame as the center frequency
+    for a spectrogram bin such that at least roll_percent (0.85 by default) of
+    the energy of the spectrum in this frame is contained in this bin and the bins below.
+    This can be used to, e.g., approximate the maximum (or minimum) frequency by
+    setting roll_percent to a value close to 1 (or 0).
+    """
+    def __init__(self, rate: int, n_fft : int = 2048, hop_length : int = 512, stats: List[str] = DEFAULT_STATS, **kwargs):
+        kwargs['n_fft'] = n_fft
+        kwargs['hop_length'] = hop_length
+        self.kwargs = kwargs
+        self.rate = rate
+        self.stats = stats
+        self.stats_computer = AxisStats(stats=stats, axis=-1)
+
+    def __call__(self, signal: np.ndarray) -> np.ndarray:
+        self._check_input(signal)
+
+        sr = librosa.feature.spectral_rolloff(signal, sr=self.rate, **self.kwargs).flatten()
+        if len(self.stats):
+            sr = self.stats_computer(sr)
+
+        return sr
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+        assert len(_input.shape) == 1
+
+
+class SpectralCentroid:
+    """Compute the spectral centroid.
+    Each frame of a magnitude spectrogram is normalized and treated as a distribution
+    over frequency bins, from which the mean (centroid) is extracted per frame.
+    """
+    def __init__(self, rate: int, n_fft : int = 2048, hop_length : int = 512, stats: List[str] = DEFAULT_STATS, **kwargs):
+        kwargs['n_fft'] = n_fft
+        kwargs['hop_length'] = hop_length
+        self.kwargs = kwargs
+        self.rate = rate
+        self.stats = stats
+        self.stats_computer = AxisStats(stats=stats, axis=-1)
+
+    def __call__(self, signal: np.ndarray) -> np.ndarray:
+        self._check_input(signal)
+
+        sc = librosa.feature.spectral_centroid(signal, sr=self.rate, **self.kwargs).flatten()
+        if len(self.stats):
+            sc = self.stats_computer(sc)
+
+        return sc
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+        assert len(_input.shape) == 1
+
+
+class RMSEnergy:
+    """Compute root-mean-square (RMS) energy for each frame."""
+    def __init__(self, frame_length : int = 2048, hop_length : int = 512, stats: List[str] = DEFAULT_STATS, **kwargs):
+        kwargs['frame_length'] = frame_length
+        kwargs['hop_length'] = hop_length
+        self.kwargs = kwargs
+        self.stats = stats
+        self.stats_computer = AxisStats(stats=stats, axis=-1)
+
+    def __call__(self, signal: np.ndarray) -> np.ndarray:
+        self._check_input(signal)
+
+        energy = librosa.feature.rms(signal, **self.kwargs).flatten()
+        if len(self.stats):
+            energy = self.stats_computer(energy)
+
+        return energy
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+        assert len(_input.shape) == 1
+
+class NumpyMFCC:
+    """Compute MFCC for audio signal."""
+    def __init__(self, rate : int, n_mfcc: int, stats: List[str] = DEFAULT_STATS, **kwargs):
+        kwargs['n_mfcc'] = n_mfcc
+        self.rate = rate
+        self.kwargs = kwargs
+        self.stats = stats
+        self.stats_computer = AxisStats(stats=stats, axis=-1)
+
+    def __call__(self, signal: np.ndarray) -> np.ndarray:
+        self._check_input(signal)
+
+        mfcc = librosa.feature.mfcc(signal, sr=self.rate, **self.kwargs)
+        if len(self.stats):
+            mfcc = self.stats_computer(mfcc)
+
+        return mfcc
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+        assert len(_input.shape) == 1
+
+
+class DeltaMFCC:
+    """Compute delta (dth order order differential) for MFCC on raw audio."""
+    def __init__(self, order: int, rate : int, n_mfcc: int, stats: List[str] = DEFAULT_STATS, **kwargs):
+        self.order = order
+        self.stats = stats
+        kwargs['n_mfcc'] = n_mfcc
+        self.mfcc = NumpyMFCC(rate=rate, stats=[], **kwargs)
+        self.stats_computer = AxisStats(stats=stats, axis=-1)
+        self._check_params(order)
+
+    def __call__(self, signal: np.ndarray) -> np.ndarray:
+        self._check_input(signal)
+
+        mfcc = self.mfcc(signal)
+        delta_mfcc = mfcc.copy()
+        for _ in range(self.order):
+            delta_mfcc = librosa.feature.delta(delta_mfcc)
+
+        if len(self.stats):
+            delta_mfcc = self.stats_computer(delta_mfcc)
+
+        return delta_mfcc
+
+    @staticmethod
+    def _check_params(order):
+        assert isinstance(order, int)
+        assert order >= 0
+
+    @staticmethod
+    def _check_input(_input):
+        assert isinstance(_input, np.ndarray)
+        assert len(_input.shape) == 1
+
+
+class ModifiedEnsemble:
+    """Applies a set of parallel transforms on input signal and aggregates them
+    # TODO: Ability to send in list of list of transforms to Ensemble
+    :param transforms_cfg: list of parallel transforms to apply on the signal
+    :type transforms_cfg: List[TransformDict]
+    :param combine: method of aggregation of parallel transforms
+    :type combine: str, optional, default to `concat`, choices=['concat', 'stack']
+    :param dim:  dimension along with to perform the `combine` operation;
+        valid for ['concat', 'stack']
+    :type dim: int, defaults to 0
+    :param as_numpy: bool to decide if inputs are tensors or np.ndarrays
+    """
+    def __init__(self, transforms_cfg: List[TransformDict], combine: str = 'concat',
+                 dim: int = 0, as_numpy: bool = False):
+        self.combine = combine
+        self.dim = dim
+        self.as_numpy = as_numpy
+
+        self.transforms = []
+        for sub_transform in transforms_cfg:
+            self.transforms.append(
+                transform_factory.create(
+                    sub_transform['name'], **sub_transform['params']))
+
+    def __call__(self, signal: torch.Tensor) -> torch.Tensor:
+        transformed_signals = []
+        for t in self.transforms:
+            transformed_signals.append(t(signal))
+
+        if self.as_numpy:
+            if self.combine == 'concat':
+                output_signal = np.concatenate(transformed_signals, axis=self.dim)
+            elif self.combine == 'stack':
+                output_signal = np.stack(transformed_signals, axis=self.dim)
+            else:
+                raise NotImplementedError
+        else:
+            if self.combine == 'concat':
+                output_signal = torch.cat(transformed_signals, dim=self.dim)
+            elif self.combine == 'stack':
+                output_signal = torch.stack(transformed_signals, dim=self.dim)
+            else:
+                raise NotImplementedError
+
+
+        return output_signal
+
 
 class KorniaBase:
     """Base class to apply any kornia augmentation
@@ -1648,6 +1961,19 @@ transform_factory.register_builder('RandomVerticalFlip', RandomVerticalFlip)
 transform_factory.register_builder(
     'RandomHorizontalFlip', RandomHorizontalFlip)
 transform_factory.register_builder('RandomErasing', RandomErasing)
+transform_factory.register_builder('ToNumpy', ToNumpy)
+transform_factory.register_builder('ToTensor', ToTensor)
+transform_factory.register_builder('Duration', Duration)
+transform_factory.register_builder('Tempo', Tempo)
+transform_factory.register_builder('Onsets', Onsets)
+transform_factory.register_builder('SpectralCentroid', SpectralCentroid)
+transform_factory.register_builder('SpectralRolloff', SpectralRolloff)
+transform_factory.register_builder('RMSEnergy', RMSEnergy)
+transform_factory.register_builder('ZeroCrossingRate', ZeroCrossingRate)
+transform_factory.register_builder('AxisStats', AxisStats)
+transform_factory.register_builder('NumpyMFCC', NumpyMFCC)
+transform_factory.register_builder('DeltaMFCC', DeltaMFCC)
+transform_factory.register_builder('ModifiedEnsemble', ModifiedEnsemble)
 
 
 class ClassificationAnnotationTransform:
