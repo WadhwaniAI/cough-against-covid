@@ -23,6 +23,11 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     ruby1.9.1 && rm -rf /var/lib/apt/lists/*
 
+# for latex in matplotlib + jupyter
+RUN apt-get install cm-super
+RUN apt-get -y install texlive-latex-recommended texlive-pictures texlive-latex-extra
+RUN apt-get install dvipng
+
 # change working directory to /
 WORKDIR /
 
