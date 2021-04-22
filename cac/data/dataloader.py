@@ -288,26 +288,14 @@ def get_dataloader(
     # define Dataset object
     dataset_params = cfg['dataset']['params'].get(mode, {})
 
-    if cfg['dataset']['name'] == "context_classification_dataset":
-        dataset_params.update({
-            'target_transform': target_transform,
-            'mode': mode,
-            'dataset_config': cfg['dataset']['config'],
-            'features' : cfg['features'],
-            'attributes_file' : cfg['attributes_file']
-        })
+    dataset_params.update({
+        'target_transform': target_transform,
+        'signal_transform': signal_transform,
+        'mode': mode,
+        'dataset_config': cfg['dataset']['config']
+    })
 
-        dataset = dataset_factory.create(cfg['dataset']['name'], **dataset_params) 
-    else:
-        dataset_params.update({
-            'target_transform': target_transform,
-            'signal_transform': signal_transform,
-            'mode': mode,
-            'dataset_config': cfg['dataset']['config']
-        })
-
-        dataset = dataset_factory.create(cfg['dataset']['name'], **dataset_params)
-
+    dataset = dataset_factory.create(cfg['dataset']['name'], **dataset_params)
 
     # to load entire dataset in one batch
     if batch_size == -1:

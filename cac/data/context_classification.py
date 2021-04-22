@@ -27,12 +27,16 @@ class ContextClassificationDataset(Dataset):
     :param target_transform: defines the transformation
         to be applied on the raw targets to make them processable.
     :type target_transform: ClassificationAnnotationTransform
-    :param features: List of features that are to be used for text classification
+    :param signal_transform: Will not be used, added to use the get_dataloader() without changes
+    :type signal_transform: DataProcessor
+    :param features: List of features that are to be used for text classification, 
+    (This is hard coded for wiai-facility dataset, for other datasets TODO) 
     :type features: List     
     """
     def __init__(self, dataset_config: List[DatasetConfigDict], features: List[str],
-                 target_transform: ClassificationAnnotationTransform = None,
-                 attributes_file: str = '/data/wiai-facility/processed/attributes_context_classification.csv'):
+                signal_transform: DataProcessor = None,
+                target_transform: ClassificationAnnotationTransform = None,
+                attributes_file: str = '/data/wiai-facility/processed/attributes_context_processed.csv'):
         super(ContextClassificationDataset, self).__init__()
         self.dataset_config = dataset_config
         self.target_transform = target_transform

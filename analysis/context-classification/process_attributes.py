@@ -11,24 +11,17 @@ import argparse
 def main(args):
     attributes = pd.read_csv(f'/data/wiai-facility/processed/{args.attribute}.csv')
     
-    median_days_cough = attributes[attributes['enroll_cough'] == 'Yes']['enroll_days_with_cough'].median()
-    median_days_fever = attributes[attributes['enroll_fever'] == 'Yes']['enroll_days_with_fever'].median()
-    median_days_shortness_of_breath = attributes[attributes['enroll_shortness_of_breath'] == 'Yes']['enroll_days_with_shortness_of_breath'].median()
+    median_days = dict()
+    symptoms = ['cough', 'fever', 'shortness_of_breath']
+    for symptom in symptoms:
+        median_days[symptom] = attributes[attributes[f'enroll_{symptom}'] == 'Yes'][f'enroll_days_with_{symptom}'].median()
+        attributes.loc[attributes[f'enroll_{symptom}'] == 'No', f'enroll_days_with_{symptom}'] = 0
+        attributes[f'enroll_days_with_{symptom}'].fillna( median_days[symptom], inplace=True)
+        attributes[f'enroll_days_with_{symptom}'] = np.where(attributes[f'enroll_days_with_{symptom}'] > 100, median_days[symptom], \
+                                                             attributes[f'enroll_days_with_{symptom}'])
+
     median_age = attributes.loc[attributes['enroll_patient_age'] < 100, 'enroll_patient_age'].median()
-
-    attributes.loc[attributes['enroll_cough'] == 'No', 'enroll_days_with_cough'] = 0
-    attributes.loc[attributes['enroll_fever'] == 'No', 'enroll_days_with_fever'] = 0
-    attributes.loc[attributes['enroll_shortness_of_breath'] == 'No', 'enroll_days_with_shortness_of_breath'] = 0
-
-    attributes['enroll_days_with_cough'].fillna(median_days_cough, inplace=True)
-    attributes['enroll_days_with_fever'].fillna(median_days_fever, inplace=True)
-    attributes['enroll_days_with_shortness_of_breath'].fillna(median_days_shortness_of_breath, inplace=True)
-
     attributes["enroll_patient_age"] = np.where(attributes["enroll_patient_age"] > 100, median_age, attributes['enroll_patient_age'])
-    attributes["enroll_days_with_cough"] = np.where(attributes["enroll_days_with_cough"] > 100, median_days_cough, attributes['enroll_days_with_cough'])
-    attributes["enroll_days_with_fever"] = np.where(attributes["enroll_days_with_fever"] > 100, median_days_fever, attributes['enroll_days_with_fever'])
-    attributes["enroll_days_with_shortness_of_breath"] = np.where(attributes["enroll_days_with_shortness_of_breath"] > 100, median_days_shortness_of_breath, \
-                                                                  attributes['enroll_days_with_shortness_of_breath'])
 
     continuous_var = ['enroll_patient_age', 'enroll_patient_temperature', 'enroll_days_with_cough', 'enroll_days_with_shortness_of_breath', 'enroll_days_with_fever']
     categorical_var = ['enroll_travel_history', 'enroll_contact_with_confirmed_covid_case',
