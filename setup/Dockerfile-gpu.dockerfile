@@ -49,3 +49,4 @@ RUN pip install git+https://github.com/detly/gammatone.git
 RUN pip install py7zr multivolumefile natsort praatio plotly
 RUN pip install librosa==0.7.2
 RUN pip install timm==0.4.5 dataclasses==0.8 ipywidgets==7.6.3
+RUN pip install catboost lightgbm
