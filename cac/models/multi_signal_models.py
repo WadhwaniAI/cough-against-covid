@@ -35,7 +35,7 @@ class NaiveCoughContextModel(nn.Module):
         self.relu2_context = nn.ReLU()
 
 
-    def forward(self, signals, context_signal, merge_type = 'sum'):
+    def forward(self, signals, context_signal):
         cough_signal = signals[0]
 
         # Forward Pass over Cough Signal
@@ -97,7 +97,7 @@ class NaiveCoughVoiceModel(nn.Module):
         self.dropout3_voice = nn.Dropout(p=dropout) 
 
 
-    def forward(self, signals, context_signal, merge_type = 'sum'):
+    def forward(self, signals, context_signal):
         cough_signal = signals[0]
         voice_signal = signals[1]
         
