@@ -13,6 +13,64 @@ from cac.data.base import BaseDataset
 from cac.data.sampler import sampler_factory
 from cac.data.transforms import DataProcessor, annotation_factory
 from cac.utils.logger import color
+from cac.data.multi_signal_classification import MultiSignalClassificationDataset
+
+def multi_signal_classification_collate(
+        batch: Tuple[Dict], zero_pad: bool = False,
+        stack: bool = True):
+    signals = []
+    context_signals = []
+    labels = []
+    items = []
+
+    for i, data_point in enumerate(batch):
+        signal_list = data_point['signal']
+
+        for j in range(len(signal_list)):
+            signal = signal_list[j]
+
+            if zero_pad:
+            # transposing here to make it the right shape for zero padding
+            # last dimension is assumed to represent timesteps
+                signal = signal.transpose(0, -1)
+
+            if zero_pad:
+                # transposing here to make it the right shape for zero padding
+                # last dimension is assumed to represent timesteps
+                signal = signal.transpose(0, -1)
+
+            if i == 0:
+                signals.append([signal])
+            else:
+                signals[j].append(signal)
+
+        context_signals.append(data_point['context-signal'])
+        labels.append(data_point['label'])
+        items.append(data_point['item'])
+
+    if zero_pad:
+        # zero pad the list of sequences to the length of the longest
+        # sequence and permute the dimensions to match the shape orientation
+        # pre zero-padding.
+        for signal_list in signals:
+            signal_list = pad_sequence(signal_list, batch_first=True)
+
+            # transposing shape back to timsteps-last
+            signal_list = signal_list.transpose(1, -1)
+    else:
+        if stack:
+            for i in range(len(signals)):
+                signals[i] = torch.stack(signals[i]).float()
+            context_signals = torch.stack(context_signals)
+
+    collated_batch = {
+        'signals': signals,
+        'context-signals': context_signals,
+        'labels': torch.Tensor(labels),
+        'items': items
+    }
+    
+    return collated_batch
 
 def context_classification_collate(
         batch: Tuple[Dict], zero_pad: bool = False,
@@ -323,3 +381,66 @@ def get_dataloader(
         pin_memory=True)
 
     return dataloader, dataset
+
+def get_dataloader_multi_signal(
+        cfg: Dict, mode: str, batch_size: int,
+        num_workers: int = 10, shuffle: bool = True, drop_last: bool = True
+        ) -> Tuple[DataLoader, BaseDataset]:
+    """Creates the DataLoader and Dataset objects
+
+    :param cfg: config specifying the various options for creating the
+        dataloader
+    :type cfg: Dict
+    :param mode: mode/split to load; one of {'train', 'test', 'val'}
+    :type mode: str
+    :param batch_size: number of instances in each batch
+    :type batch_size: int
+    :param num_workers: number of cpu workers to use, defaults to 10
+    :type num_workers: int
+    :param shuffle: whether to shuffle the data, defaults to True
+    :type shuffle: bool, optional
+    :param drop_last: whether to include last batch containing sample
+        less than the batch size, defaults to True
+    :type drop_last: bool, optional
+    :returns: A tuple containing the DataLoader and Dataset objects
+    """
+    logging.info(color('Creating {} DataLoader'.format(mode), 'blue'))
+    
+    # define Dataset object
+    dataset_params = {
+        'cfg' : cfg,
+        'mode': mode,
+        'features' : cfg['features'],
+        'attribute_file': cfg['attribute_file']
+    }
+    
+    dataset = MultiSignalClassificationDataset(**dataset_params)
+    target_transform = dataset.target_transform
+
+    # to load entire dataset in one batch
+    if batch_size == -1:
+        batch_size = len(dataset)
+
+    # define sampler
+    sampler_cfg = cfg['sampler'].get(mode, {'name': 'default'})
+    sampler_params = sampler_cfg.get('params', {})
+    sampler_params.update({
+        'target_transform': target_transform,
+        'dataset': dataset,
+        'shuffle': shuffle
+    })
+    sampler = sampler_factory.create(sampler_cfg['name'], **sampler_params)
+
+    # define DataLoader object
+    dataloader = DataLoader(
+        dataset=dataset,
+        batch_size=batch_size,
+        sampler=sampler,
+        num_workers=num_workers,
+        collate_fn=partial(eval(cfg['collate_fn']['name']),
+                           **cfg['collate_fn']['params']),
+        drop_last=drop_last,
+        pin_memory=True)
+
+    return dataloader, dataset
+
