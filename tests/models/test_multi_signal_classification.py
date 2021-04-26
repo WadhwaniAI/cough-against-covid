@@ -42,8 +42,8 @@ class MultiSignalClassificationModelTestCase(unittest.TestCase):
         cough_context_model = MultiSignalClassificationModel(cough_context_cfg)
         cough_voice_model = MultiSignalClassificationModel(cough_voice_cfg)
        
-        self.assertTrue(cough_context_model.network.__class__.__name__ == 'NaiveCoughContextModel')
-        self.assertTrue(cough_voice_model.network.__class__.__name__ == 'NaiveCoughVoiceModel')
+        self.assertTrue(cough_context_model.network.__class__.__name__ == 'NaiveCoughContextNetwork')
+        self.assertTrue(cough_voice_model.network.__class__.__name__ == 'NaiveCoughVoiceNetwork')
 
 if __name__ == "__main__":
     unittest.main()
