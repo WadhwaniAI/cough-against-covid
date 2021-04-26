@@ -408,7 +408,7 @@ def get_dataloader_multi_signal(
     
     # define Dataset object
     dataset_params = {
-        'cfg' : cfg,
+        'signal_wise_data_cfgs' : cfg['signal_wise_data_cfgs'],
         'mode': mode,
         'features' : cfg['features'],
         'attribute_file': cfg['attribute_file']
