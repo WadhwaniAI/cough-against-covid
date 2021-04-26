@@ -37,9 +37,10 @@ from cac.networks.backbones.resnet import resnet18
 np.set_printoptions(suppress=True)
 from cac.models.utils import get_subsets
 from cac.networks.backbones.utils import _correct_state_dict
-from cac.models.multi_signal_models import * 
+from cac.networks.multi_signal import * 
+from cac.models.classification import ClassificationModel
 
-class MultiSignalClassificationModel(Model):
+class MultiSignalClassificationModel(ClassificationModel):
     """Classification model class
 
     Args:
@@ -47,9 +48,7 @@ class MultiSignalClassificationModel(Model):
     :type config: Config
     """
     def __init__(self, config):
-        super(MultiSignalClassificationModel, self).__init__(config)
-        logging.info(color('Using loss functions:'))
-        logging.info(self.model_config.get('loss'))
+        super(ClassificationModel, self).__init__(config)
 
     def _setup_network(self):
         """Setup the network which needs to be trained"""
@@ -62,327 +61,7 @@ class MultiSignalClassificationModel(Model):
         """Freeze layers based on config during training"""
         logging.info(color('Freezing specified layers'))
         # Add Stuff Here
-
-    def _setup_optimizers(self):
-        """Setup optimizers to be used while training"""
-        if 'optimizer' not in self.model_config:
-            return
-
-        logging.info(color("Setting up the optimizer ..."))
-        kwargs = self.model_config['optimizer']['args']
-        kwargs.update({'params': self.network.parameters()})
-        self.optimizer = optimizer_factory.create(
-            self.model_config['optimizer']['name'],
-            **kwargs)
-
-        if 'scheduler' in self.model_config['optimizer']:
-            scheduler_config = self.model_config['optimizer']['scheduler']
-            scheduler_config['params']['optimizer'] = self.optimizer
-            self.scheduler = scheduler_factory.create(
-                scheduler_config['name'],
-                **scheduler_config['params'])
-            self.update_freq = [scheduler_config['update']]
-
-            if 'value' in scheduler_config:
-                self.value_to_track = scheduler_config['value']
-
-    def calculate_instance_loss(
-            self, predictions: torch.FloatTensor, targets: torch.LongTensor,
-            mode: str, as_numpy: bool = False) -> dict:
-        """Calculate loss per instance in a batch
-
-        :param predictions: Predictions (Predicted)
-        :type predictions: torch.FloatTensor
-        :param targets: Targets (Ground Truth)
-        :type targets: torch.LongTensor
-        :param mode: train/val/test
-        :type mode: str
-        :param as_numpy: flag to decide whether to return losses as np.ndarray
-        :type as_numpy: bool
-
-        :return: dict of losses with list of loss values per instance
-        """
-        loss_config = self.model_config.get('loss')[mode]
-        criterion = loss_factory.create(
-            loss_config['name'], **loss_config['params'])
-        loss = criterion(predictions, targets.long())
-
-        if as_numpy:
-            loss = loss.cpu().numpy()
-
-        return {'loss': loss}
-
-    def calculate_batch_loss(self, instance_losses) -> dict:
-        """Calculate mean of each loss for the batch
-
-        :param batch_losses: losses per instance in the batch
-        :type batch_losses: dict
-
-        :return: dict containing various loss values over the batch
-        """
-        losses = dict()
-        for key in instance_losses:
-            losses[key] = torch.mean(instance_losses[key])
-
-        return losses
-
-    def _gather_data(self, epoch_data: dict, mode=None) -> Tuple:
-        """Gather inputs, preds, targets & other epoch data in one tensor
-
-        :param epoch_data: dictionary containing lists of various epoch values
-        :type epoch_data: dict
-
-        :return: dictionary with different values as one tensor
-        """
-        epoch_data['inputs'] = torch.cat(epoch_data['inputs']).cpu().numpy()
-        epoch_data['predictions'] = torch.cat(
-            epoch_data['predictions']).detach().cpu()
-        epoch_data['targets'] = torch.cat(epoch_data['targets']).detach().cpu()
-        epoch_data['items'] = np.hstack(epoch_data['items'])
-        return epoch_data
-
-    def _gather_joint_help(self, epoch_data, repeat = 5, method = 'mean'):
-        epoch_data_new = defaultdict(list)
-        epoch_data_new['inputs'] = epoch_data['inputs']
-        
-        predictions = torch.cat(epoch_data['predictions']).detach().cpu()
-        targets = torch.cat(epoch_data['targets']).detach().cpu()
-        items = np.hstack(epoch_data['items'])
-        paths = [x.path for x in items]
-            
-        for i in tqdm(range(0, len(paths), repeat)):
-            paths = [x.path for x in items[i:i+repeat]]
-            assert len(np.unique(paths)) == 1
-            
-            epoch_data_new['items'].append(items[i])
-            epoch_data_new['targets'].append(targets[i])
-            # merge logic on predictions 
-            preds = []
-            for j in range(repeat):
-                preds.append(predictions[i + j])
-            preds = torch.stack(preds)
-            
-            # apply mode/max/mean operation, the same way it is applied in the _aggregate_data()
-            preds = F.softmax(preds, -1)
-            preds = preds[:, 1]
-
-            if method == 'median':
-                prediction = np.median(preds)
-            elif method == 'mean':
-                prediction = torch.mean(preds)
-            elif method == 'min':
-                prediction = torch.min(preds)
-            elif method == 'max':
-                prediction = torch.max(preds)
-            else:
-                raise NotImplementedError
-
-            inverse_softmax = torch.Tensor(
-                [0.0, logit(prediction)])
-            epoch_data_new['predictions'].append(inverse_softmax)
-        
-        epoch_data_new['predictions'] = torch.stack(epoch_data_new['predictions'])
-        epoch_data_new['targets'] = torch.stack(epoch_data_new['targets'])
-        epoch_data_new['items'] = np.array(epoch_data_new['items'])
-        return epoch_data_new
-        
-    def _aggregate_data(
-            self, epoch_data: dict, method: str,
-            at: str, classes: List[str] = None) -> Tuple:
-        """Aggregate predictions for a single file by a given `method`
-
-        :param epoch_data: dictionary containing lists of various epoch values
-        :type epoch_data: dict
-        :param method: method to be used for aggregation, eg. median
-        :type method: str
-        :param at: point of aggregating the predictions, eg. after softmax
-        :type at: str
-
-        :return: epoch data dictionary with values aggregated per file
-        """
-        items = epoch_data['items']
-        predictions, targets = epoch_data['predictions'], epoch_data['targets']
-
-        if classes is None:
-            classes = self.model_config['classes']
-
-        agg_items, agg_predictions, agg_targets = [], [], []
-
-        paths = np.array([item.path for item in items])
-        unique_paths = np.unique(paths)
-
-        if at == 'softmax':
-            predictions = F.softmax(predictions, -1)
-        else:
-            raise NotImplementedError
-
-        if len(classes) == 2:
-            # only works for binary classification as of now
-            predictions = predictions[:, 1]
-            indices = defaultdict()
-            for path in unique_paths:
-                indices = np.where(paths == path)[0]
-
-                file_items = items[indices]
-                starts = [item.start for item in file_items]
-                sorted_indices = indices[np.argsort(starts)]
-                file_item = AudioItem(path=path)
-                agg_items.append(file_item)
-
-                file_target = targets[sorted_indices][0]
-                agg_targets.append(file_target)
-
-                file_predictions = predictions[sorted_indices]
-                if method == 'median':
-                    file_prediction = np.median(file_predictions)
-                elif method == 'mean':
-                    file_prediction = torch.mean(file_predictions)
-                elif method == 'min':
-                    file_prediction = torch.min(file_predictions)
-                elif method == 'max':
-                    file_prediction = torch.max(file_predictions)
-                else:
-                    raise NotImplementedError
-
-                inverse_softmax = torch.Tensor(
-                        [0.0, logit(file_prediction)])
-                agg_predictions.append(inverse_softmax)
-        else:
-            raise NotImplementedError
-
-        epoch_data['targets'] = torch.stack(agg_targets)
-        epoch_data['predictions'] = torch.stack(agg_predictions)
-        epoch_data['items'] = np.array(agg_items)
-
-        return epoch_data
-
-    def update_network_params(self, losses):
-        """Defines how to update network weights
-
-        Args:
-        :param losses: losses for the current batch
-        :type losses: dict
-        """
-        self.optimizer.zero_grad()
-        losses['loss'].backward()
-        self.optimizer.step()
-
-    def update_optimizer_params(self, values: dict, update_freq: str):
-        """Update optimization parameters like learning rate etc.
-
-        :param values: dictionary of losses and metrics when invoked
-            after one epoch or dictionary of losses after one batch
-        :type values: dict
-        :param update_freq: whether the function is being called after a
-            batch or an epoch
-        :type update_freq: str
-        """
-        if hasattr(self, 'scheduler'):
-            if hasattr(self, 'value_to_track'):
-                self.scheduler.step(values[self.value_to_track])
-            else:
-                self.scheduler.step()
-
-    def log_batch_summary(self, iterator: Any, mode: str, losses: dict):
-        """Logs the summary of the batch on the progressbar in command line
-
-        :param iterator: tqdm iterator
-        :type iterator: tqdm
-        :param mode: train/val or test mode
-        :type mode: str
-        :param losses: losses for the current batch
-        :type losses: dict
-        """
-        iterator.set_description(
-             "V: {} | Epoch: {} | {} | Loss {:.4f}".format(
-                self.config.version, self.epoch_counter, mode.capitalize(),
-                losses['loss']
-                ), refresh=True)
-
-    def log_epoch_summary(self, mode: str, epoch_losses: dict, metrics: dict,
-                          epoch_data: dict, learning_rates: List[Any],
-                          batch_losses: defaultdict, instance_losses: defaultdict,
-                          use_wandb: bool):
-        """Logs the summary of the epoch (losses, metrics and visualizations)
-
-        :param mode: train/val or test mode
-        :type mode: str
-        :param epoch_losses: aggregate losses aggregated for the epoch
-        :type epoch_losses: dict
-        :param metrics: metrics for the epoch
-        :type metrics: dict
-        :param epoch_data: dictionary of various values in the epoch
-        :type epoch_data: dict
-        :param learning_rates: Dynamically accumulated learning rates per batch
-            over all epochs
-        :type learning_rates: List[Any]
-        :param batch_losses: Dynamically accumulated losses per batch
-        :type batch_losses: defaultdict
-        :param instance_losses: losses per instance in the batch
-        :type instance_losses: dict
-        :param use_wandb: flag to decide whether to log visualizations to wandb
-        :type use_wandb: bool
-        """
-        logging.info(
-            color("V: {} | Epoch: {} | {} | Avg. Loss {:.4f}".format(
-                self.config.version, self.epoch_counter, mode.capitalize(),
-                epoch_losses['loss']
-            ), 'green')
-        )
-
-        metric_log = "V: {} | Epoch: {} | {}".format(
-                    self.config.version, self.epoch_counter, mode.capitalize())
-
-        for metric in self.config.metrics_to_track:
-            metric_log += ' | {}: {:.4f}'.format(metric, metrics[metric])
-
-        logging.info(color(metric_log, 'green'))
-
-        # update wandb
-        if use_wandb:
-            self._update_wandb(
-                mode, epoch_losses, metrics, epoch_data, learning_rates,
-                batch_losses)
-
-        if batch_losses is not None:
-            # reshape batch losses to the shape of instance losses
-            instance_batch_losses = dict()
-            for loss_name, loss_value in batch_losses.items():
-                loss_value = loss_value.reshape(-1, 1)
-                loss_value = np.repeat(
-                    loss_value, self.model_config['batch_size'],
-                    axis=-1).reshape(-1)
-
-                # correct for incomplete last batch
-                instance_batch_losses[loss_name] = loss_value[:len(
-                    epoch_data['items'])]
-
-        # log instance-level epochwise values
-        instance_values = {
-            'paths': [item.path for item in epoch_data['items']],
-            'predictions': epoch_data['predictions'],
-            'targets': epoch_data['targets'],
-        }
-
-        for key, value in metrics.items():
-            instance_values[key] = value
-
-        starts = [item.start if hasattr(item, 'start') else None for item in epoch_data['items']]
-        ends = [item.end if hasattr(item, 'end') else None for item in epoch_data['items']]
-
-        instance_values['start'] = starts
-        instance_values['end'] = ends
-
-        for loss_name in instance_losses:
-            instance_values['instance_loss'] = instance_losses[loss_name]
-            if batch_losses is not None:
-                instance_values['batch_loss'] = instance_batch_losses[loss_name]
-
-        save_path = join(self.config.log_dir, 'epochwise', '{}/{}.pt'.format(
-            mode, self.epoch_counter))
-        makedirs(dirname(save_path), exist_ok=True)
-        torch.save(instance_values, save_path)
-    
+ 
     def fit(
             self, debug: bool = False, overfit_batch: bool = False,
             use_wandb: bool = True):
@@ -461,52 +140,6 @@ class MultiSignalClassificationModel(Model):
 
             # increment epoch counter
             self.epoch_counter += 1
-
-
-    def get_subset_data(
-            self, epoch_data: dict, indices: List[int],
-            instance_losses: defaultdict = None) -> Tuple:
-        """Get data for the subset specified by the indices
-
-        :param epoch_data: dictionary of various values in the epoch
-        :type epoch_data: dict
-        :param indices: list of integers specifying the subset to select
-        :type indices: List[int]
-        :param instance_losses: losses per instance in the batch
-        :type instance_losses: defaultdict, defaults to None
-
-        :return: dict of epoch_data at the given indices
-        """
-        subset_data = dict()
-        _epoch_data = dict()
-        for key in epoch_data:
-            _epoch_data[key] = epoch_data[key][indices]
-        subset_data['epoch_data'] = _epoch_data
-
-        if instance_losses is not None:
-            # get the instance losses for the subset
-            subset_data['instance_losses'] = dict()
-            for loss_name, loss_value in instance_losses.items():
-                subset_data['instance_losses'][loss_name] = loss_value[indices]
-
-            # calculate the subset losses and metrics
-            subset_data['epoch_losses'] = self.calculate_epoch_loss(
-                subset_data['instance_losses'])
-        return subset_data
-
-    def get_eval_params(self, epoch_data: dict) -> Tuple:
-        """Get evaluation params by optimizing on the given data
-
-        :param epoch_data: dictionary of various values in the epoch
-        :type epoch_data: dict
-
-        :return: dict containing evaluation parameters
-        """
-        metrics = self.compute_epoch_metrics(
-                epoch_data['predictions'], epoch_data['targets'])
-        param_keys = ['recall', 'threshold']
-        params = {key: metrics[key] for key in param_keys}
-        return params
 
     def compute_epoch_metrics(
             self, predictions: Any, targets: Any,
@@ -618,31 +251,6 @@ class MultiSignalClassificationModel(Model):
 
         return metrics
 
-    def save(self, epoch_metric_values: Dict, use_wandb: bool):
-        """Saves the model and optimizer states
-
-        :param epoch_metric_values: validation metrics computed for current epoch
-        :type epoch_metric_values: Dict
-        :param use_wandb: flag to decide whether to log visualizations to wandb
-        :type use_wandb: bool
-        """
-
-        # updating the best metric and obtaining save-related metadata
-        save_status = self.checkpoint.update_best_metric(
-            self.epoch_counter, epoch_metric_values)
-
-        # if save status indicates necessaity to save, save the model
-        # keeping this part model-class dependent since this can change
-        # with models
-        if save_status['save']:
-            logging.info(color(save_status['info'], 'red'))
-            torch.save({
-                'network': self.network.state_dict(),
-                'optimizer': self.optimizer.state_dict(),
-                'epoch': self.epoch_counter,
-                'metrics': epoch_metric_values
-            }, save_status['path'])
-
     def load(self, load_config: Dict):
         """Defines and executes logic to load checkpoint for fine-tuning.
 
@@ -674,17 +282,6 @@ class MultiSignalClassificationModel(Model):
             else:
                 sys.exit(color('Checkpoint file does not exist at {}'.format(
                     self.load_path), 'red'))        
-
-    def _accumulate_lr(self, learning_rates: List[Any]) -> dict:
-        """Accumulate learning rate values
-
-        :param learning_rates: Dynamically accumulated learning rates per batch
-            over all epochs
-        :type learning_rates: List[Any]
-        :return: dict containing a running list of learning rates
-        """
-        learning_rates.append(self.optimizer.param_groups[0]['lr'])
-        return learning_rates
 
     def process_batch(self, batch: Any, mode: str = None) -> Tuple[Any, Any]:
         """Returns the predictions and targets for each batch
@@ -735,7 +332,7 @@ class MultiSignalClassificationModel(Model):
         :param batch_losses: Dynamically accumulated losses per batch
         :type batch_losses: defaultdict, defaults to None
         """
-        super(MultiSignalClassificationModel, self)._update_wandb(
+        super(ClassificationModel, self)._update_wandb(
             mode, epoch_losses, metrics)
 
         # decide indices to visualize
@@ -775,81 +372,6 @@ class MultiSignalClassificationModel(Model):
 
         # log to wandb
         wandb.log(self.wandb_logs, step=self.epoch_counter)
-
-    def evaluate(
-            self, data_loader: DataLoader, mode: str, use_wandb: bool = True,
-            ignore_cache: bool = True, threshold: float = None,
-            recall: float = 0.9, data_only: bool = False,
-            save: bool = True, log_summary: bool = True):
-        """Evaluate the model on given data
-
-        :param data_loader: data_loader made from the evaluation dataset
-        :type data_loader: DataLoader
-        :param mode: split of the data represented by the dataloader (train/test/val)
-        :type mode: str
-        :param use_wandb: flag to decide whether to log visualizations to wandb
-        :type use_wandb: bool, defaults to True
-        :param ignore_cache: whether to ignore cached values
-        :type ignore_cache: bool, defaults to True
-        :param threshold: confidence threshold to be used for binary
-            classification; if None, the optimal threshold is found.
-        :type threshold: float, defaults to None
-        :param recall: minimum recall to choose the optimal threshold
-        :type recall: float, defaults to 0.9
-        :param data_only: whether to only return the epoch data without
-            computing metrics
-        :type data_only: bool, defaults to False
-        :param save: whether to save eval data
-        :type save: bool, defaults to True
-        :param log_summary: whether to log epoch summary
-        :type log_summary: bool, defaults to True
-        """
-        ckpt_name = basename(self.load_path).split('.')[0]
-        cache_path = join(
-            self.config.output_dir, 'evaluation', ckpt_name, 'cache', '{}.pt'.format(mode))
-        makedirs(dirname(cache_path), exist_ok=True)
-
-        # load cache if `ignore_cache=False`
-        if exists(cache_path) and not ignore_cache:
-            logging.info(
-                color('Using cached values from {}'.format(cache_path), 'red'))
-            results = torch.load(cache_path)
-        else:
-            logging.info(color('Ignoring cache', 'red'))
-            # prevent logging anything into wandb when processing epoch
-            results = self.process_epoch(
-                data_loader, mode=mode, training=False, use_wandb=False,
-                log_summary=log_summary)
-
-            logging.info(
-                color('Saving cached values to {}'.format(cache_path), 'red'))
-            torch.save(results, cache_path)
-
-        if data_only:
-            return results
-
-        predictions = results['predictions']
-        targets = results['targets']
-
-        threshold = threshold if threshold is not None else results['threshold']
-
-        logging.info(color("Using threshold: {}".format(threshold)))
-        metrics = self.compute_epoch_metrics(
-            predictions, targets, threshold=threshold, recall=recall)
-        logging.info(metrics)
-
-        # save evaluation data
-        save_dir = join(self.config.output_dir, 'evaluation', ckpt_name)
-
-        # update wandb
-        if use_wandb:
-            self._update_wandb(mode, {}, metrics, results)
-
-        if save:
-            logging.info(color('Saving eval data', 'red'))
-            _save_eval_data(
-                save_dir, mode, results['items'], predictions, targets,
-                metrics)
 
 class MultiSignalClassificationModelBuilder:
     def __init__(self):
