@@ -39,7 +39,8 @@ $ python training/train.py -v $cfg --wandb_entity <your-W&B-account-name>
 ```
 
 ### Network Creation
-Networks are created in a different manner as opposed to single model classification configs. In order to provide more flexibility, you can create standard pytorch networks as created in this [link](https://github.com/WadhwaniAI/cough-against-covid/blob/ns/joint-training/cac/models/multi_signal_models.py).
+Networks are created in a different manner as opposed to single model classification configs. In order to provide more flexibility, you can create standard pytorch networks as created in this [link](../cac/models/multi_signal_models.py).
+
 
 The configs under the [multi-signal-training](../configs/experiments/multi-signal-training) use the networks from [link](../cac/models/multi_signal_models.py). We have added a three basic network architures using different combinations of input(cough-context, cough-voice, cough-context-voice). All of them are naive non-learnt merging at the final layer before logit computation. 
 
