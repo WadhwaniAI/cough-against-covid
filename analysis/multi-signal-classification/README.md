@@ -38,7 +38,8 @@ $ cfg=experiments/multi-signal-training/naive/multi-signal-max.yml
 $ python training/train.py -v $cfg --wandb_entity <your-W&B-account-name>
 ```
 
-### Network Creation
+### Network Creation (Optional)
+
 Networks are created in a different manner as opposed to single model classification configs. In order to provide more flexibility, you can create standard pytorch networks as created in this [link](../cac/models/multi_signal_models.py).
 
 
