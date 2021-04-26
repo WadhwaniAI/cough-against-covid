@@ -46,4 +46,4 @@ The configs under the [multi-signal-training](../configs/experiments/multi-signa
 
 
 ##### New Network Architectures
-In order to add new network architectures, a standard pytorch network needs to be added [here](https://github.com/WadhwaniAI/cough-against-covid/blob/ns/joint-training/cac/models/multi_signal_models.py). Make sure the the inputs (`signals: List[torch.Tensor], context-signal: torch.Tensor`) to the forward function does not change. Once this has been created, the network name needs to passed in the config file under the `network` section, with the necessary init parameters under the `params` key. 
+In order to add new network architectures, a standard pytorch network needs to be added [here](../cac/models/multi_signal_models.py). Make sure the the inputs (`signals: List[torch.Tensor], context-signal: torch.Tensor`) to the forward function does not change. Once this has been created, the network name needs to passed in the config file under the `network` section, with the necessary init parameters under the `params` key. 
