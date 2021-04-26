@@ -1,3 +1,9 @@
+'''
+Create the voice version file from the corresponding cough version file. 
+Sample Command
+python datasets/multi-signal-data-prep/prep-voice-version.py -v v9.8
+This will create the corresponding version voice file having the same splits as the cough version file. Since we have 1 voice sample for every 3 cough samples, the number of files in each split will go down by a factor of 3. This version file can also be used for voice based covid classification tasks.
+'''
 from cac.utils.io import read_yml, save_yml
 import pandas as pd
 import numpy as np
@@ -46,8 +52,7 @@ def main(args):
                 users.append(user)
 
                 filename = splitext(basename(file))[0]
-                split_index = filename.find('_cough')
-                path = join(load_dir, ''.join([filename[:split_index], '_audio_1_to_10.wav']))
+                path = filename.replace('cough', 'audio_1_to_10')
                 end = get_duration(filename=path)
 
                 files.append(path)

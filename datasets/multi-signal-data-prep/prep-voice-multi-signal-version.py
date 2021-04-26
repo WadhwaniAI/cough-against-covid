@@ -1,3 +1,10 @@
+'''
+This file creates the version file necessary for running the multi-signal joint training. Basically repeats the voice version file thrice so that there is one to one correspondence
+between the cough and voice version file. This is because we have 3 cough samples and 1 voice sample per patient. 
+Sample Command
+$ python prep-voice-multi-signal-version.py -v v9.8
+Here, v9.8 is the cough version file corresponding to which we need to create the voice version file needed for multi-signal joint training.
+'''
 from cac.utils.io import read_yml, save_yml
 import pandas as pd
 import numpy as np
