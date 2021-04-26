@@ -21,7 +21,8 @@ What the above two steps do for us,
 1. Create the voice version file from the corresponding cough version file. This can be done using `python datasets/multi-signal-data-prep/prep-voice-version.py -v v9.8`. This will create the corresponding version voice file having the same splits as the cough version file. Since we have 1 voice sample for every 3 cough samples, the number of files in each split will go down by a factor of 3. This version file can also be used for voice based covid classification tasks.
 2. Once the corresponding voice version file has been created (`v9.8_voice` from `v9.8`), we need to create a version where the cough and voice files are in sync, which means we need to repeat the voice files by a factor of 3 (As 3 cough files and 1 voice file for each patient). To do this, just run, `python datasets/multi-signal-data-prep/prep-voice-multi-signal-version.py -v v9.8` 
 
-In order to explore more, there are alternative notebooks to see the underlying data preparation steps at [here](https://github.com/WadhwaniAI/cough-against-covid/tree/ns/joint-training/datasets/multi-signal-data-prep)
+In order to explore more, there are alternative notebooks to see the underlying data preparation steps at [here](../datasets/multi-signal-data-prep)
+
 
 ### Training Multi-Signal Joint Trained Models
 * Start docker container
@@ -44,4 +45,3 @@ The configs under the [multi-signal-training](https://github.com/WadhwaniAI/coug
 
 ##### New Network Architectures
 In order to add new network architectures, a standard pytorch network needs to be added [here](https://github.com/WadhwaniAI/cough-against-covid/blob/ns/joint-training/cac/models/multi_signal_models.py). Make sure the the inputs (`signals: List[torch.Tensor], context-signal: torch.Tensor`) to the forward function does not change. Once this has been created, the network name needs to passed in the config file under the `network` section, with the necessary init parameters under the `params` key. 
-
