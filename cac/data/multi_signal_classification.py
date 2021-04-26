@@ -18,10 +18,10 @@ class MultiSignalClassificationDataset(Dataset):
     '''
     Creates Dataset for Multi-Signal Joint Training
 
-    :param dataset_config: defines the config for the
+    :param signal_wise_data_cfgs: defines the config for the
         data to be loaded. The config is specified by a list of list of dict, with each dict
         representing: (dataset_name, dataset_version, mode [train, test, val])
-    :type dataset_config: List[DatasetConfigDict]
+    :type signal_wise_data_cfgs: List[DatasetConfigDict]
     :param mode: One of these ['train', 'val', 'test']
     :type mode: str
     :param features: List of features that are to be used for text classification, 
@@ -30,7 +30,7 @@ class MultiSignalClassificationDataset(Dataset):
     :param attribute_file: CSV file to pick up the contextual data
     :type attribute_file: str
     '''
-    def __init__(self, cfg: DatasetConfigDict, mode: str = 'train',
+    def __init__(self, signal_wise_data_cfgs: DatasetConfigDict, mode: str = 'train',
                 features: List = ['enroll_patient_age'],
                 attribute_file: str = '/data/wiai-facility/processed/attributes_context_processed.csv'):
         super(Dataset, self).__init__()
@@ -39,8 +39,7 @@ class MultiSignalClassificationDataset(Dataset):
         self.attribute_file = attribute_file
         self.features = features
 
-        data_configs = cfg['data']
-        for sub_config in data_configs:
+        for sub_config in signal_wise_data_cfgs:
             # define target transform
             if 'target_transform' in sub_config:
                 self.target_transform = annotation_factory.create(

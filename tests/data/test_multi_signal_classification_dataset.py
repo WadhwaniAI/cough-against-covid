@@ -22,17 +22,17 @@ class MultiSignalClassificationDatasetTestCase(unittest.TestCase):
         cls.single_data_config = cfg.data.copy()
 
         cls.multiple_data_config = cfg.data.copy()
-        cls.multiple_data_config['data'].append(cls.multiple_data_config['data'][0])
+        cls.multiple_data_config['signal_wise_data_cfgs'].append(cls.multiple_data_config['signal_wise_data_cfgs'][0])
 
         cls.features = ['enroll_patient_age']
         cls.attributes_file = '/data/wiai-facility/processed/attributes_context_processed.csv'
         cls.single_dataset_dataset_params = {
-            'cfg' : cls.single_data_config,
+            'signal_wise_data_cfgs' : cls.single_data_config['signal_wise_data_cfgs'],
             'features' : cls.features,
             'attribute_file': cls.attributes_file,
         }  
         cls.multiple_dataset_dataset_params = {
-            'cfg' : cls.multiple_data_config,
+            'signal_wise_data_cfgs' : cls.multiple_data_config['signal_wise_data_cfgs'],
             'features' : cls.features,
             'attribute_file': cls.attributes_file,
         }  

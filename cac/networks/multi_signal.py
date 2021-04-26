@@ -8,9 +8,9 @@ from cac.networks.backbones.resnet import resnet18
 from cac.networks.backbones.tab_network import TabNet
 
 # MLP(Context) + Resnet+FCLayers(Cough) [Merge at 128]
-class NaiveCoughContextModel(nn.Module):
+class NaiveCoughContextNetwork(nn.Module):
     def __init__(self, input_dim_text = 11, dropout = 0.4, merge_type = 'sum'):
-        super(NaiveCoughContextModel, self).__init__()
+        super(NaiveCoughContextNetwork, self).__init__()
         self.merge_type = merge_type
         assert merge_type in ['sum', 'max', 'min'], "Mention Merge Type out of the 3 (Max, Min, Sum)"
 
@@ -63,9 +63,9 @@ class NaiveCoughContextModel(nn.Module):
         return cough_signal
 
 # Resnet+FCLayers(Cough) + Resnet+FCLayers(Voice) [Merge at 128]
-class NaiveCoughVoiceModel(nn.Module):
+class NaiveCoughVoiceNetwork(nn.Module):
     def __init__(self, input_dim_text = 11, dropout = 0.4, merge_type = 'sum'):
-        super(NaiveCoughVoiceModel, self).__init__()
+        super(NaiveCoughVoiceNetwork, self).__init__()
         self.merge_type = merge_type
         assert merge_type in ['sum', 'max', 'min'], "Mention Merge Type out of the 3 (Max, Min, Sum)"
 
@@ -129,9 +129,9 @@ class NaiveCoughVoiceModel(nn.Module):
         return cough_signal
 
 # Resnet+FCLayers(Cough) + Resnet+FCLayers(Voice) + MLP(Context) [Merge at 128]
-class NaiveCoughVoiceContextModel(nn.Module):
+class NaiveCoughVoiceContextNetwork(nn.Module):
     def __init__(self, input_dim_text = 11, dropout = 0.4, merge_type = 'sum'):
-        super(NaiveCoughVoiceContextModel, self).__init__()
+        super(NaiveCoughVoiceContextNetwork, self).__init__()
         self.merge_type = merge_type
         assert merge_type in ['sum', 'max', 'min'], "Mention Merge Type out of the 3 (Max, Min, Sum)"
 

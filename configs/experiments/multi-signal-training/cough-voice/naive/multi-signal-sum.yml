@@ -47,7 +47,7 @@ model:
       val: {}
 
 network: 
-  network_name: NaiveCoughVoiceModel
+  network_name: NaiveCoughVoiceNetwork
   params:
     merge_type: sum
 
@@ -78,7 +78,7 @@ data:
     name: multi_signal_classification_collate
     params: {}  
   
-  data:
+  signal_wise_data_cfgs:
     - name: cough
       raw_waveform: false
       target_transform:
