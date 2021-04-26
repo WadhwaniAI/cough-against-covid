@@ -41,7 +41,8 @@ $ python training/train.py -v $cfg --wandb_entity <your-W&B-account-name>
 ### Network Creation
 Networks are created in a different manner as opposed to single model classification configs. In order to provide more flexibility, you can create standard pytorch networks as created in this [link](https://github.com/WadhwaniAI/cough-against-covid/blob/ns/joint-training/cac/models/multi_signal_models.py).
 
-The configs under the [multi-signal-training](https://github.com/WadhwaniAI/cough-against-covid/tree/ns/joint-training/configs/experiments/multi-signal-training) use the networks from [link](https://github.com/WadhwaniAI/cough-against-covid/blob/ns/joint-training/cac/models/multi_signal_models.py). We have added a three basic network architures using different combinations of input(cough-context, cough-voice, cough-context-voice). All of them are naive non-learnt merging at the final layer before logit computation. 
+The configs under the [multi-signal-training](../configs/experiments/multi-signal-training) use the networks from [link](../cac/models/multi_signal_models.py). We have added a three basic network architures using different combinations of input(cough-context, cough-voice, cough-context-voice). All of them are naive non-learnt merging at the final layer before logit computation. 
+
 
 ##### New Network Architectures
 In order to add new network architectures, a standard pytorch network needs to be added [here](https://github.com/WadhwaniAI/cough-against-covid/blob/ns/joint-training/cac/models/multi_signal_models.py). Make sure the the inputs (`signals: List[torch.Tensor], context-signal: torch.Tensor`) to the forward function does not change. Once this has been created, the network name needs to passed in the config file under the `network` section, with the necessary init parameters under the `params` key. 
