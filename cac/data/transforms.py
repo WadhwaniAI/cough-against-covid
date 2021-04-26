@@ -1918,30 +1918,6 @@ class DataProcessor:
     def __call__(self, signal: torch.Tensor) -> torch.Tensor:
         return self.transform(signal)
 
-class MultiSignalDataProcessor:
-    """Defines class for on-the-fly transformations on a given multi signal input
-
-    :param configs: list of list list of dictionaries, each specifying a
-        transformation to be applied on a given input signal
-    :type configs: List[List[TransformDict]]
-    """
-    def __init__(self, configs: List[List[TransformDict]]):
-        super(MultiSignalDataProcessor, self).__init__()
-        self.transform = []
-        for config in configs:
-            transforms = []
-            for transform in config:
-                transforms.append(
-                    transform_factory.create(
-                        transform['name'], **transform['params']))
-
-            self.transform.append(Compose(transforms))
-
-    def __call__(self, signals: List[torch.Tensor]) -> List[torch.Tensor]:
-        transformed_signal = []
-        for signal, transform in zip(signals, self.transform):
-            transformed_signal.append(transform(signal))
-        return transformed_signal
 
 transform_factory = Factory()
 transform_factory.register_builder('Resize', Resize)
