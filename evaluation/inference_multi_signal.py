@@ -148,7 +148,7 @@ class InferenceOnMultiSignalDataset:
             val_results['paths'], val_results['targets'],
             val_results['predictions'], agg_method=agg_method, at=at
         )
-        import ipdb; ipdb.set_trace()
+        
         val_metrics = model.compute_epoch_metrics(
             val_ila_results['predictions'], val_ila_results['targets'],
             as_logits=False, threshold=None
