@@ -116,7 +116,7 @@ class MultiSignalClassificationModel(ClassificationModel):
         )
         self.epoch_counter += 1
 
-        for epochID in range(self.model_config['epochs']):
+        for epochID in range(1, self.model_config['epochs'] + 1):
             if not debug:
                 # train epoch
                 train_results = self.process_epoch(
