@@ -141,6 +141,31 @@ class MultiSignalClassificationModel(ClassificationModel):
             # increment epoch counter
             self.epoch_counter += 1
 
+    def save(self, epoch_metric_values: Dict, use_wandb: bool):
+        """Saves the model and optimizer states
+
+        :param epoch_metric_values: validation metrics computed for current epoch
+        :type epoch_metric_values: Dict
+        :param use_wandb: flag to decide whether to log visualizations to wandb
+        :type use_wandb: bool
+        """
+
+        # updating the best metric and obtaining save-related metadata
+        save_status = self.checkpoint.update_best_metric(
+            self.epoch_counter, epoch_metric_values)
+
+        # if save status indicates necessaity to save, save the model
+        # keeping this part model-class dependent since this can change
+        # with models
+        if save_status['save']:
+            logging.info(color(save_status['info'], 'red'))
+            torch.save({
+                'network': self.network.state_dict(),
+                'optimizer': self.optimizer.state_dict(),
+                'epoch': self.epoch_counter,
+                'metrics': epoch_metric_values
+            }, save_status['path'])
+
     def compute_epoch_metrics(
             self, predictions: Any, targets: Any,
             threshold: float = None, recall: float = 0.9,
@@ -192,7 +217,7 @@ class MultiSignalClassificationModel(ClassificationModel):
                     **{'recall': recall})
                 _, _, threshold = maximize_fn(targets, predict_proba)
 
-            predicted_labels = torch.ge(predict_proba, threshold).cpu()
+            predicted_labels = torch.ge(predict_proba, threshold).cpu() * 1.0
             confusion_matrix = ConfusionMatrix(classes)
             confusion_matrix(targets, predicted_labels)
 
