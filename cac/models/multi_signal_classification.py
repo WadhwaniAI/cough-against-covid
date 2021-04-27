@@ -217,7 +217,7 @@ class MultiSignalClassificationModel(ClassificationModel):
                     **{'recall': recall})
                 _, _, threshold = maximize_fn(targets, predict_proba)
 
-            predicted_labels = torch.ge(predict_proba, threshold).cpu() * 1.0
+            predicted_labels = torch.ge(predict_proba, threshold).cpu()
             confusion_matrix = ConfusionMatrix(classes)
             confusion_matrix(targets, predicted_labels)
 
