@@ -1897,7 +1897,6 @@ class Compose:
             signal = t(signal)
         return signal
 
-
 class DataProcessor:
     """Defines class for on-the-fly transformations on a given input signal
 
