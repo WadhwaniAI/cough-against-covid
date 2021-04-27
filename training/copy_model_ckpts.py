@@ -24,12 +24,12 @@ if __name__ == '__main__':
     assets_dir = join(repo_path, 'assets')
     models_dir = join(assets_dir, 'models')
     all_ckpts = glob(join(models_dir, '**/*.pth.tar'), recursive=True)
+    print(args.ckpt_path, all_ckpts)
 
     if args.ckpt_path:
-        assert args.ckpt_path in all_ckpts
-
         src = join(assets_dir, 'models', args.ckpt_path)
         assert exists(src), f"Source ckpt file does not exist as {src}"
+
         dst = src.replace(models_dir, '/output/')
         print(colored(f"Copying from {src} to {dst}", 'yellow'))
 
