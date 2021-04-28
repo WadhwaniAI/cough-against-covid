@@ -448,7 +448,6 @@ class ClassificationModel(Model):
 
             metrics = {
                 'accuracy': accuracy_score(targets, predicted_labels),
-                'auc': auc(targets, predicted_labels),
                 'confusion_matrix': confusion_matrix.cm,
                 'precision': precision_score(targets, predicted_labels),
                 'recall': recall_score(
