@@ -25,9 +25,8 @@ if __name__ == '__main__':
     models_dir = join(assets_dir, 'models')
     all_ckpts = glob(join(models_dir, '**/*.pth.tar'), recursive=True)
 
-    if args.ckpt_path:
-        assert args.ckpt_path in all_ckpts
 
+    if args.ckpt_path:
         src = join(assets_dir, 'models', args.ckpt_path)
         assert exists(src), f"Source ckpt file does not exist as {src}"
         dst = src.replace(models_dir, '/output/')
