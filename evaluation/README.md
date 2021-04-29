@@ -59,7 +59,12 @@ python evaluation/inference.py -v $cfg -e 31 -dn wiai-facility -dv v9.7 -m test 
 
 #### Evaluating a context-based trained model on a given dataset
 
-@shenoy
+**Steps**:
+1. Run forward pass and store metrics. Note that passing `-t` is not needed here since it will pick up the optimal threshold from validation set logs stored while training.
+```bash
+cfg=experiments/iclrw/context/v9.7/context-neural.yml
+python evaluation/inference.py -v $cfg -e 31 -dn wiai-facility -dv v9.7 -m test --at softmax
+```
 
 
 #### Evaluating an ensemble of cough-based and context-based model on a given dataset
