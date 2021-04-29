@@ -26,7 +26,7 @@ To try out our model(s) on sample data, please follow the instructions.
 
 * **Cough-based model**: Follow the notebook [here](demo/covid_detection_from_cough.ipynb) to predict COVID from cough using a pretrained model released with the repository. If you want to try on your own cough samples, you can record and store them in `assets/data/` and run the notebook by changing appropriate paths.
 
-* **Context-based model**: Follow the notebook [here](demo/covid_detection_from_cough.ipynb) to predict COVID from contextual features like age, symptoms, travel history etc. If you want to try on your own contextual-features, you can modify the relevant cells and run the notebook.
+* **Context-based model**: Follow the notebook [here](demo/covid_detection_from_contextual_data.ipynb) to predict COVID from contextual features like age, symptoms, travel history etc. If you want to try on your own contextual-features, you can modify the relevant cells and run the notebook.
 
 ## Training
 
