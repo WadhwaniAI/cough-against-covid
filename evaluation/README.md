@@ -90,8 +90,6 @@ models:
     agg_method: max
 
 data:
-  name: wiai-facility
-  version: v9.7
   mode: test
 ```
 
