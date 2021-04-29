@@ -20,7 +20,7 @@ We use docker to manage code dependencies. Please follow the steps [here](https:
 
 We use a combination of publicly-available datasets and our own collected datasets. Please follow the steps [here](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection/datasets) to download, process all datasets.
 
-#### Demo notebooks
+## Demo notebooks
 
 To try out our model(s) on sample data, please follow the instructions.
 
