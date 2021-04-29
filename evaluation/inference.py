@@ -8,7 +8,7 @@ $ python inference.py -v $cfg -u piyush -e 1 -dv v9.7 -m val --at softmax
 TODO: Add ignore_cache option, use cache when available to save time
 """
 import os
-from os.path import splitext, join, basename
+from os.path import splitext, join, basename, exists
 import argparse
 from collections import defaultdict
 import multiprocessing as mp
@@ -41,6 +41,12 @@ class InferenceOnDataset:
         # load optimal threshold for val set on this epoch
         epoch_val_logs = self.load_epoch_logs(config.log_dir, args.epoch)
         if args.threshold is None:
+            if epoch_val_logs is None:
+                assert args.threshold is not None, \
+                    color(
+                        "args.threshold cannot be None when model logs do not exist.",
+                        "red"
+                    )
             args.threshold = epoch_val_logs['threshold']
 
         # load data
@@ -55,15 +61,15 @@ class InferenceOnDataset:
         self.print_update("Running forward pass")
         results = self.forward_pass(model, dataloader, args.mode, args.threshold)
         # save logs: individual predictions
-        self.save_logs(results, config.log_dir_inference, args.mode, fname="0.pt")
+        self.save_logs(results, config.log_dir_inference, args.mode, fname=f"{args.epoch}.pt")
 
         # individual level aggregation
         self.print_update("individual level aggregation")
         ila_results = self.results_post_aggregation(
-            model, results, epoch_val_logs, args.agg_method, args.mode, at=args.at
+            model, results, epoch_val_logs, args.agg_method, args.mode, at=args.at, agg_th=args.threshold
         )
         # save logs: individual predictions post aggregation
-        fname = f"0_{args.agg_method}_aggregated.pt"
+        fname = f"{args.epoch}_{args.agg_method}_aggregated.pt"
         self.save_logs(ila_results, config.log_dir_inference, args.mode, fname=fname)
 
     def load_and_set_config(self, args):
@@ -131,26 +137,32 @@ class InferenceOnDataset:
         assert fname.endswith(".pt")
         torch.save(results, join(logdir, fname))
 
-    def results_post_aggregation(self, model, results, val_results, agg_method, mode, at):
+    def results_post_aggregation(self, model, results, val_results, agg_method, mode, at, agg_th=None):
 
-        # obtain optimal threshold based on val set
-        val_ila_results = individual_level_aggregation(
-            val_results['paths'], val_results['targets'],
-            val_results['predictions'], agg_method=agg_method, at=at
-        )
-        val_metrics = model.compute_epoch_metrics(
-            val_ila_results['predictions'], val_ila_results['targets'],
-            as_logits=False, threshold=None
-        )
-        agg_threshold = val_metrics['threshold']
+        if val_results is not None:
+            # obtain optimal threshold based on val set
+            val_ila_results = individual_level_aggregation(
+                val_results['paths'], val_results['targets'],
+                val_results['predictions'], agg_method=agg_method, at=at
+            )
+            val_metrics = model.compute_epoch_metrics(
+                val_ila_results['predictions'], val_ila_results['targets'],
+                as_logits=False, threshold=None
+            )
+            agg_threshold = val_metrics['threshold']
 
-        # display results
-        metric_log = "V: {} | ILA: Val | {}".format(
-            model.config.version, mode.capitalize()
-        )
-        for metric in model.config.metrics_to_track:
-            metric_log += ' | {}: {:.4f}'.format(metric, val_metrics[metric])
-        print(color(metric_log, 'green'))
+            # display results
+            metric_log = "V: {} | ILA: Val | {}".format(
+                model.config.version, mode.capitalize()
+            )
+            for metric in model.config.metrics_to_track:
+                metric_log += ' | {}: {:.4f}'.format(metric, val_metrics[metric])
+            print(color(metric_log, 'green'))
+
+        else:
+            assert agg_th is not None, "agg_th cannot be None when val_results=None."\
+                " You can fix this by passing apt value using args.threshold"
+            agg_threshold = agg_th
 
         # compute ILA results on given mode using obtained threshold
         ila_results = individual_level_aggregation(
@@ -171,13 +183,14 @@ class InferenceOnDataset:
             metric_log += ' | {}: {:.4f}'.format(metric, metrics[metric])
         print(color(metric_log, 'green'))
 
-
         return ila_results
 
     @staticmethod
     def load_epoch_logs(logdir, epoch, mode="val"):
         epoch_logfile = join(logdir, f"epochwise/{mode}/{epoch}.pt")
-        epoch_logs = torch.load(epoch_logfile)
+        epoch_logs = None
+        if exists(epoch_logfile):
+            epoch_logs = torch.load(epoch_logfile)
         return epoch_logs
 
     # helper functions specifc to this class
@@ -202,13 +215,13 @@ if __name__ == '__main__':
     # model-related inputs
     parser.add_argument('-v', '--version', required=True, type=str,
                         help='path to the experiment config file')
-    parser.add_argument('-u', '--user', required=True, type=str,
+    parser.add_argument('-u', '--user', default=None, required=False, type=str,
                         help='specifies the user owning the checkpoint')
     parser.add_argument('-e', '--epoch', type=int, default=-1,
                         help='specifies the checkpoint epoch to load')
     parser.add_argument('-b', '--load_best', action='store_true',
                         help='whether to load the best saved checkpoint')
-    parser.add_argument('-t', '--threshold', default=None,
+    parser.add_argument('-t', '--threshold', default=None, type=float,
                         help='specifies the confidence threshold to compute labels')
     parser.add_argument('-a', '--agg_method', default='max', type=str,
                         help='method of individual level aggregation')
