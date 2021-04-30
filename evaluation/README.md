@@ -32,7 +32,7 @@ Here,
 * `-t`: threshold at which the model is evaluated against at the given mode
 
 ##### ICLR'21 Workshop Paper : Epoch and Checkpoint details
-We have provided the model checkpoints and threshold values for the ICLR'21 Workshop paper.
+We have provided the [model](../configs/experiments/iclrw) checkpoints and threshold values for the ICLR'21 Workshop paper.
 
 |      | Cough Model<br>(Epoch / Threshold) | Context Model<br>(Epoch / Threshold) |
 |------|:----------------------------------:|:------------------------------------:|
