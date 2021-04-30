@@ -1,0 +1,18 @@
+models:
+  cough:
+    version: experiments/covid-detection/v9_7_cough_adam_1e-4.yml
+    epoch: 192
+    user: null
+    weight: 0.5
+    agg_method: max
+
+  context:
+    version: experiments/iclrw/context/v9.7/context-neural.yml
+    epoch: 31
+    user: null
+    weight: 0.5
+    agg_method: max
+
+data:
+  mode: test
+
