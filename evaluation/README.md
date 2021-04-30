@@ -2,7 +2,6 @@
 
 
 #### Evaluating a cough-based model checkpoint on a given dataset
-
 **Task**: Evaluate model checkpoint `assets/models/covid-detection/v9_7_cough_adam_1e-4/checkpoints/192_ckpt.pth.tar` on dataset `wiai-facility`/version `v9.7`/ mode `test`. Note that the config corresponding to this checkpoint is `experiments/covid-detection/v9_7_cough_adam_1e-4.yml`.
 
 **Steps**:
@@ -30,10 +29,21 @@ Here,
 * `-dv`: dataset version (name of `.yml` file stored)
 * `-m`: mode, train/test/val
 * `-at`: point of the outputs where aggregation is applied, e.g. after `softmax`
+* `-t`: threshold at which the model is evaluated against at the given mode
+
+##### ICLR'21 Workshop Paper : Epoch and Checkpoint details
+We have provided the model checkpoints and threshold values for the ICLR'21 Workshop paper.
+
+|      | Cough Model<br>(Epoch / Threshold) | Context Model<br>(Epoch / Threshold) |
+|------|:----------------------------------:|:------------------------------------:|
+| v9.4 |             37 / 0.145             |              15 / 0.211              |
+| v9.7 |             154 / 0.053            |              31 / 0.207              |
+| v9.8 |             76 / 0.111             |              38 / 0.231              |
+
 
 #### Evaluating a cough-based trained model on a given dataset
 
-**Task**: Evaluate a trained model with config file `experiments/covid-detection/v9_7_cough_adam_1e-4.yml` on dataset `wiai-facility`/version `v9.7`/ mode `test`.
+**Task**: Evaluate a trained model with config file `experiments/covid-detection/v9_7_cough_adam_1e-4.yml` at epoch `192` on dataset `wiai-facility`/version `v9.7`/ mode `test`.
 
 **Steps**:
 1. Run forward pass and store metrics. Note that passing `-t` is not needed here since it will pick up the optimal threshold from validation set logs stored while training.
@@ -65,7 +75,6 @@ python evaluation/inference.py -v $cfg -e 31 -dn wiai-facility -dv v9.7 -m test 
 cfg=experiments/iclrw/context/v9.7/context-neural.yml
 python evaluation/inference.py -v $cfg -e 31 -dn wiai-facility -dv v9.7 -m test --at softmax
 ```
-
 
 #### Evaluating an ensemble of cough-based and context-based model on a given dataset
 
