@@ -26,7 +26,6 @@ if __name__ == '__main__':
     assets_dir = join(repo_path, 'assets')
     models_dir = join(assets_dir, 'models')
     all_ckpts = glob(join(models_dir, '**/*.pth.tar'), recursive=True)
-    print(args.ckpt_path, all_ckpts)
 
     if args.ckpt_path:
         src = join(assets_dir, 'models', args.ckpt_path)

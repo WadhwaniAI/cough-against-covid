@@ -1,7 +1,7 @@
 models:
   cough:
-    version: experiments/covid-detection/v9_7_cough_adam_1e-4.yml
-    epoch: 192
+    version: experiments/iclrw/cough/v9.7/adamW_1e-4.yml
+    epoch: 113
     user: null
     weight: 0.5
     agg_method: max
@@ -15,4 +15,3 @@ models:
 
 data:
   mode: test
-
