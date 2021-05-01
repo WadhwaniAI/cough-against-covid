@@ -129,13 +129,13 @@ python evaluation/inference.py -v $cfg -e 31 -dn wiai-facility -dv v9.7 -m test 
 
 1. Before running evaluation of ensemble of predictions, you need to run inference for the individual models. Follow aforementioned steps.
 
-2. Create a meta config for ensembling models ([e.g.](../configs/experiments/ensemble/cough_context_v9.7.yml)).
+2. Create a meta config for ensembling models ([e.g.](../configs/experiments/iclrw/ensemble/cough_context_v9.7.yml)).
 In this example, we are ensembling a cough-based model and context-based models with ensemling weights of 0.5 each.
 ```yaml
 models:
   cough:
-    version: experiments/covid-detection/v9_7_cough_adam_1e-4.yml
-    epoch: 192
+    version: experiments/iclrw/cough/v9.7/adamW_1e-4.yml
+    epoch: 113
     user: null
     weight: 0.5
     agg_method: max
@@ -153,5 +153,5 @@ data:
 
 3. Run the ensembling to see result metrics
 ```bash
-python evaluation/ensemble.py -c experiments/ensemble/cough_context_v9.7.yml
+python evaluation/ensemble.py -c experiments/iclrw/ensemble/cough_context_v9.7.yml
 ```
