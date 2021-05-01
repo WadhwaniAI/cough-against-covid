@@ -1,6 +1,55 @@
-### Evaluation
+## Evaluation
+
+The following sections will have steps to evaluate a given model on a given dataset. As an example, we have used config `iclrw/cough/v9.7/adamW_1e-4.yml` but the steps hold for any other config. Please see details of configs used as part of our [ICLRW](../configs/experiments/iclrw/README.md) submission.
+
+### Evaluating given checkpoints on existing datasets
+
+Given the model checkpoint and corresponding config file, you can evaluate on a given dataset.
+* Checkpoint: `assets/models/iclrw/cough/v9.7/adamW_1e-4/checkpoints/113_ckpt.pth.tar`
+* Corresponding config: `configs/experiments/iclrw/cough/v9.7/adamW_1e-4.yml`
+* Dataset: `wiai-facility | v9.7 | test`
+
+1. Copy model checkpoint in appropriate output folder (run inside docker):
+```bash
+# copies from assets/models/ckpt_path/ to /output/experiments/ckpt_path/
+ckpt_path=experiments/iclrw/cough/v9.7/adamW_1e-4/checkpoints/113_ckpt.pth.tar
+python training/copy_model_ckpts.py -p $ckpt_path --dst_prefix experiments
+```
+
+2. Run forward pass and store metrics
+```bash
+cfg=iclrw/cough/v9.7/adamW_1e-4.yml
+python evaluation/inference.py -v $cfg -e 113 -dn wiai-facility -dv v9.7 -m test --at softmax -t 0.1317
+```
+The results are published on the terminal with key metric being AUC-ROC. Here, explanation of args:
+
+* `-v`: experiment version (config file)
+* `-u`: corresponds to the user who trained the model,
+        no need to pass this when you have config file in
+        `configs/` folder.
+* `-e`: epoch/checkpoint number of the trained model
+* `-dn`: dataset name
+* `-dv`: dataset version (name of `.yml` file stored)
+* `-m`: mode, train/test/val
+* `-at`: point of the outputs where aggregation is applied, e.g. after `softmax`
+* `-t`: threshold at which the model is evaluated against at the given mode
 
 
+### Evaluating your trained models on existing datasets
+
+Given you ran training with following config, you can run evaluation as follows:
+* Corresponding config: `configs/experiments/iclrw/cough/v9.7/adamW_1e-4.yml`
+* Dataset: `wiai-facility | v9.7 | test`
+
+1. Run forward pass and store metrics
+```bash
+cfg=iclrw/cough/v9.7/adamW_1e-4.yml
+python evaluation/inference.py -v $cfg -e 113 -dn wiai-facility -dv v9.7 -m test --at softmax
+```
+
+> **Note**: Here, you do not need to copy checkpoint since checkpoints are saved during training itself. Plus, you do not need to explicitly pass `-threshold` since it picks it up from validation set logs saved during training.
+
+<!-- 
 #### Evaluating a cough-based model checkpoint on a given dataset
 **Task**: Evaluate model checkpoint `assets/models/covid-detection/v9_7_cough_adam_1e-4/checkpoints/192_ckpt.pth.tar` on dataset `wiai-facility`/version `v9.7`/ mode `test`. Note that the config corresponding to this checkpoint is `experiments/covid-detection/v9_7_cough_adam_1e-4.yml`.
 
@@ -74,7 +123,7 @@ python evaluation/inference.py -v $cfg -e 31 -dn wiai-facility -dv v9.7 -m test 
 ```bash
 cfg=experiments/iclrw/context/v9.7/context-neural.yml
 python evaluation/inference.py -v $cfg -e 31 -dn wiai-facility -dv v9.7 -m test --at softmax
-```
+``` -->
 
 #### Evaluating an ensemble of cough-based and context-based model on a given dataset
 
@@ -106,8 +155,3 @@ data:
 ```bash
 python evaluation/ensemble.py -c experiments/ensemble/cough_context_v9.7.yml
 ```
-
-
-#### Evaluating any custom model on a given dataset
-
-Coming soon!
