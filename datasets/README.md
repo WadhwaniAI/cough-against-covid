@@ -60,16 +60,18 @@ For this project, we use the following datasets. The instructions to follow step
 
 | Dataset                                                                    | Cough | Non-cough | Total |
 |----------------------------------------------------------------------------|-------|-----------|-------|
-| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 2035  | 7115      | 9149  |
+| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 3082  | 10786     | 13868 |
 | [FluSense](https://github.com/Forsad/FluSense-data)                        | 2486  | 9201      | 11687 |
 | [FreeSound](https://zenodo.org/record/2552860#.XFD05fwo-V4)                | 273   | 10800     | 11073 |
 | [ESC-50](https://github.com/karolpiczak/ESC-50)                            | -     | 2000      | 2000  |
-| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | 11724 |           | 11724 |
+| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | 11724 | 13429     | 25153 |
 
+Number of COVID-19 positive/negative cough samples:
 
-| Dataset                                                                    | Covid | Non-Covid | Total |
-|----------------------------------------------------------------------------|-------|-----------|-------|
-| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | 3867  | 7857      | 11724 |
+| Dataset                                                                    | Positive | Negative  | Unknown | Total |
+|----------------------------------------------------------------------------|-------|------------|-------|-------|
+| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | 3867  | 7857       | - | 11724 |
+| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 290   | 2426        | 366 | 3082 |
 
 
 </div>
