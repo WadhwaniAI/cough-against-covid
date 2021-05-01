@@ -17,6 +17,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Copies model checkpoints")
     parser.add_argument('-a', '--copy_all', action='store_true',
                         help='copy all checkpoints from assets/models/')
+    parser.add_argument('--dst_prefix', default='', required=False,
+                        help='prefix to apply to destination path')
     parser.add_argument('-p', '--ckpt_path', default=None, required=False,
                         help='path to ckpt to copy relative to assets/models/')
     args = parser.parse_args()
@@ -26,15 +28,17 @@ if __name__ == '__main__':
     all_ckpts = glob(join(models_dir, '**/*.pth.tar'), recursive=True)
 
     if args.ckpt_path:
-        assert args.ckpt_path in all_ckpts
-
         src = join(assets_dir, 'models', args.ckpt_path)
         assert exists(src), f"Source ckpt file does not exist as {src}"
-        dst = src.replace(models_dir, '/output/')
+
+        dst = src.replace(models_dir, f'/output/{args.dst_prefix}')
         print(colored(f"Copying from {src} to {dst}", 'yellow'))
 
         os.makedirs(dirname(dst), exist_ok=True)
-        call(f'rsync -avzP {src} {dst}',  shell=True)
+        if not exists(dst):
+            call(f'rsync -avzP {src} {dst}',  shell=True)
+        else:
+            print(f"SKIPPING: File already exists at {dst}")
 
     else:
         if args.copy_all:
@@ -45,4 +49,7 @@ if __name__ == '__main__':
                 print(colored(f"Copying from {src} to {dst}", 'yellow'))
 
                 os.makedirs(dirname(dst), exist_ok=True)
-                call(f'rsync -avzP {src} {dst}',  shell=True)
+                if not exists(dst):
+                    call(f'rsync -avzP {src} {dst}',  shell=True)
+                else:
+                    print(f"SKIPPING: File already exists at {dst}")
