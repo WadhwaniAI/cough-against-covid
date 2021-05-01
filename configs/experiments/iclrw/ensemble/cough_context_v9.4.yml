@@ -1,0 +1,17 @@
+models:
+  cough:
+    version: experiments/iclrw/cough/v9.4/adamW_1e-4_cyclic.yml
+    epoch: 38
+    user: null
+    weight: 0.5
+    agg_method: max
+
+  context:
+    version: experiments/iclrw/context/v9.4/context-neural.yml
+    epoch: 9
+    user: null
+    weight: 0.5
+    agg_method: max
+
+data:
+  mode: test
