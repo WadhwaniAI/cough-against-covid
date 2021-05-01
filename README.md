@@ -33,7 +33,8 @@ To try out our model(s) on sample data, please follow the instructions.
 #### Training on existing datasets
 To run training on datasets downloaded in previous step, please follow the steps [here](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection/training).
 
-#### Training on your own datasets
+#### Training any custom model on any given dataset
+
 In order to train on your own dataset(s), first, you need to set up the dataset following steps similar to those for existing dataset given [here](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection/datasets). This includes downloading/setting it in the right folder structure, processing and splitting (train-validation-test).
 Next, you need to create a new `.yml` config file (like [this](https://github.com/WadhwaniAI/cough-against-covid/blob/pb/cough-detection/configs/experiments/covid-detection/v9_4_cough_adam_1e-4.yml)) and configure the dataset section:
 
@@ -46,13 +47,13 @@ dataset:
 ```
 You can also play around with various other hyperparameters in the config like optimizer, scheduler, batch sampler method, random crop duration, network architecture etc.
 
+More coming soon!
+
 ## Evaluation
 
-#### Evaluating a trained model on a given dataset
+You can evaluate your own trained models or use released model checkpoints on a given dataset. Instructions for both of these are given [here](./evaluation/README.md).
 
-If you train a model on our given datasets using a config, you can follow the instructions [here](./evaluation/README.md) to evaluate that model on a given dataset.
-
-#### Evaluating any custom model on a given dataset
+#### Evaluating any custom model on any given dataset
 
 Coming soon!
 
