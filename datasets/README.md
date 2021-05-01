@@ -60,16 +60,24 @@ For this project, we use the following datasets. The instructions to follow step
 
 | Dataset                                                                    | Cough | Non-cough | Total |
 |----------------------------------------------------------------------------|-------|-----------|-------|
-| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 2035  | 7115      | 9149  |
+| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 3082  | 10786     | 13868 |
 | [FluSense](https://github.com/Forsad/FluSense-data)                        | 2486  | 9201      | 11687 |
 | [FreeSound](https://zenodo.org/record/2552860#.XFD05fwo-V4)                | 273   | 10800     | 11073 |
 | [ESC-50](https://github.com/karolpiczak/ESC-50)                            | -     | 2000      | 2000  |
-| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | X     | X         | X     |
+| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | 11724 | 13429     | 25153 |
+
+Number of COVID-19 positive/negative cough samples:
+
+| Dataset                                                                    | Positive | Negative  | Unknown | Total |
+|----------------------------------------------------------------------------|-------|------------|-------|-------|
+| [Ours (Wadhwani AI)](https://www.wadhwaniai.org/work/cough-against-covid/) | 3867  | 7857       | - | 11724 |
+| [Coswara](https://github.com/iiscleap/Coswara-Data)                        | 290   | 2426        | 366 | 3082 |
+
 
 </div>
 
 ---
-
+ 
 <!-- 
 For a given dataset, you need to follow the steps given below to be able to run training or inference on the dataset. As an example, we show instructions to download and setup the [CoSwara Dataset](https://github.com/iiscleap/Coswara-Data) by IISc, Bangalore.
 
@@ -239,6 +247,8 @@ esc-50/
 
 ### Cough Against COVID Dataset (Wadhwani AI)
 
+#### Note : The Cough Against COVID Dataset is not public and we are currently in the process of getting approvals for releasing the data. 
+
 * Download: Run the following commands.
 
 > Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `~/cac/` to the common storage location that you have already set. 
@@ -281,6 +291,8 @@ wiai-facility/
 ```
 
 ### Cough Against COVID Crowdsourced Dataset (Wadhwani AI)
+
+#### Note : The Cough Against COVID Crowdsourced Dataset is not public and we are currently in the process of getting approvals for releasing the data. 
 
 * Download: Run the following commands.
 
