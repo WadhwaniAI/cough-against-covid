@@ -1,5 +1,6 @@
-## Evaluation
-### 1. Evaluating a model (not trained by the user) on a given checkpoint
+# Evaluation
+
+## Evaluating a model (not trained by the user) on a given checkpoint
 **Task**: Evaluate model checkpoint `assets/models/covid-detection/v9_7_cough_adam_1e-4/checkpoints/192_ckpt.pth.tar` on dataset `wiai-facility`/version `v9.7`/ mode `test`. Note that the config corresponding to this checkpoint is `experiments/covid-detection/v9_7_cough_adam_1e-4.yml`.
 
 **Steps**:
@@ -28,7 +29,7 @@ Here,
 * `-at`: point of the outputs where aggregation is applied, e.g. after `softmax`
 * `-t`: threshold at which the model is evaluated against at the given mode
 
-#### ICLR'21 Workshop Paper : Epoch and Checkpoint details
+### ICLR'21 Workshop Paper : Epoch and Checkpoint details
 We have provided the [model](../configs/experiments/iclrw) checkpoints and threshold values for the ICLR'21 Workshop paper. To directly evaluate the models used in the paper without training, follow the steps mentioned above for any of the configs as shared at [link](../configs/experiments/iclrw).
 
 <div align='center'>
@@ -43,7 +44,7 @@ We have provided the [model](../configs/experiments/iclrw) checkpoints and thres
 
 ---
 
-### 2. Evaluating a trained model on a given dataset
+## Evaluating a trained model on a given dataset
 **Task**: Evaluate a trained model with config file `experiments/covid-detection/v9_7_cough_adam_1e-4.yml` at epoch `192` on dataset `wiai-facility`/version `v9.7`/ mode `test`.
 
 **Steps**:
@@ -52,8 +53,9 @@ We have provided the [model](../configs/experiments/iclrw) checkpoints and thres
 cfg=experiments/covid-detection/v9_7_cough_adam_1e-4.yml
 python evaluation/inference.py -v $cfg -e 192 -dn wiai-facility -dv v9.7 -m test --at softmax
 ```
+---
 
-### 3. Evaluating an ensemble of cough-based and context-based model on a given dataset
+## Evaluating an ensemble of cough-based and context-based model on a given dataset
 
 1. Before running evaluation of ensemble of predictions, you need to run inference for the individual models. Follow aforementioned steps.
 
