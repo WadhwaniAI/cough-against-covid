@@ -11,4 +11,4 @@ The following folders can be used a starting point to replicate experiments and 
 
 **4. [multi-signal-training](../configs/experiments/multi-signal-training)** : Some configs as a starting point to perform multi-signal classification on different kinds of multi-signal combinations (cough-context, cough-voice and cough-voice-context). For more details on Multi-Signal Model, refer to this [link](../../analysis/multi-signal-classification)
 
-**5. [unsupervised](../configs/experiments/unsupervised)** : // Add Stuff // 
+**5. [unsupervised](../configs/experiments/unsupervised)** : Configs for using handcrafted features (AI4COVID/Cambridge) to visualize and/or train.
