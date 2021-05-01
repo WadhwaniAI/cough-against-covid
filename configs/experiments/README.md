@@ -1,4 +1,6 @@
 ### Experiments
+The following folders can be used a starting point to replicate experiments and to build your own custom models.
+
 **1. [cough-detection](../configs/experiments/cough-detection)** : Cough detection configs that uses open source cough datasets using a ResNet18 backbones.
 
 **2. [covid-detection](../configs/experiments/covid-detection)** : Configs in this folder perform the covid detection task 
