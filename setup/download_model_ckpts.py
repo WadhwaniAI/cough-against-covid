@@ -10,17 +10,18 @@ from termcolor import colored
 from cac.utils.file import repo_path
 
 # download
-print(colored("=> Downloading to assets/models.zip", 'yellow'))
-url = 'https://drive.google.com/uc?id=1Ev46K6NCzDWGdlHgJGYOBuC2ZQZI2RSy'
+force_download = False
+print(colored("=> Downloading to assets/", 'yellow'))
+url = 'https://drive.google.com/uc?id=1fkuQOEL3V7tDSMo0TvzKvWiMzuRjHgvd'
 output = join(repo_path, 'assets/')
-download_path = join(output, 'models.zip')
-if not exists(download_path):
-    gdown.download(url, output, quiet=False)
+download_path = join(output, 'models-03-05-2021.zip')
+if (not exists(download_path)) or force_download:
+    download_path = gdown.download(url, output, quiet=False)
 else:
-    print("Zip file already exists at assets/models.zip")
+    print(f"Zip file already exists at {download_path}")
 
 # unzip
-zip_file = join(output, 'models.zip')
+zip_file = download_path
 unzip_dir = dirname(output)
 print(colored(f"=> Unzipping {zip_file} to {unzip_dir}", 'yellow'))
 with zipfile.ZipFile(zip_file, 'r') as zip_ref:
