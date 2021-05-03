@@ -23,7 +23,7 @@ For the datasets used in this work, we create our own split files and those are 
 python setup/download_data_splits.py
 ```
 
-## Pre-trained Models
+### Pre-trained Models
 
 Broadly, we release trained checkpoints for three kinds of models:
 
