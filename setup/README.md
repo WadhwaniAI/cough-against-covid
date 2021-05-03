@@ -69,6 +69,7 @@ cd ~/
 mkdir projects; cd projects;
 git clone git@github.com:WadhwaniAI/cough-against-covid.git
 ```
+> For internal testing, please switch to branch `pb/test-no-lfs` to continue.
 
 * **Pull required docker image**: Note that this might change depending on whether this image works. For a CPU-only machine, run:
 ```bash
