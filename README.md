@@ -52,8 +52,8 @@ To run training on datasets downloaded in previous step, please follow the steps
 
 #### Training any custom model on any given dataset
 
-In order to train on your own dataset(s), first, you need to set up the dataset following steps similar to those for existing dataset given [here](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection/datasets). This includes downloading/setting it in the right folder structure, processing and splitting (train-validation-test).
-Next, you need to create a new `.yml` config file (like [this](https://github.com/WadhwaniAI/cough-against-covid/blob/pb/cough-detection/configs/experiments/covid-detection/v9_4_cough_adam_1e-4.yml)) and configure the dataset section:
+In order to train on your own dataset(s), first, you need to set up the dataset following steps similar to those for existing dataset given [here](./datasets). This includes downloading/setting it in the right folder structure, processing and splitting (train-validation-test).
+Next, you need to create a new `.yml` config file (like [this](./configs/experiments/iclrw/cough/v9.7/adamW_1e-4.yml)) and configure the dataset section:
 
 ```yml
 dataset:
