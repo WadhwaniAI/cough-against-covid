@@ -33,6 +33,10 @@ Broadly, we release trained checkpoints for three kinds of models:
 
 Please run the following (from inside docker container) to download them to `assets/models/` folder.
 
+```bash
+python setup/download_model_ckpts.py
+```
+
 ## Datasets
 
 We use a combination of publicly-available datasets and our own collected datasets. Please follow the steps [here](./datasets) to download, process all datasets.
