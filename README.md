@@ -14,11 +14,28 @@ Code relase for the [Cough Against COVID-19](https://www.wadhwaniai.org/work/cou
 
 ## Setup
 
-We use docker to manage code dependencies. Please follow the steps [here](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection/setup) to set up all dependencies. This code works on both CPU-only machine/ GPU machine. However, it is recommended to use a GPU machine since CPU machine is very slow in runtime.
+We use docker to manage code dependencies. Please follow the steps [here](./setup) to set up all dependencies. This code works on both CPU-only machine/ GPU machine. However, it is recommended to use a GPU machine since CPU machine is very slow in runtime.
+
+### Data version files
+For the datasets used in this work, we create our own split files and those are released publicly. Please run the following (from inside docker container) to download them to `assets/data/` folder.
+
+```bash
+python setup/download_data_splits.py
+```
+
+## Pre-trained Models
+
+Broadly, we release trained checkpoints for three kinds of models:
+
+* Cough-based `ResNet-18` models for cough-detection
+* Cough-based `ResNet-18` models for COVID-detection
+* Context-based `TabNet` models for COVID-detection
+
+Please run the following (from inside docker container) to download them to `assets/models/` folder.
 
 ## Datasets
 
-We use a combination of publicly-available datasets and our own collected datasets. Please follow the steps [here](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection/datasets) to download, process all datasets.
+We use a combination of publicly-available datasets and our own collected datasets. Please follow the steps [here](./datasets) to download, process all datasets.
 
 ## Demo notebooks
 

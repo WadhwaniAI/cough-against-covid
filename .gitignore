@@ -1,6 +1,12 @@
 # docker container metadata
 .nfs*
 
+# assets (data split files and model checkpoints)
+assets/data.zip
+assets/data/*
+assets/models.zip
+assets/models/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
