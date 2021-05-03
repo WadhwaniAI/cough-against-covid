@@ -37,10 +37,6 @@ Please run the following (from inside docker container) to download them to `ass
 python setup/download_model_ckpts.py
 ```
 
-## Datasets
-
-We use a combination of publicly-available datasets and our own collected datasets. Please follow the steps [here](./datasets) to download, process all datasets.
-
 ## Demo notebooks
 
 To try out our model(s) on sample data, please follow the instructions.
@@ -48,6 +44,12 @@ To try out our model(s) on sample data, please follow the instructions.
 * **Cough-based model**: Follow the notebook [here](demo/covid_detection_from_cough.ipynb) to predict COVID from cough using a pretrained model released with the repository. If you want to try on your own cough samples, you can record and store them in `assets/data/` and run the notebook by changing appropriate paths.
 
 * **Context-based model**: Follow the notebook [here](demo/covid_detection_from_contextual_data.ipynb) to predict COVID from contextual features like age, symptoms, travel history etc. If you want to try on your own contextual-features, you can modify the relevant cells and run the notebook.
+
+
+## Datasets
+
+We use a combination of publicly-available datasets and our own collected datasets. Please follow the steps [here](./datasets) to download, process all datasets.
+
 
 ## Training
 
