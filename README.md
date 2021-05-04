@@ -81,7 +81,7 @@ You can also play around with various other hyperparameters in the config like o
 
 More coming soon!
 
-## Evaluation
+### Evaluation
 
 You can evaluate your own trained models or use released model checkpoints on a given dataset. Instructions for both of these are given [here](./evaluation/README.md).
 
