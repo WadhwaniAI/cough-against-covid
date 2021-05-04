@@ -50,12 +50,17 @@ To try out our model(s) on sample data, please follow the instructions.
 * **Context-based model**: Follow the notebook [here](demo/covid_detection_from_contextual_data.ipynb) to predict COVID from contextual features like age, symptoms, travel history etc. If you want to try on your own contextual-features, you can modify the relevant cells and run the notebook.
 
 
-## Datasets
+## Training/evaluating/fine-tuning your own models
+
+In order to use our and other public datasets as part of this work, you will need to first download, process the datasets and then create your own configs to train models.
+
+### Datasets
 
 We use a combination of publicly-available datasets and our own collected datasets. Please follow the steps [here](./datasets) to download, process all datasets.
 
+> Note: Our own dataset `wiai-facility` collected from across 27 facilities in India has not been released yet due to legal constraints that prevent us from sharing the data. We are trying to resolve those before we can release the dataset in any form.
 
-## Training
+### Training
 
 #### Training on existing datasets
 To run training on datasets downloaded in previous step, please follow the steps [here](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection/training).
