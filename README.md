@@ -16,6 +16,10 @@ Code relase for the [Cough Against COVID-19](https://www.wadhwaniai.org/work/cou
 
 We use docker to manage code dependencies. Please follow the steps [here](./setup) to set up all dependencies. This code works on both CPU-only machine/ GPU machine. However, it is recommended to use a GPU machine since CPU machine is very slow in runtime.
 
+## Using our trained models
+
+We release models trained to predict COVID-19 status from cough/contextual (symptoms etc.) metadata.
+
 ### Data version files
 For the datasets used in this work, we create our own split files and those are released publicly. Please run the following (from inside docker container) to download them to `assets/data/` folder.
 
@@ -37,7 +41,7 @@ Please run the following (from inside docker container) to download them to `ass
 python setup/download_model_ckpts.py
 ```
 
-## Demo notebooks
+### Demo notebooks
 
 To try out our model(s) on sample data, please follow the instructions.
 
