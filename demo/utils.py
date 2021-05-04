@@ -4,11 +4,16 @@ Utility functions required for demo (forward passing single input wav file to pr
 import librosa
 import numpy as np
 import torch
-
 from cac.data.audio import AudioItem
 from cac.data.transforms import DataProcessor
 import pandas as pd
 
+# SOME CONSTANTS
+CONTEXTUAL_DATA_STATS = {'enroll_patient_age': {'mean': 36.97, 'std': 13.50},
+                         'enroll_patient_temperature': {'mean': 97.23, 'std': 1.24},
+                         'enroll_days_with_cough': {'mean': 1.22, 'std': 3.14},
+                         'enroll_days_with_shortness_of_breath': {'mean': 0.39, 'std': 2.05},
+                         'enroll_days_with_fever': {'mean': 1.19, 'std': 3.44}}
 
 def _create_frames(path, frame_length=2000, hop_length=500, min_length=100, label=None, start=None, end=None):
     """
@@ -62,26 +67,11 @@ def _process_raw_audio_file(path, signal_transforms, frame_length, hop_length, m
 
     return batch
 
-def _preprocess_raw_context_data(input_, attributes_file_raw ='/data/wiai-facility/processed/attributes.csv'):
-    attributes = pd.read_csv(attributes_file_raw)
-    
-    median_days = dict()
-    symptoms = ['cough', 'fever', 'shortness_of_breath']
-    for symptom in symptoms:
-        median_days[symptom] = attributes[attributes[f'enroll_{symptom}'] == 'Yes'][f'enroll_days_with_{symptom}'].median()
-        attributes.loc[attributes[f'enroll_{symptom}'] == 'No', f'enroll_days_with_{symptom}'] = 0
-        attributes[f'enroll_days_with_{symptom}'].fillna( median_days[symptom], inplace=True)
-        attributes[f'enroll_days_with_{symptom}'] = np.where(attributes[f'enroll_days_with_{symptom}'] > 100, median_days[symptom], \
-                                                             attributes[f'enroll_days_with_{symptom}'])
-
-    median_age = attributes.loc[attributes['enroll_patient_age'] < 100, 'enroll_patient_age'].median()
-    attributes["enroll_patient_age"] = np.where(attributes["enroll_patient_age"] > 100, median_age, attributes['enroll_patient_age'])
-
+def _preprocess_raw_context_data(input_):
     continuous_var = ['enroll_patient_age', 'enroll_patient_temperature', 'enroll_days_with_cough',
                       'enroll_days_with_shortness_of_breath', 'enroll_days_with_fever']
-
     for var in continuous_var:
-        input_[var] = (input_[var] - attributes[var].mean()) / attributes[var].std()
+        input_[var] = (input_[var] - CONTEXTUAL_DATA_STATS[var]['mean']) / CONTEXTUAL_DATA_STATS[var]['std']
     return input_
 
 def check_data_correct_format(input_):
