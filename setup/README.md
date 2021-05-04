@@ -91,6 +91,7 @@ export WANDB_CONFIG_DIR=</path/to/any/folder>/.config/wandb/
 > Tip: It is convenient to put these in your `~/.bashrc` or `~/.bash_profile` instead of setting them manually everytime.
 > Add the line `export WANDB_API_KEY=XYZ` to your `~/.bashrc` file.
 
+Depending on whether you have a CPU-only machine or a GPU machine, you can choose which docker image to use.
 Next, you can start a container by the following command: 
 ```bash
 cd ~/projects/cough-against-covid/setup/
@@ -126,6 +127,8 @@ For GPU machine, inside the container, run the following command to test you are
 $ python -c "import torch; print(torch.__version__)"
 1.6.0
 ```
+
+You can exit (and kill) the running docker container by pressing `Ctrl + D` inside the container.
 
 #### (Optional) Starting Jupyter lab
 In order to spin up jupyter lab from inside the container, use: (note the use of the same port which was used to start the container)
