@@ -1,0 +1,268 @@
+description: Default Model for Multi-Signal Joint Training 
+
+model:
+    name: multi_signal_classification
+    type: binary
+    batch_size: 128
+    epochs: 100
+    optimizer:
+      name: Adam
+      args:
+        lr: 0.00001
+        weight_decay: 0.001
+      scheduler:
+        name: StepLR
+        update: epoch
+        params:
+          step_size: 10
+          gamma: 0.95
+    loss:
+      train:
+        name: cross-entropy
+        params:
+          reduction: none
+      val:
+        name: cross-entropy
+        params:
+          reduction: none
+    classes:
+      - non-covid
+      - covid
+    save:
+        period: 1000
+        monitor: specificity
+        monitor_mode: max
+    load:    
+        version: null
+        epoch: -1
+        load_best: True
+        resume_optimizer: false
+    eval:
+      maximize_metric: specificity
+      maximize_mode: val
+      aggregate:
+        train: {}
+        val: {}
+    subset_tracker:
+      val: {}
+
+network: 
+  network_name: NaiveCoughVoiceNetwork
+  params:
+    merge_type: max
+
+data:
+  name: multi_signal_classification
+  attribute_file: /data/wiai-facility/processed/attributes_context_processed.csv
+  features:
+    - enroll_patient_age
+    - enroll_patient_temperature
+    - enroll_days_with_cough
+    - enroll_days_with_shortness_of_breath
+    - enroll_days_with_fever
+    - enroll_travel_history   
+    - enroll_contact_with_confirmed_covid_case 
+    - enroll_health_worker       
+    - enroll_fever
+    - enroll_cough  
+    - enroll_shortness_of_breath    
+  sampler:
+    train:
+        name: classification
+        params:
+            mode: balanced
+    val:
+        name: default
+    
+  collate_fn:
+    name: multi_signal_classification_collate
+    params: {}  
+  
+  signal_wise_data_cfgs:
+    - name: cough
+      raw_waveform: false
+      target_transform:
+        name: classification
+        params:
+          classes:
+            - covid  
+
+      signal_transform:
+        train:
+        - name: Resample
+          params:
+            orig_freq: 44100
+            new_freq: 16000
+        - name: RandomCrop
+          params:
+            crop_size: 32000
+            pad_mode: zero
+        - name: BackgroundNoise
+          augmentation: true
+          params:
+              dataset_config:
+                  - name: esc-50
+                    version: default
+                    mode: all
+              min_noise_scale: 0.4
+              max_noise_scale: 0.75
+        - name: Spectrogram
+          params:
+            n_fft: 512
+            win_length: 512
+            hop_length: 160
+        - name: MelScale
+          params:
+            n_mels: 64
+            sample_rate: 16000
+            f_min: 125
+            f_max: 7500
+        - name: AmplitudeToDB
+          params: {}
+        - name: TimeMasking
+          augmentation: true
+          params:
+              max_len: 50
+              max_num: 2
+        - name: FrequencyMasking
+          augmentation: true
+          params:
+              max_len: 50
+              max_num: 2
+        - name: Rescale
+          params:
+            value: 100
+        - name: Unsqueeze
+          params: {}
+
+        val:
+        - name: Resample
+          params:
+            orig_freq: 44100
+            new_freq: 16000
+        - name: RandomCrop
+          params:
+            crop_size: 32000
+            pad_mode: zero
+        - name: Spectrogram
+          params:
+            n_fft: 512
+            win_length: 512
+            hop_length: 160
+        - name: MelScale
+          params:
+            n_mels: 64
+            sample_rate: 16000
+            f_min: 125
+            f_max: 7500
+        - name: AmplitudeToDB
+          params: {}
+        - name: Rescale
+          params:
+            value: 100
+        - name: Unsqueeze
+          params: {}
+
+      dataset:
+        name: classification_dataset
+        config:
+          - name: wiai-facility
+            version: v9.8
+        params:
+          train: {}
+          val: {}
+    - name: voice
+      raw_waveform: false
+      target_transform:
+        name: classification
+        params:
+          classes:
+            - covid  
+
+      signal_transform:
+        train:
+        - name: Resample
+          params:
+            orig_freq: 44100
+            new_freq: 16000
+        - name: RandomCrop
+          params:
+            crop_size: 64000
+            pad_mode: zero
+        - name: BackgroundNoise
+          augmentation: true
+          params:
+              dataset_config:
+                  - name: esc-50
+                    version: default
+                    mode: all
+              min_noise_scale: 0.4
+              max_noise_scale: 0.75
+        - name: Spectrogram
+          params:
+            n_fft: 512
+            win_length: 512
+            hop_length: 160
+        - name: MelScale
+          params:
+            n_mels: 64
+            sample_rate: 16000
+            f_min: 125
+            f_max: 7500
+        - name: AmplitudeToDB
+          params: {}
+        - name: TimeMasking
+          augmentation: true
+          params:
+              max_len: 50
+              max_num: 2
+        - name: FrequencyMasking
+          augmentation: true
+          params:
+              max_len: 50
+              max_num: 2
+        - name: Rescale
+          params:
+            value: 100
+        - name: Unsqueeze
+          params: {}
+
+        val:
+        - name: Resample
+          params:
+            orig_freq: 44100
+            new_freq: 16000
+        - name: RandomCrop
+          params:
+            crop_size: 64000
+            pad_mode: zero
+        - name: Spectrogram
+          params:
+            n_fft: 512
+            win_length: 512
+            hop_length: 160
+        - name: MelScale
+          params:
+            n_mels: 64
+            sample_rate: 16000
+            f_min: 125
+            f_max: 7500
+        - name: AmplitudeToDB
+          params: {}
+        - name: Rescale
+          params:
+            value: 100
+        - name: Unsqueeze
+          params: {}
+
+      dataset:
+        name: classification_dataset
+        config:
+          - name: wiai-facility
+            version: v9.8_voice_repeated
+        params:
+          train: {}
+          val: {}
+
+  dataset: {}
+ 
