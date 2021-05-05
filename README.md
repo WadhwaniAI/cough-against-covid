@@ -1,4 +1,5 @@
 # Cough Against COVID-19
+
 Code relase for the [Cough Against COVID-19](https://www.wadhwaniai.org/work/cough-against-covid/) Project by the [Wadhwani Institute for Artificial Intelligence](https://www.wadhwaniai.org/) supported by the Gates' Foundation.
 
 #### [Project page](https://www.wadhwaniai.org/work/cough-against-covid/) | [Code](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection) | [Paper (ArXiv)](https://arxiv.org/abs/2009.08790) | [Data](Coming-soon)
@@ -11,6 +12,16 @@ Code relase for the [Cough Against COVID-19](https://www.wadhwaniai.org/work/cou
  -->
  ![Cough Against COVID-19](./assets/media/teaser-v6.png)
 
+
+In order to use this code, you need to follow the steps below. Please check the pre-requisites to decide whether your system is compatible.
+
+### Pre-requisites
+
+* CPU-only machine OR GPU-enabled machine
+* Docker installed on your machine
+* More to be added
+
+> Note: Switch to branch `pb/datasets` to follow the steps on Setup and Dataset ingestion.
 
 ## Setup
 
