@@ -15,7 +15,7 @@ In order to use this code, you need to follow the steps below. Please check the 
 * Docker installed on your machine
 * OS: Linux/Mac OS
 
-> Note: This code has been tested on Mac OS and Ubuntu.
+> :checkered_flag: Note: This code has been tested on Mac OS and Ubuntu.
 
 ## Setup
 
@@ -84,7 +84,7 @@ dataset:
 ```
 You can also play around with various other hyperparameters in the config like optimizer, scheduler, batch sampler method, random crop duration, network architecture etc.
 
-More coming soon!
+:construction: More coming soon!
 
 ### Evaluation
 
@@ -92,7 +92,7 @@ You can evaluate your own trained models or use released model checkpoints on a 
 
 #### Evaluating any custom model on any given dataset
 
-Coming soon!
+:construction: Coming soon!
 
 
 ### Citing us
