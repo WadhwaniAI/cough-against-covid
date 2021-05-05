@@ -55,4 +55,5 @@ echo "=> Firing docker container with $command"
 	--env WANDB_DOCKER=$image \
 	--env WANDB_API_KEY=$WANDB_API_KEY \
 	--ipc host \
+	--net host \
 	$image bash
