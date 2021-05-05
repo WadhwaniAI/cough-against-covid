@@ -111,6 +111,6 @@ If you use this code, kindly consider citing us:
 * [Nikhil Shenoy](https://www.linkedin.com/in/nikhil-shenoy-01a7a6141/?originalSubdomain=in)
 * [Piyush Bagad](https://bpiyush.github.io/)
 
-We thank [Jigar Doshi](https://www.linkedin.com/in/jigarkdoshi/) for guidance on structuring the repository to reduce the time from code-to-experiments.
+We thank [Jigar Doshi](https://www.linkedin.com/in/jigarkdoshi/) the Research Lead of the project for guidance.
 
 **Reporting issues/bugs/suggestions**: If you need to bring our attention to bugs or suggest modifications, kindly create an issue and we will try our best to address it. Please feel free to contact us if you have queries. 
