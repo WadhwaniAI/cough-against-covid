@@ -1,0 +1,204 @@
+description: v9.4 running on best v7.4.1 model/resnet-pretrained-melspec-smoothing-reg + use scheduler + default sampler
+
+model:
+    name: classification
+    type: binary
+    batch_size: 128
+    epochs: 200
+    optimizer:
+      name: AdamW
+      args:
+        lr: 0.00001
+        weight_decay: 0.001
+      scheduler:
+        name: CyclicLR
+        update: batch
+        params:
+            base_lr: 0.00001
+            max_lr: 0.001
+            step_size_up: 1000
+            step_size_down: 5000
+            mode: triangular
+            cycle_momentum: false
+    loss:
+      train:
+        name: cross-entropy
+        params:
+          reduction: none
+      val:
+        name: cross-entropy
+        params:
+          reduction: none
+    classes:
+      - non-covid
+      - covid
+    save:
+        period: 1
+        monitor: specificity
+        monitor_mode: max
+    load:
+        version: cough-detection/flusense/resnet18-coughnet-db-melspec
+        epoch: 167
+        load_best: False
+        resume_optimizer: false
+    eval:
+      maximize_metric: specificity
+      maximize_mode: val
+      aggregate:
+        train: {}
+        val:
+          method: median
+          at: softmax
+    subset_tracker:
+      val:
+      - name: wiai-facility
+        version: v9.4
+        mode: val
+      
+
+network:
+    name: neural_net
+    params:
+        config:
+        - name: resnet18
+          params:
+            in_channels: 1
+            pretrained: true
+        - name: AdaptiveAvgPool2d
+          params:
+            output_size:
+            - 1
+            - 1
+        - name: Flatten
+          params: {}
+        - name: Dropout
+          params:
+            p: 0.4
+        - name: Linear
+          params:
+            in_features: 512
+            out_features: 256
+        - name: ReLU
+          params: {}
+        - name: Dropout
+          params:
+            p: 0.4
+        - name: Linear
+          params:
+            in_features: 256
+            out_features: 128
+        - name: ReLU
+          params: {}
+        - name: Dropout
+          params:
+            p: 0.4
+        - name: Linear
+          params:
+            in_features: 128
+            out_features: 2
+
+data:
+  raw_waveform: false
+  target_transform:
+    name: classification
+    params:
+      classes:
+        - covid
+
+  signal_transform:
+    train:
+    - name: Resample
+      params:
+        orig_freq: 44100
+        new_freq: 16000
+    - name: RandomCrop
+      params:
+        crop_size: 32000
+        pad_mode: zero
+    - name: BackgroundNoise
+      augmentation: true
+      params:
+          dataset_config:
+              - name: esc-50
+                version: default
+                mode: all
+          min_noise_scale: 0.4
+          max_noise_scale: 0.75
+    - name: Spectrogram
+      params:
+        n_fft: 512
+        win_length: 512
+        hop_length: 160
+    - name: MelScale
+      params:
+        n_mels: 64
+        sample_rate: 16000
+        f_min: 125
+        f_max: 7500
+    - name: AmplitudeToDB
+      params: {}
+    - name: TimeMasking
+      augmentation: true
+      params:
+          max_len: 50
+          max_num: 2
+    - name: FrequencyMasking
+      augmentation: true
+      params:
+          max_len: 50
+          max_num: 2
+    - name: Rescale
+      params:
+        value: 100
+    - name: Unsqueeze
+      params: {}
+
+    val:
+    - name: Resample
+      params:
+        orig_freq: 44100
+        new_freq: 16000
+    - name: FixedPad
+      params:
+        target_size: 32000
+    - name: Spectrogram
+      params:
+        n_fft: 512
+        win_length: 512
+        hop_length: 160
+    - name: MelScale
+      params:
+        n_mels: 64
+        sample_rate: 16000
+        f_min: 125
+        f_max: 7500
+    - name: AmplitudeToDB
+      params: {}
+    - name: Rescale
+      params:
+        value: 100
+    - name: Unsqueeze
+      params: {}
+
+  dataset:
+    name: classification_dataset
+    config:
+      - name: wiai-facility
+        version: v9.4
+    params:
+      train: {}
+      val:
+        as_frames: True
+        frame_length: 2000
+        min_length: 2000
+        hop_length: 500
+  sampler:
+    train:
+        name: classification
+        params:
+            mode: default
+    val:
+        name: default
+  collate_fn:
+    name: classification_collate
+    params: {}

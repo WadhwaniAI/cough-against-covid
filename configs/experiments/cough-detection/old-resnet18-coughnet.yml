@@ -1,0 +1,169 @@
+description: flusense/resnet18-coughnet-crop + DB-scaled MelSpectrogram as representation + v9.4
+
+model:
+    name: classification
+    type: binary
+    batch_size: 32
+    epochs: 1000
+    optimizer:
+      name: AdamW
+      args:
+        lr: 0.00001
+        weight_decay: 0.0001
+    classes:
+      - non-cough
+      - cough
+    save:
+        period: 1
+        monitor: precision
+        monitor_mode: max
+    load:
+        version: null
+        epoch: -1
+        load_best: False
+        resume_optimizer: False
+        resume_epoch: False
+    subset_tracker:
+      val: {}
+
+network:
+    name: neural_net
+    params:
+        config:
+        - name: resnet18
+          params:
+            in_channels: 1
+            pretrained: true
+        - name: AdaptiveAvgPool2d
+          params:
+            output_size:
+            - 1
+            - 1
+        - name: Flatten
+          params: {}
+        - name: Linear
+          params:
+            in_features: 512
+            out_features: 256
+        - name: ReLU
+          params: {}
+        - name: Dropout
+          params:
+            p: 0.2
+        - name: Linear
+          params:
+            in_features: 256
+            out_features: 128
+        - name: ReLU
+          params: {}
+        - name: Dropout
+          params:
+            p: 0.2
+        - name: Linear
+          params:
+            in_features: 128
+            out_features: 2
+
+data:
+  raw_waveform: false
+  target_transform:
+    name: classification
+    params:
+      classes:
+        - cough
+
+  signal_transform:
+    train:
+    - name: Resample
+      params:
+        orig_freq: 44100
+        new_freq: 16000
+    - name: RandomCrop
+      params:
+        crop_size: 32000
+        pad_mode: zero
+    - name: BackgroundNoise
+      augmentation: true
+      params:
+          dataset_config:
+              - name: esc-50
+                version: default
+                mode: all
+          max_noise_scale: 0.75
+    - name: Spectrogram
+      params:
+        n_fft: 512
+        win_length: 512
+        hop_length: 160
+    - name: MelScale
+      params:
+        n_mels: 64
+        sample_rate: 16000
+        f_min: 125
+        f_max: 7500
+    - name: AmplitudeToDB
+      params: {}
+    - name: TimeMasking
+      augmentation: true
+      params:
+          max_len: 50
+          max_num: 2
+    - name: FrequencyMasking
+      augmentation: true
+      params:
+          max_len: 50
+          max_num: 2
+    - name: Rescale
+      params:
+        value: 100
+    - name: Unsqueeze
+      params: {}
+
+    val:
+    - name: Resample
+      params:
+        orig_freq: 44100
+        new_freq: 16000
+    - name: RandomCrop
+      params:
+        crop_size: 32000
+        pad_mode: zero
+    - name: Spectrogram
+      params:
+        n_fft: 512
+        win_length: 512
+        hop_length: 160
+    - name: MelScale
+      params:
+        n_mels: 64
+        sample_rate: 16000
+        f_min: 125
+        f_max: 7500
+    - name: AmplitudeToDB
+      params: {}
+    - name: Rescale
+      params:
+        value: 100
+    - name: Unsqueeze
+      params: {}
+
+  dataset:
+    name: classification_dataset
+    config:
+      - name: flusense
+        version: old-segmented-v1
+      - name: freesound-kaggle
+        version: old-v1.0
+      - name: coswara
+        version: old-v1.0
+  sampler:
+    train:
+        name: classification
+        params:
+            mode: balanced
+    val:
+        name: default
+  collate_fn:
+    name: classification_collate
+    params: {}
+

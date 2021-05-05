@@ -1,0 +1,71 @@
+description: Unsupervised representation learning using MFCC based features with PCA and on facility
+
+model:
+    name: dimensionality_reduction
+    method:
+      name: PCA
+      params:
+        n_components: 2
+
+data:
+  raw_waveform: false
+  signal_transform:
+    all:
+      - name: Resample
+        params:
+          orig_freq: 44100
+          new_freq: 16000
+      - name: MFCC
+        params:
+          sample_rate: 16000
+          n_mfcc: 64
+          log_mels: true
+          melkwargs:
+            n_mels: 128
+      - name: Rescale
+        params: {}
+      - name: Ensemble
+        params:
+          transforms_cfg:
+            - - name: 'PCA'
+                params:
+                  n_components: 10
+                  norm: True
+                  norm_order: 1
+            - - name: 'AxisMean'
+                params: {}
+          combine: concat
+    test:
+      - name: Resample
+        params:
+          orig_freq: 44100
+          new_freq: 16000
+      - name: MFCC
+        params:
+          sample_rate: 16000
+          n_mfcc: 64
+          log_mels: true
+          melkwargs:
+            n_mels: 128
+      - name: Rescale
+        params: {}
+      - name: Ensemble
+        params:
+          transforms_cfg:
+            - - name: 'PCA'
+                params:
+                  n_components: 10
+                  norm: True
+                  norm_order: 1
+            - - name: 'AxisMean'
+                params: {}
+          combine: concat
+  dataset:
+    name: unsupervised_dataset
+    config:
+      - name: wiai-facility
+        version: default-unsupervised-mini
+  collate_fn:
+    name: unsupervised_collate
+    params:
+      zero_pad: False

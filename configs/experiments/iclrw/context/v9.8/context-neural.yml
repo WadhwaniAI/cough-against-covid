@@ -1,0 +1,110 @@
+description: default-context-neural running on TabNet + use scheduler + default sampler
+
+model:
+    name: classification
+    type: binary
+    batch_size: 256
+    epochs: 100
+    optimizer:
+      name: SGD
+      args:
+        lr: 0.01
+    loss:
+      train:
+        name: cross-entropy
+        params:
+          reduction: none
+      val:
+        name: cross-entropy
+        params:
+          reduction: none
+    classes:
+      - non-covid
+      - covid
+    save:
+        period: 1
+        monitor: specificity
+        monitor_mode: max
+    load:
+        version: null
+        epoch: -1
+        load_best: False
+        resume_optimizer: false
+    eval:
+      maximize_metric: specificity
+      maximize_mode: val
+      aggregate:
+        train: {}
+        val: {}
+    subset_tracker:
+      val:
+      - name: wiai-facility
+        version: v9.8
+        mode: val
+              
+network:
+    name: neural_net
+    params:
+        config:
+          - name: tabnet
+            params:
+              input_dim: 11
+              output_dim: 2
+
+data:
+  raw_waveform: True
+  target_transform:
+    name: classification
+    params:
+      classes:
+        - covid
+
+  signal_transform:
+    train: {}
+    val: {}
+       
+  dataset:
+    name: context_classification_dataset
+    config:
+      - name: wiai-facility
+        version: v9.8
+    params:
+      train: 
+        attributes_file: /data/wiai-facility/processed/attributes_context_processed.csv
+        features:
+          - enroll_patient_age
+          - enroll_patient_temperature
+          - enroll_days_with_cough
+          - enroll_days_with_shortness_of_breath
+          - enroll_days_with_fever
+          - enroll_travel_history   
+          - enroll_contact_with_confirmed_covid_case 
+          - enroll_health_worker       
+          - enroll_fever
+          - enroll_cough  
+          - enroll_shortness_of_breath
+      val: 
+        attributes_file: /data/wiai-facility/processed/attributes_context_processed.csv
+        features:
+          - enroll_patient_age
+          - enroll_patient_temperature
+          - enroll_days_with_cough
+          - enroll_days_with_shortness_of_breath
+          - enroll_days_with_fever
+          - enroll_travel_history   
+          - enroll_contact_with_confirmed_covid_case 
+          - enroll_health_worker       
+          - enroll_fever
+          - enroll_cough  
+          - enroll_shortness_of_breath
+  
+  sampler:
+    train:
+        name: classification
+        params:
+            mode: default
+    val:
+        name: default
+  collate_fn:
+    name: context_classification_collate
+    params: {}
