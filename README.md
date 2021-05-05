@@ -89,3 +89,28 @@ You can evaluate your own trained models or use released model checkpoints on a 
 
 Coming soon!
 
+
+### Citing us
+
+If you use this code, kindly consider citing us:
+```
+@misc{bagad2020cough,
+      title={Cough Against COVID: Evidence of COVID-19 Signature in Cough Sounds}, 
+      author={Piyush Bagad and Aman Dalmia and Jigar Doshi and Arsha Nagrani and Parag Bhamare and Amrita Mahale and Saurabh Rane and Neeraj Agarwal and Rahul Panicker},
+      year={2020},
+      eprint={2009.08790},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD}
+}
+```
+
+**Code Contributors** (in alphabetical order):
+
+* [Aman Dalmia](https://www.amandalmia.com/)
+* [Makkunda Sharma](https://www.linkedin.com/in/makkunda-sharma-23960814a/?originalSubdomain=in)
+* [Nikhil Shenoy](https://www.linkedin.com/in/nikhil-shenoy-01a7a6141/?originalSubdomain=in)
+* [Piyush Bagad](https://bpiyush.github.io/)
+
+We thank [Jigar Doshi](https://www.linkedin.com/in/jigarkdoshi/) for guidance on structuring the repository to reduce the time from code-to-experiments.
+
+**Reporting issues/bugs/suggestions**: If you need to bring our attention to bugs or suggest modifications, kindly create an issue and we will try our best to address it. Please feel free to contact us if you have queries. 
