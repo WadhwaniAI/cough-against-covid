@@ -63,7 +63,7 @@ In order to use our and other public datasets as part of this work, you will nee
 
 We use a combination of publicly-available datasets and our own collected datasets. Please follow the steps [here](./datasets) to download, process all datasets.
 
-> Note: Our own dataset `wiai-facility` collected from across 27 facilities in India has not been released yet due to legal constraints that prevent us from sharing the data. We are trying to resolve those before we can release the dataset in any form.
+> :warning: Note: Our own dataset `wiai-facility` collected from across 27 facilities in India has not been released yet due to legal constraints that prevent us from sharing the data. We are trying to resolve those before we can release the dataset in any form.
 
 ### Training
 
