@@ -19,9 +19,9 @@ In order to use this code, you need to follow the steps below. Please check the 
 
 * CPU-only machine OR GPU-enabled machine
 * Docker installed on your machine
-* More to be added
+* OS: Linux/Mac OS
 
-> Note: Switch to branch `pb/datasets` to follow the steps on Setup and Dataset ingestion.
+> Note: This code has been tested on Mac OS and Ubuntu.
 
 ## Setup
 
