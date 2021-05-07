@@ -98,6 +98,8 @@ You can evaluate your own trained models or use released model checkpoints on a 
 ### Citing us
 
 If you use this code, kindly consider citing us:
+
+* [Arxiv version](https://arxiv.org/abs/2009.08790)
 ```
 @misc{bagad2020cough,
       title={Cough Against COVID: Evidence of COVID-19 Signature in Cough Sounds}, 
@@ -108,6 +110,16 @@ If you use this code, kindly consider citing us:
       primaryClass={cs.SD}
 }
 ```
+* [ICLR'21 AI4PH Workshop](https://aiforpublichealth.github.io/papers/ICLR-AI4PH_paper_51.pdf)
+```
+@misc{sharma2021impact,
+      title={Impact of data-splits on generalization: Identifying COVID-19 from cough and context}, 
+      author={Makkunda Sharma and Nikhil Shenoy and Jigar Doshi and Piyush Bagad and Aman Dalmia and Parag Bhamare and Amrita Mahale and Saurabh Rane and Neeraj Agarwal and Rahul Panicker},
+      year={2021},
+      eprint={ICLR 2021 AI4PH Workshop}
+}
+```
+
 
 **Code Contributors** (in alphabetical order):
 
