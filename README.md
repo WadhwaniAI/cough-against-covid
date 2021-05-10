@@ -2,7 +2,7 @@
 
 Code relase for the [Cough Against COVID-19](https://www.wadhwaniai.org/work/cough-against-covid/) Project by the [Wadhwani Institute for Artificial Intelligence](https://www.wadhwaniai.org/) supported by the Gates' Foundation.
 
-#### [Project page](https://www.wadhwaniai.org/work/cough-against-covid/) | [Code](https://github.com/WadhwaniAI/cough-against-covid/tree/pb/cough-detection) | [Paper (ArXiv)](https://arxiv.org/abs/2009.08790) | [Data](Coming-soon)
+#### [Project page](https://www.wadhwaniai.org/work/cough-against-covid/) | [Code](https://github.com/WadhwaniAI/cough-against-covid/) | [Paper (ArXiv)](https://arxiv.org/abs/2009.08790) | Data
 
 ![Cough Against COVID-19](./assets/media/teaser-v6.png)
 
