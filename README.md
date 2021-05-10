@@ -101,7 +101,7 @@ You can evaluate your own trained models or use released model checkpoints on a 
 
 ### Citing us
 
-If you use this code, kindly consider citing us:
+If you find this code useful, kindly consider citing our papers and starring our repository:
 
 * [Arxiv version](https://arxiv.org/abs/2009.08790)
 ```
