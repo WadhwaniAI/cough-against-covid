@@ -133,6 +133,7 @@ If you find this code useful, kindly consider citing our papers and starring our
 * [Makkunda Sharma](https://www.linkedin.com/in/makkunda-sharma-23960814a/?originalSubdomain=in)
 * [Nikhil Shenoy](https://www.linkedin.com/in/nikhil-shenoy-01a7a6141/?originalSubdomain=in)
 * [Piyush Bagad](https://bpiyush.github.io/)
-* [Jigar Doshi](https://www.linkedin.com/in/jigarkdoshi/) the Research Lead of the project
+
+And [Jigar Doshi](https://www.linkedin.com/in/jigarkdoshi/) the Research Lead of the project
 
 **Reporting issues/bugs/suggestions**: If you need to bring our attention to bugs or suggest modifications, kindly create an issue and we will try our best to address it. Please feel free to contact us if you have queries. 
