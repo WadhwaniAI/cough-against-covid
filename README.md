@@ -118,9 +118,11 @@ If you find this code useful, kindly consider citing our papers and starring our
 ```
 @misc{sharma2021impact,
       title={Impact of data-splits on generalization: Identifying COVID-19 from cough and context}, 
-      author={Makkunda Sharma and Nikhil Shenoy and Jigar Doshi and Piyush Bagad and Aman Dalmia and Parag Bhamare and Amrita Mahale and Saurabh Rane and Neeraj Agarwal and Rahul Panicker},
+      author={Makkunda Sharma and Nikhil Shenoy and Jigar Doshi and Piyush Bagad and Aman Dalmia and Parag Bhamare and Amrita Mahale and Saurabh Rane and Neeraj Agrawal and Rahul Panicker},
       year={2021},
-      eprint={ICLR 2021 AI4PH Workshop}
+      eprint={2106.03851},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD}
 }
 ```
 
