@@ -138,6 +138,6 @@ And [Jigar Doshi](https://www.linkedin.com/in/jigarkdoshi/) the Research Lead of
 
 **Acknowledgements**: 
 
-* Our codebase design has been inspired by the [ML Codebase Management Guidelines](https://drive.google.com/file/d/1-JGPn9X6xLBe2qu61vKUJIy2ZM3BQ1cm/view?usp=sharing) compiled by Aditya Sarma and Jigar Doshi.
+* Our codebase design has been inspired by the [ML Codebase Management Guidelines](https://drive.google.com/file/d/1-JGPn9X6xLBe2qu61vKUJIy2ZM3BQ1cm/view?usp=sharing) compiled by [Aditya Sarma](https://adityaas.github.io/) and [Jigar Doshi](https://www.linkedin.com/in/jigarkdoshi/).
 
 **Reporting issues/bugs/suggestions**: If you need to bring our attention to bugs or suggest modifications, kindly create an issue and we will try our best to address it. Please feel free to contact us if you have queries. 
