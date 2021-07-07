@@ -776,6 +776,161 @@ class BackgroundNoise:
             raise ValueError("Expected input is a 1D tensor")
 
 
+class BackgroundNoiseOnImage:
+    """Adds background noise from a specified dataset to a spectrogram-like image
+
+    Given an input signal `x`, the output `y` is calculated as:
+
+    $y = x + (\alpha) * b$
+
+    where `b` is a spectrogram of background signal sampled from the background noise
+    dataset and $\alpha$ is sampled uniformly from `[min_noise_scale, max_noise_scale]`.
+
+    Example:
+    >>> signal = load_signal()
+    >>> signal.shape
+    (64, 704)
+    >>> dataset_config = {
+        'name': 'esc-50', 'version': 'default', 'mode': 'all'}
+    >>> t_signal = BackgroundNoiseOnImage([dataset_config])(signal)
+    >>> t_signal.shape
+    (64, 704)
+
+    :param dataset_config: config for the dataset to use as background noise
+    :type dataset_config: List[DatasetConfigDict]
+    :param noise_transform_cfg: list of transforms to be applied on raw noise waveform
+        to make it apt for addition to input image signal, defaults to None
+    :type noise_transform_cfg: list
+    :param min_noise_scale: minimum fraction of background noise in the output
+        signal
+    :param min_noise_scale: float, defaults to 0.0
+    :param max_noise_scale: maximum fraction of background noise in the output
+        signal
+    :param max_noise_scale: float, defaults to 1.0
+    """
+    def __init__(
+            self, dataset_config: List[DatasetConfigDict],
+            noise_transform_cfg: list = None,
+            min_noise_scale: float = 0.0,
+            max_noise_scale: float = 0.3):
+        self._check_params(min_noise_scale, max_noise_scale)
+
+        dataset = BaseDataset(dataset_config)
+        self.bg_audios = dataset.items
+        self.min_noise_scale = min_noise_scale
+        self.max_noise_scale = max_noise_scale
+
+        if noise_transform_cfg is None:
+            # default spectrogram conversion for bg sounds
+            noise_transform_cfg = [
+                {
+                    "name": "Resample",
+                    "params": {
+                        "orig_freq": 44100,
+                        "new_freq": 16000
+                    }
+                },
+                {
+                    "name": "Spectrogram",
+                    "params": {
+                        "n_fft": 512,
+                        "win_length": 512,
+                        "hop_length": 160
+                    }
+                },
+                {
+                    "name": "MelScale",
+                    "params": {
+                        "n_mels": 64,
+                        "sample_rate": 16000,
+                        "f_min": 125,
+                        "f_max": 7500
+                    }
+                },
+                {
+                    "name": "AmplitudeToDB",
+                    "params": {}
+                },
+            ]
+        self.noise_transform = DataProcessor(noise_transform_cfg)
+
+    def __call__(
+            self, signal: torch.Tensor,
+            return_params: bool = False) -> torch.Tensor:
+        
+        self._check_input(signal)
+
+        # sample a background audio
+        bg_audio = random.choice(self.bg_audios)
+        bg_audio = bg_audio.load(as_tensor=True)['signal']
+        bg_image = self.noise_transform(bg_audio)
+
+        # pad bg_image aptly to make its shape equal to signal
+        bg_image = self._check_size(signal, bg_image)
+
+        # randomly pick the noise fraction
+        noise_scale = random.uniform(
+            self.min_noise_scale, self.max_noise_scale)
+        signal = noise_scale * bg_image + signal
+
+        if return_params:
+            return signal, bg_audio, bg_image, noise_scale
+
+        return signal
+
+    @staticmethod
+    def _check_size(signal, bg_image):
+
+        assert len(signal.shape) == 2 and len(bg_image.shape) == 2
+
+        assert(
+            signal.shape[0] == bg_image.shape[0]
+        ), "Frequencies do not match in input signal & bg noise image."\
+        "Make sure you are passing the exact same transforms used to generate input image."\
+        "Try passing noise_transform_cfg=None so that it will use the default value."\
+
+        signal_size = signal.shape[1]
+        bg_size = bg_image.shape[1]
+
+        # handle the cases when the input signal
+        # and background have different lengths
+        if signal_size < bg_size:
+            start_index = random.randint(0, bg_size - signal_size)
+
+            # sample a smaller chunk from the background
+            # matching the length of the input signal
+            bg_image = bg_image[:, start_index: start_index + signal_size]
+
+        elif signal_size > bg_size:
+            size_diff = signal_size - bg_size
+
+            # randomly pick the length of the zero padding
+            # to be applied at the start of the background
+            start_pad_length = random.randint(0, size_diff)
+            end_pad_length = size_diff - start_pad_length
+            # pads only the last dimension (time) which is exactly what we want
+            padding = (start_pad_length, end_pad_length)
+            bg_image = F.pad(bg_image, padding)
+
+        return bg_image
+
+    @staticmethod
+    def _check_params(min_noise_scale, max_noise_scale):
+        if min_noise_scale < 0 or min_noise_scale > 1:
+            raise ValueError("min_noise_scale should be between 0 and 1")
+
+        if max_noise_scale < 0 or max_noise_scale > 1:
+            raise ValueError("max_noise_scale should be between 0 and 1")
+
+        if min_noise_scale > max_noise_scale:
+            raise ValueError("max_noise_scale should be >= min_noise_scale")
+
+    @staticmethod
+    def _check_input(signal):
+        if len(signal.shape) != 2:
+            raise ValueError("Expected input is a 2D tensor image")
+
+
 class STFT:
     """Computes the Short-Time Fourier Transform (STFT)
 
@@ -1938,6 +2093,7 @@ transform_factory.register_builder('Ensemble', Ensemble)
 transform_factory.register_builder('AmplitudeToDB', AmplitudeToDB)
 transform_factory.register_builder('GTFB', GTFB)
 transform_factory.register_builder('BackgroundNoise', BackgroundNoise)
+transform_factory.register_builder('BackgroundNoiseOnImage', BackgroundNoiseOnImage)
 transform_factory.register_builder('NoiseReduction', NoiseReduction)
 transform_factory.register_builder('RandomPad', RandomPad)
 transform_factory.register_builder('RandomCrop', RandomCrop)
