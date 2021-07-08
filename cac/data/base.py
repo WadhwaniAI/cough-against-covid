@@ -47,10 +47,11 @@ class BaseDataset(Dataset):
     def __init__(self, dataset_config: List[DatasetConfigDict],
                  fraction: float = 1.0, as_frames: bool = False,
                  frame_length: int = None, hop_length: int = 500,
-                 min_length: int = 100):
+                 min_length: int = 100, raw_waveform: bool = True):
         self._check_args(fraction, as_frames, frame_length)
         self.dataset_config = dataset_config
         self.as_frames = as_frames
+        self.raw_waveform = raw_waveform
 
         if as_frames:
             # converting from milliseconds to seconds
@@ -79,7 +80,7 @@ class BaseDataset(Dataset):
                     self.items.extend(audio_items)
 
                 else:
-                    audio_item = AudioItem(path=path, label=label, start=start, end=end)
+                    audio_item = AudioItem(path=path, label=label, start=start, end=end, raw_waveform=self.raw_waveform)
                     self.items.append(audio_item)
 
     def _create_frames(self, path, label, start, end):
@@ -88,7 +89,7 @@ class BaseDataset(Dataset):
 
         # if the file is smaller than frame_length, simply return one audio item
         if end - start < self.frame_length:
-            return [AudioItem(path=path, label=label, start=start, end=end)]
+            return [AudioItem(path=path, label=label, start=start, end=end, raw_waveform=self.raw_waveform)]
 
         steps = np.arange(start, end, self.hop_length)
         items = []
@@ -99,11 +100,11 @@ class BaseDataset(Dataset):
                 # check if it is long enough to be considered
                 if end - (step + self.hop_length) > self.min_length:
                     _start = end - self.frame_length
-                    items.append(AudioItem(path=path, label=label, start=_start, end=end))
+                    items.append(AudioItem(path=path, label=label, start=_start, end=end, raw_waveform=self.raw_waveform))
                 break
 
             _end = step + self.frame_length
-            items.append(AudioItem(path=path, label=label, start=step, end=_end))
+            items.append(AudioItem(path=path, label=label, start=step, end=_end, raw_waveform=self.raw_waveform))
 
         return items
 

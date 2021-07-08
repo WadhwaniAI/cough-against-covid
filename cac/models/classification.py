@@ -626,11 +626,11 @@ class ClassificationModel(Model):
             plt.close()
 
         # log audios
-        audios = get_audios(
-            epoch_data['items'][indices], F.softmax(
-                epoch_data['predictions'][indices], -1),
-            epoch_data['targets'][indices])
-        self.wandb_logs['{}/audios'.format(mode)] = audios
+        # audios = get_audios(
+        #     epoch_data['items'][indices], F.softmax(
+        #         epoch_data['predictions'][indices], -1),
+        #     epoch_data['targets'][indices])
+        # self.wandb_logs['{}/audios'.format(mode)] = audios
 
         # log learning rates vs losses
         if learning_rates is not None and batch_losses is not None:

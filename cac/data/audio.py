@@ -23,12 +23,15 @@ class AudioItem(object):
     :type start: float
     :param end: end of the segment to consider in the audio file
     :type end: float
+    :param raw_waveform: type of input expected: raw_waveform or spectrogram
+    :type end: bool
     """
-    def __init__(self, path: str, label: dict = None, start: float = None, end: float = None):
+    def __init__(self, path: str, label: dict = None, start: float = None, end: float = None, raw_waveform: bool = True):
         self.path = path
         self.label = label
         self.start = start
         self.end = end
+        self.raw_waveform = raw_waveform
 
     def load(
             self, as_tensor: bool = False
@@ -40,20 +43,40 @@ class AudioItem(object):
 
         :returns: dict containing signal, rate
         """
-        signal, rate = librosa.load(self.path, sr=44100)
+        if self.raw_waveform: # Raw Waveform Input
+            signal, rate = librosa.load(self.path, sr=44100)
 
-        # cut the signal from start time to end time
-        start_idx = 0 if self.start is None else np.round(self.start * rate).astype(int)
-        end_idx = -1 if self.end is None else np.round(self.end * rate).astype(int)
-        signal = signal[start_idx: end_idx]
+            # cut the signal from start time to end time
+            start_idx = 0 if self.start is None else np.round(self.start * rate).astype(int)
+            end_idx = -1 if self.end is None else np.round(self.end * rate).astype(int)
+            signal = signal[start_idx: end_idx]
 
-        if as_tensor:
-            signal = torch.Tensor(signal)
+            if as_tensor:
+                signal = torch.Tensor(signal)
 
-        audio = {
-            'signal': signal,
-            'rate': rate
-        }
+            audio = {
+                'signal': signal,
+                'rate': rate
+            }
+        else: # Spectrogram input
+            signal = np.load(self.path)
+            rate = 16000
+
+            # cut the signal from start time to end time
+            time_domain = signal.shape[1]
+            # For reference https://librosa.org/doc/main/_modules/librosa/core/audio.html#get_duration
+            duration = librosa.get_duration(S = signal, hop_length=160, n_fft=512, sr=16000)
+            start_idx = 0 if self.start is None else int(time_domain * self.start / duration)
+            end_idx = -1 if self.end is None else int(time_domain * self.end / duration)
+            signal = signal[:, start_idx: end_idx]
+
+            if as_tensor:
+                signal = torch.Tensor(signal)
+
+            audio = {
+                'signal': signal,
+                'rate': rate
+            }
 
         return audio
 

@@ -53,10 +53,10 @@ class ClassificationDataset(BaseDataset):
                  signal_transform: DataProcessor = None,
                  fraction: float = 1.0, as_frames: bool = False,
                  frame_length: int = None, hop_length: int = 500,
-                 min_length: int = 100):
+                 min_length: int = 100, raw_waveform: bool = True):
         super(ClassificationDataset, self).__init__(
             dataset_config, fraction, as_frames, frame_length,
-            hop_length, min_length)
+            hop_length, min_length, raw_waveform)
         self.target_transform = target_transform
         self.signal_transform = signal_transform
 
