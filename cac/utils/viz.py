@@ -148,3 +148,14 @@ def plot_classification_metric_curve(
     vis_image = fig2im(figure)
     plt.close()
     return vis_image
+
+
+def plot_spectrogram_image(image, title="MelSpectrogram", figsize=(20, 7)):
+    """
+    Plots (mel)spectrogram-like image.
+    """
+    plt.figure(figsize=figsize)
+    plt.title(title)
+    plt.grid()
+    plt.imshow(image)
+    plt.show()

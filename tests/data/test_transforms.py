@@ -16,7 +16,7 @@ from cac.data.transforms import DataProcessor, STFT, TimeMasking,\
     Identity, Flip, Sometimes, TimeStretch, AddValue, Transpose, Log, \
     FixedPad, Duration, Tempo, Onsets, \
     RMSEnergy, SpectralRolloff, SpectralCentroid, ZeroCrossingRate, \
-    DeltaMFCC, AxisStats, ToNumpy, ToTensor
+    DeltaMFCC, AxisStats, ToNumpy, ToTensor, BackgroundNoiseOnImage
 
 
 class DataProcessorTestCase(unittest.TestCase):
@@ -1016,6 +1016,25 @@ class DataProcessorTestCase(unittest.TestCase):
                 noise_scale <= max_noise_scale)
             assert_array_equal(
                 t_signal, dummy_signal + noise_scale * bg_signal)
+
+    def test_bgnoise_on_image(self):
+        dataset_config = [{
+            'name': 'esc-50',
+            'version': 'default',
+            'mode': 'all'
+        }]
+        min_noise_scale = 0.3
+        max_noise_scale = 0.6
+
+        processor = BackgroundNoiseOnImage(
+            dataset_config=dataset_config,
+            min_noise_scale=min_noise_scale,
+            max_noise_scale=max_noise_scale
+        )
+        dummy_signal = torch.ones((64, 100))
+        noise_added_signal = processor(dummy_signal)
+
+        assert noise_added_signal.shape == dummy_signal.shape
 
     def test_noise_reduction(self):
         """Tests NoiseReduction"""
