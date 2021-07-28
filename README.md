@@ -103,6 +103,18 @@ You can evaluate your own trained models or use released model checkpoints on a 
 
 If you find this code useful, kindly consider citing our papers and starring our repository:
 
+* [ICLR'21 AI4PH Workshop](https://aiforpublichealth.github.io/papers/ICLR-AI4PH_paper_51.pdf) and [Arxiv Version](https://arxiv.org/abs/2106.03851)
+```
+@misc{sharma2021impact,
+      title={Impact of data-splits on generalization: Identifying COVID-19 from cough and context}, 
+      author={Makkunda Sharma and Nikhil Shenoy and Jigar Doshi and Piyush Bagad and Aman Dalmia and Parag Bhamare and Amrita Mahale and Saurabh Rane and Neeraj Agrawal and Rahul Panicker},
+      year={2021},
+      eprint={2106.03851},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD}
+}
+
+```
 * [Arxiv version](https://arxiv.org/abs/2009.08790)
 ```
 @misc{bagad2020cough,
@@ -114,18 +126,6 @@ If you find this code useful, kindly consider citing our papers and starring our
       primaryClass={cs.SD}
 }
 ```
-* [ICLR'21 AI4PH Workshop](https://aiforpublichealth.github.io/papers/ICLR-AI4PH_paper_51.pdf)
-```
-@misc{sharma2021impact,
-      title={Impact of data-splits on generalization: Identifying COVID-19 from cough and context}, 
-      author={Makkunda Sharma and Nikhil Shenoy and Jigar Doshi and Piyush Bagad and Aman Dalmia and Parag Bhamare and Amrita Mahale and Saurabh Rane and Neeraj Agrawal and Rahul Panicker},
-      year={2021},
-      eprint={2106.03851},
-      archivePrefix={arXiv},
-      primaryClass={cs.SD}
-}
-```
-
 
 **Code Contributors** (in alphabetical order):
 
