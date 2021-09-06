@@ -103,7 +103,7 @@ You can evaluate your own trained models or use released model checkpoints on a 
 
 If you find this code useful, kindly consider citing our papers and starring our repository:
 
-* [ICLR'21 AI4PH Workshop](https://aiforpublichealth.github.io/papers/ICLR-AI4PH_paper_51.pdf) and [Arxiv Version](https://arxiv.org/abs/2106.03851)
+* [ICLR'21 AI4PH Workshop](https://aiforpublichealth.github.io/papers/ICLR-AI4PH_paper_51.pdf), [Arxiv Version](https://arxiv.org/abs/2106.03851) [Poster](https://mlpcp21.github.io/files/posters/Cough_Against_Covid_Poster.pdf)
 ```
 @misc{sharma2021impact,
       title={Impact of data-splits on generalization: Identifying COVID-19 from cough and context}, 
