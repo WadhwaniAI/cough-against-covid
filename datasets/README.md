@@ -247,88 +247,33 @@ esc-50/
 
 ### Cough Against COVID Dataset (Wadhwani AI)
 
-#### Note : The Cough Against COVID Dataset is not public and we are currently in the process of getting approvals for releasing the data. 
-
-* Download: Run the following commands.
-
-> Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `~/cac/` to the common storage location that you have already set. 
-```bash
-odin_ip=192.168.100.70
-rsync -avzP -e "ssh -i /path/to/your/pem-file" username@$odin_ip:/scratche/data/cac/data/wiai-facility/wiai-facility-23-11-2020.7z* ~/cac/data/wiai-facility/
-```
-
-Once this step completes (takes about 40mins; each zip file is around 2GBs), run the following script (from inside docker container) that unzips the zip files.
+Due to privacy constraints, we only provide spectrograms of all the audio that we have collected. To download/access the data, 
+1. Sign the data sharing agreement [doc]()
+2. Fill the form and attach the signed doc file 
+3. Wait for approval, we generally respond in 2-3 days and longer if it's the weekend
+4. Unzip the five zip files into a single folder (say zip_dir) that are provided on the request for data getting approved
+5. Run the wiai-facility.py to unzip them into a single folder for further use
 
 ```bash
-cd /workspace/cough-against-covid/datasets/download
-python wiai-facility.py
+cd /workspace/cough-against-covid/datasets
+python wiai-facility.py --zip_dir=/data/path_zip_file_dir/ --output_dir=/
+ 
+Args:
+    zip_dir: Directory where the zip files are present
+    output_dir: Directory where the unzipped files would be present
 ```
-You should see `/data/wiai-facility/raw/audio/` and `/data/wiai-facility/raw/annotations/` folders that contain our dataset. This is a fairly large dataset of about 25GBs. If you do not have enough space, delete the zip files.
 
-* Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/wiai-facility.ipynb`.
-
-* Versioning (Optional): We use this dataset for cough classification for COVID. Thus, we create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-facility/default.ipynb`.
-
+This would unzip all the audio files at /storage/data/wiai-release-spectrograms/processed/spectrograms 
 
 The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files):
 ```bash
-wiai-facility/
-└── raw
-    ├── annotations
-    │   └── CaC_label_sheet-final-nov23.csv
-    └── audio
-        └── patient_fffe9cc25aa29666b83c6739d451f9b97ea4748b
-            └── 20200615_000817
-                ├── breathing_recording_7594558455454881112.wav
-                ├── cough_sound_recording_1_8753244935701971117.wav
-                ├── cough_sound_recording_2_82219589935506130.wav
-                ├── cough_sound_recording_3_5125087475383634297.wav
-                └── speech_recording_344728264604520646.wav
+wiai-release-spectrograms/
+    └── processed
+        └── spectrograms
+            ├── breathing_recording_7594558455454881112.npy
+            ├── cough_sound_recording_1_8753244935701971117.npy
+            ├── cough_sound_recording_2_82219589935506130.npy
+            ├── cough_sound_recording_3_5125087475383634297.npy
+            └── speech_recording_344728264604520646.npy
 
-# likewise, you have 7169 patient folders.
-# patient_fffe9cc25aa29666b83c6739d451f9b97ea4748b: patient ID
-# 20200615_000817: timestamp of RTPCR test reciept for that patient
 ```
-
-### Cough Against COVID Crowdsourced Dataset (Wadhwani AI)
-
-#### Note : The Cough Against COVID Crowdsourced Dataset is not public and we are currently in the process of getting approvals for releasing the data. 
-
-* Download: Run the following commands.
-
-> Note: Currently, we are yet to figure out how to release our dataset. For now, the tester is expected to download zip files from the server and run the following script after that. Pass path to your `pem` file that you use to SSH into Odin. Replace `username` by your username on Odin. Replace `~/cac/` to the common storage location that you have already set. 
-```bash
-odin_ip=192.168.100.70
-rsync -avzP -e "ssh -i /path/to/your/pem-file" username@$odin_ip:/scratche/data/cac/data/wiai-crowdsourced/wiai-crowdsourced-15-03-2021.zip ~/cac/data/wiai-crowdsourced/
-```
-
-Once this step completes, run the following script (from inside docker container) that unzips the zip files.
-```bash
-cd /workspace/cough-against-covid/datasets/download
-python wiai-facility.py
-```
-
-You should see `/data/wiai-crowdsourced/raw/audio/` and `/data/wiai-crowdsourced/raw/annotations/` folders that contain our dataset.
-
-* Cleaning: Run the notebook - `cough-against-covid/datasets/cleaning/wiai-crowdsourced.ipynb`.
-
-* Versioning (Optional): We do not currently use this dataset for any of the tasks since the GT RTPCR labels are self-reported. However, in case you plan to use it, you create version `default` using notebook - `cough-against-covid/datasets/versioning/cough-classification/wiai-crowdsourced/default.ipynb`.
-
-The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files):
-```bash
-wiai-crowdsourced/
-├── processed
-│   ├── audio
-│   └── versions
-└── raw
-    ├── annotations
-    └── audio
-
-6 directories
-```
-
-<!-- 
-### Ready-to-use Datasets
-
-WIP: This can contain a list of datasets with various statistics that we can release with our own dataset package - for these datasets, a user need not run these steps.
- -->
