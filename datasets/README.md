@@ -263,9 +263,9 @@ Args:
     output_dir: Directory where the unzipped files would be present
 ```
 
-This would unzip all the audio files at /storage/data/wiai-release-spectrograms/processed/spectrograms 
+This would unzip all the audio files at /data/wiai-release-spectrograms/processed/spectrograms 
 
-The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files):
+The final dataset folder structure as a result of above steps is organized as follows (only shows relevant files) inside /data:
 ```bash
 wiai-release-spectrograms/
     └── processed
