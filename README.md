@@ -43,7 +43,7 @@ Broadly, we release trained checkpoints for three kinds of models:
 Please run the following (from inside docker container) to download them to `assets/models/` folder.
 
 ```bash
-python setup/download_model_ckpts.py
+aws s3 sync --no-sign-request --region=ap-south-1  s3://covid-ml-data/ assets/
 ```
 
 ### Demo notebooks
